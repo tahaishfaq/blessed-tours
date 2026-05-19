@@ -1,0 +1,27 @@
+---
+interface Props {
+	href?: string;
+	class?: string;
+}
+
+const { href = '/', class: className } = Astro.props;
+---
+
+<a
+	href={href}
+	aria-label="Blessed Tours — Home"
+	class:list={[
+		'inline-flex shrink-0 transition-opacity hover:opacity-90',
+		className,
+	]}
+>
+	<img
+		src="/logo.png"
+		alt="Blessed Tours"
+		width="152"
+		height="84"
+		class="h-9 w-auto max-w-[9rem] object-contain object-left sm:h-10 sm:max-w-[10.5rem] md:h-11 md:max-w-[11.5rem] [filter:none]"
+		loading="eager"
+		decoding="async"
+	/>
+</a>

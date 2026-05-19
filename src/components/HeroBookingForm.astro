@@ -1,0 +1,219 @@
+---
+import {
+	departureCities,
+	nightOptions,
+	travelerOptions,
+} from '../data/booking-options';
+
+/** Glass field — readable on video while matching the panel */
+const fieldClass =
+	'h-11 w-full rounded-lg border border-white/50 bg-white/88 px-3 font-sans text-sm leading-none text-ink-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] backdrop-blur-md outline-none transition-all duration-300 placeholder:text-ink-400 hover:border-white/70 hover:bg-white/95 focus:border-gold-400/80 focus:bg-white focus:ring-2 focus:ring-gold-500/25';
+
+const selectClass = `${fieldClass} cursor-pointer appearance-none py-0 pr-9`;
+
+const inputClass = fieldClass;
+
+const dateClass = `${fieldClass} pt-4 pb-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60`;
+---
+
+<form
+	class="hero-booking-form group relative isolate w-full overflow-hidden rounded-2xl border border-white/25 bg-white/[0.08] p-3 shadow-[0_8px_40px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-2xl transition-[border-color,box-shadow,background-color] duration-500 hover:border-white/35 hover:bg-white/[0.11] hover:shadow-[0_12px_48px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.2)] focus-within:border-gold-500/35 focus-within:bg-white/[0.1] focus-within:shadow-[0_12px_48px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.08),inset_0_1px_0_rgba(255,255,255,0.22)] sm:p-4 lg:max-w-[22rem] xl:max-w-md"
+	action="#"
+	method="post"
+	data-booking-form
+	data-motion-item="scale"
+	data-motion-delay="500"
+	novalidate
+>
+	<div
+		class="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.14] via-white/[0.04] to-transparent"
+		aria-hidden="true"
+	></div>
+	<div
+		class="pointer-events-none absolute -top-px right-8 left-8 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"
+		aria-hidden="true"
+	></div>
+
+	<div
+		class="relative grid grid-cols-1 gap-2.5 min-[400px]:grid-cols-2 sm:gap-3"
+		data-motion-stagger
+	>
+		<!-- Departure date -->
+		<div class="relative h-11">
+			<label class="relative block h-full">
+				<span
+					class="pointer-events-none absolute top-1.5 left-3 z-10 font-sans text-[0.6875rem] font-semibold leading-none text-ink-500"
+				>
+					Departure date
+				</span>
+				<input type="date" name="departure" required class={dateClass} />
+			</label>
+		</div>
+
+		<!-- Departure city -->
+		<div class="relative h-11">
+			<label class="sr-only" for="departure-city">Departure city</label>
+			<div class="relative h-full">
+				<select id="departure-city" name="city" required class={selectClass}>
+					<option value="" disabled selected>Departure city</option>
+					{departureCities.map((city) => <option value={city}>{city}</option>)}
+				</select>
+				<svg
+					class="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-ink-500"
+					viewBox="0 0 20 20"
+					fill="currentColor"
+					aria-hidden="true"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
+						clip-rule="evenodd"></path>
+				</svg>
+			</div>
+		</div>
+
+		<!-- Travelers -->
+		<div class="relative h-11">
+			<label class="sr-only" for="travelers">Travelers</label>
+			<div class="relative h-full">
+				<select id="travelers" name="travelers" required class={selectClass}>
+					<option value="" disabled selected>Travelers</option>
+					{travelerOptions.map((opt) => (
+						<option value={opt.value}>{opt.label}</option>
+					))}
+				</select>
+				<svg
+					class="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-ink-500"
+					viewBox="0 0 20 20"
+					fill="currentColor"
+					aria-hidden="true"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
+						clip-rule="evenodd"></path>
+				</svg>
+			</div>
+		</div>
+
+		<!-- Nights -->
+		<div class="relative h-11">
+			<label class="sr-only" for="nights">Nights</label>
+			<div class="relative h-full">
+				<select id="nights" name="nights" required class={selectClass}>
+					<option value="" disabled selected>Nights</option>
+					{nightOptions.map((opt) => (
+						<option value={opt.value}>{opt.label}</option>
+					))}
+				</select>
+				<svg
+					class="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-ink-500"
+					viewBox="0 0 20 20"
+					fill="currentColor"
+					aria-hidden="true"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
+						clip-rule="evenodd"></path>
+				</svg>
+			</div>
+		</div>
+
+		<!-- Full name -->
+		<div class="relative h-11">
+			<label class="sr-only" for="full-name">Full name</label>
+			<input
+				id="full-name"
+				type="text"
+				name="name"
+				required
+				autocomplete="name"
+				class={inputClass}
+				placeholder="Full name"
+			/>
+		</div>
+
+		<!-- Phone -->
+		<div class="relative h-11">
+			<label class="sr-only" for="phone">Phone</label>
+			<input
+				id="phone"
+				type="tel"
+				name="phone"
+				required
+				autocomplete="tel"
+				class={inputClass}
+				placeholder="Phone"
+			/>
+		</div>
+
+		<!-- Email -->
+		<div class="relative h-11">
+			<label class="sr-only" for="email">Email</label>
+			<input
+				id="email"
+				type="email"
+				name="email"
+				required
+				autocomplete="email"
+				class={inputClass}
+				placeholder="Email"
+			/>
+		</div>
+
+		<!-- Get quote -->
+		<div class="relative h-11">
+			<button
+				type="submit"
+				class="flex h-11 w-full items-center justify-center rounded-lg border border-gold-400/50 bg-gold-500/95 font-sans text-sm font-bold leading-none tracking-wide text-ink-900 shadow-[0_4px_20px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.35)] backdrop-blur-sm transition-all duration-300 hover:border-gold-300/60 hover:bg-gold-400 hover:shadow-[0_6px_24px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.45)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
+				data-submit
+			>
+				<span data-submit-label>Get quote</span>
+			</button>
+		</div>
+	</div>
+
+	<p class="mt-3 hidden text-center font-sans text-sm text-gold-300" data-success role="status">
+		Thank you — our team will contact you shortly.
+	</p>
+</form>
+
+<script>
+	function initBookingForm(form: HTMLFormElement) {
+		const departure = form.querySelector<HTMLInputElement>('input[name="departure"]');
+		const submitBtn = form.querySelector<HTMLButtonElement>('[data-submit]');
+		const submitLabel = form.querySelector<HTMLElement>('[data-submit-label]');
+		const successMsg = form.querySelector<HTMLElement>('[data-success]');
+
+		if (departure) {
+			const today = new Date().toISOString().split('T')[0];
+			departure.min = today;
+		}
+
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			if (!form.checkValidity()) {
+				form.reportValidity();
+				return;
+			}
+
+			submitBtn?.setAttribute('disabled', 'true');
+			if (submitLabel) submitLabel.textContent = 'Sending…';
+
+			await new Promise((r) => setTimeout(r, 600));
+
+			form.querySelectorAll('input, select, button').forEach((el) => {
+				if (el instanceof HTMLElement) el.setAttribute('disabled', 'true');
+			});
+
+			successMsg?.classList.remove('hidden');
+			if (submitLabel) submitLabel.textContent = 'Booked';
+
+			form.dispatchEvent(new CustomEvent('booking:success', { bubbles: true }));
+		});
+	}
+
+	document.querySelectorAll<HTMLFormElement>('[data-booking-form]').forEach(initBookingForm);
+</script>

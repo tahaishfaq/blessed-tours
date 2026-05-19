@@ -1,0 +1,38 @@
+<script>
+	function playMotion(root: HTMLElement) {
+		if (root.classList.contains('motion-ready')) return;
+		root.classList.add('motion-ready');
+	}
+
+	function initMotionRoot(root: HTMLElement) {
+		const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (reduced) {
+			playMotion(root);
+			return;
+		}
+
+		const trigger = root.dataset.motionTrigger ?? 'inview';
+		const run = () => playMotion(root);
+
+		if (trigger === 'load' || trigger === 'both') {
+			requestAnimationFrame(() => requestAnimationFrame(run));
+		}
+
+		if (trigger === 'inview' || trigger === 'both') {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							run();
+							observer.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.12, rootMargin: '0px 0px -5% 0px' },
+			);
+			observer.observe(root);
+		}
+	}
+
+	document.querySelectorAll<HTMLElement>('[data-motion-root]').forEach(initMotionRoot);
+</script>

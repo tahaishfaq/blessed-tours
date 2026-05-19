@@ -1,0 +1,141 @@
+---
+import type { BookingStep } from '../data/booking-process';
+import { bookingProcessIntro } from '../data/booking-process';
+import BookingStepIcon from './BookingStepIcon.astro';
+
+interface Props {
+	steps: BookingStep[];
+	intro?: string;
+}
+
+const { steps, intro = bookingProcessIntro } = Astro.props;
+
+const stepDelays = ['150', '225', '300', '375'] as const;
+const stepNums = ['01', '02', '03', '04'] as const;
+---
+
+<section
+	class="section-block section-block--divider px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28"
+	aria-labelledby="booking-process-heading"
+>
+	<div class="relative mx-auto max-w-7xl" data-motion-root data-motion-trigger="inview">
+		<div class="mx-auto mb-12 max-w-2xl text-center lg:mb-16">
+			<p
+				class="mb-4 inline-flex rounded-full border border-white/12 bg-white/[0.05] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm"
+				data-motion-item="up"
+				data-motion-delay="0"
+			>
+				How it works
+			</p>
+			<h2
+				id="booking-process-heading"
+				class="font-display text-3xl leading-[1.1] tracking-tight text-ink-50 sm:text-4xl lg:text-[2.75rem]"
+				data-motion-item="up"
+				data-motion-delay="75"
+			>
+				Easy Booking Process
+			</h2>
+			<p
+				class="mt-4 font-sans text-base leading-relaxed text-ink-400 sm:text-lg"
+				data-motion-item="up"
+				data-motion-delay="150"
+			>
+				{intro}
+			</p>
+		</div>
+
+		<ol
+			class="booking-timeline relative grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6"
+		>
+			{
+				steps.map((item, i) => (
+					<li
+						class="booking-timeline__step group relative"
+						data-motion-item="scale"
+						data-motion-delay={stepDelays[i] ?? '375'}
+					>
+						<article
+							class="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-sm transition-[border-color,transform,box-shadow] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] hover:border-gold-500/30 hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.45)] sm:p-6"
+						>
+							<span
+								class="pointer-events-none absolute -top-3 right-4 font-display text-5xl leading-none text-gold-500/[0.12] select-none sm:text-6xl"
+								aria-hidden="true"
+							>
+								{stepNums[i]}
+							</span>
+
+							<div class="relative mb-5 flex items-center">
+								<span
+									class="inline-flex size-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-gold-400 transition-transform duration-500 group-hover:scale-105"
+									aria-hidden="true"
+								>
+									<BookingStepIcon name={item.icon} class="size-5" />
+								</span>
+							</div>
+
+							<h3 class="relative font-display text-lg leading-tight text-ink-50 sm:text-xl">
+								{item.title}
+							</h3>
+							<p class="relative mt-2.5 flex-1 font-sans text-sm leading-relaxed text-ink-400">
+								{item.description}
+							</p>
+						</article>
+					</li>
+				))
+			}
+		</ol>
+	</div>
+</section>
+
+<style>
+	/* Horizontal connectors — aligned through icon row on desktop */
+	@media (min-width: 1024px) {
+		.booking-timeline__step:not(:last-child)::after {
+			content: '';
+			position: absolute;
+			top: 2.875rem; /* p-6 + half of size-11 icon */
+			left: 4.25rem; /* after icon (1.5rem pad + 2.75rem icon) */
+			width: calc(100% - 4.25rem + 3rem); /* card remainder + gap + next card padding */
+			height: 1px;
+			transform: translateY(-50%);
+			background: linear-gradient(
+				90deg,
+				hsl(36 75% 65% / 0.55),
+				hsl(36 75% 65% / 0.22)
+			);
+			pointer-events: none;
+			z-index: 1;
+		}
+	}
+
+	@media (max-width: 1023px) {
+		.booking-timeline {
+			padding-left: 0.25rem;
+		}
+
+		.booking-timeline__step:not(:last-child)::before {
+			content: '';
+			position: absolute;
+			left: 1.375rem;
+			top: 3.75rem;
+			bottom: -1rem;
+			width: 1px;
+			background: linear-gradient(
+				180deg,
+				hsl(36 75% 65% / 0.45),
+				hsl(36 75% 65% / 0.12)
+			);
+			pointer-events: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.booking-timeline__step article {
+			transition: border-color 0.2s ease;
+		}
+
+		.booking-timeline__step article:hover {
+			transform: none;
+		}
+	}
+</style>

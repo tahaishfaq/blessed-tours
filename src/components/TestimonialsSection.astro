@@ -1,0 +1,156 @@
+---
+import TestimonialCard from './TestimonialCard.astro';
+import type { Testimonial } from '../data/testimonials';
+import { testimonialsHeading, testimonialsIntro, testimonialsByColumn } from '../data/testimonials';
+
+interface Props {
+	items?: Testimonial[];
+	heading?: string;
+	intro?: string;
+}
+
+const { heading = testimonialsHeading, intro = testimonialsIntro } = Astro.props;
+const columns = testimonialsByColumn(3);
+
+const columnMeta = [
+	{ direction: 'up' as const, duration: '32s' },
+	{ direction: 'down' as const, duration: '38s' },
+	{ direction: 'up' as const, duration: '34s' },
+];
+---
+
+<section
+	class="section-block section-block--divider testimonials-section px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28"
+	aria-labelledby="testimonials-heading"
+>
+	<div class="relative mx-auto max-w-7xl" data-motion-root data-motion-trigger="inview">
+		<div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
+			<p
+				class="mb-4 inline-flex rounded-full border border-white/12 bg-white/[0.05] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm"
+				data-motion-item="up"
+				data-motion-delay="0"
+			>
+				Reviews
+			</p>
+			<h2
+				id="testimonials-heading"
+				class="font-display text-3xl leading-[1.1] tracking-tight text-ink-50 sm:text-4xl lg:text-[2.75rem]"
+				data-motion-item="up"
+				data-motion-delay="75"
+			>
+				{heading}
+			</h2>
+			<p
+				class="mt-4 font-sans text-base leading-relaxed text-ink-400 sm:text-lg"
+				data-motion-item="up"
+				data-motion-delay="150"
+			>
+				{intro}
+			</p>
+		</div>
+
+		<div
+			class="testimonials-marquee relative mx-auto max-w-6xl"
+			data-motion-item="up"
+			data-motion-delay="200"
+		>
+			<div class="testimonials-marquee__grid hidden lg:grid lg:grid-cols-3 lg:gap-5">
+				{
+					columns.map((colItems, colIndex) => {
+						const meta = columnMeta[colIndex];
+						return (
+							<div
+								class="testimonials-col relative h-[28rem] overflow-hidden sm:h-[34rem] lg:h-[40rem]"
+								data-testimonials-col={meta.direction}
+							>
+								<div
+									class:list={[
+										'testimonials-track flex flex-col gap-4 will-change-transform',
+										meta.direction === 'up' ? 'testimonials-track--up' : 'testimonials-track--down',
+									]}
+									style={`--testimonials-duration: ${meta.duration}`}
+								>
+									{colItems.map((item) => (
+										<TestimonialCard item={item} />
+									))}
+									{colItems.map((item) => (
+										<TestimonialCard item={item} />
+									))}
+								</div>
+							</div>
+						);
+					})
+				}
+			</div>
+
+			<ul class="mt-6 flex flex-col gap-4 lg:hidden" aria-label="Testimonials">
+				{
+					columns.flat().map((item) => (
+						<li>
+							<TestimonialCard item={item} />
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+</section>
+
+<style>
+	@keyframes testimonials-scroll-up {
+		from {
+			transform: translate3d(0, 0, 0);
+		}
+		to {
+			transform: translate3d(0, -50%, 0);
+		}
+	}
+
+	@keyframes testimonials-scroll-down {
+		from {
+			transform: translate3d(0, -50%, 0);
+		}
+		to {
+			transform: translate3d(0, 0, 0);
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.testimonials-track--down {
+			transform: translate3d(0, -50%, 0);
+		}
+
+		.testimonials-track--up {
+			animation: testimonials-scroll-up var(--testimonials-duration, 34s) linear infinite;
+		}
+
+		.testimonials-track--down {
+			animation: testimonials-scroll-down var(--testimonials-duration, 38s) linear infinite;
+		}
+
+		.testimonials-col:hover .testimonials-track {
+			animation-play-state: paused;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.testimonials-track--up,
+		.testimonials-track--down {
+			animation: none;
+			transform: none;
+		}
+
+		.testimonials-col {
+			height: auto;
+			overflow: visible;
+		}
+
+		.testimonials-marquee__grid {
+			display: none;
+		}
+
+		.testimonials-marquee > ul {
+			display: flex;
+		}
+	}
+</style>

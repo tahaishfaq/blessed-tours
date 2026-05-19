@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+@import './motion.css';
+@import './page-surface.css';
+
+@theme {
+	--font-sans: 'Source Sans Pro', ui-sans-serif, system-ui, sans-serif;
+	--font-display: 'DM Serif Display', ui-serif, Georgia, serif;
+
+	--color-ink-50: hsl(0 5% 98%);
+	--color-ink-100: hsl(0 5% 96%);
+	--color-ink-200: hsl(0 6% 91%);
+	--color-ink-300: hsl(0 6% 82%);
+	--color-ink-400: hsl(0 6% 68%);
+	--color-ink-500: hsl(0 7% 54%);
+	--color-ink-600: hsl(0 7% 42%);
+	--color-ink-700: hsl(0 7% 32%);
+	--color-ink-800: hsl(0 7% 18%);
+	--color-ink-900: hsl(0 7% 9%);
+	--color-ink-950: hsl(0 7% 5%);
+
+	--color-gold-50: hsl(36 80% 97%);
+	--color-gold-100: hsl(36 78% 92%);
+	--color-gold-200: hsl(36 76% 84%);
+	--color-gold-300: hsl(36 75% 76%);
+	--color-gold-400: hsl(36 75% 70%);
+	--color-gold-500: hsl(36 75% 65%);
+	--color-gold-600: hsl(36 72% 55%);
+	--color-gold-700: hsl(36 68% 45%);
+	--color-gold-800: hsl(36 65% 35%);
+	--color-gold-900: hsl(36 62% 25%);
+	--color-gold-950: hsl(36 58% 15%);
+
+	--color-black: hsl(0 0% 0%);
+	--color-white: hsl(0 0% 100%);
+}
+
+html {
+	overflow-x: clip;
+	scroll-behavior: smooth;
+}
+
+body {
+	overflow-x: clip;
+}

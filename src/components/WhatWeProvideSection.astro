@@ -1,0 +1,274 @@
+---
+import type { ProvideCard } from '../data/what-we-provide';
+import { whatWeProvideIntro } from '../data/what-we-provide';
+import ProvideIcon from './ProvideIcon.astro';
+
+interface Props {
+	items: ProvideCard[];
+	intro?: string;
+}
+
+const { items, intro = whatWeProvideIntro } = Astro.props;
+const defaultId = items[0]?.id ?? '';
+---
+
+<section
+	class="section-block section-block--divider provide-section px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24"
+	aria-labelledby="provide-heading"
+	data-provide-section
+>
+	<div class="relative mx-auto max-w-7xl" data-motion-root data-motion-trigger="inview">
+		<div
+			class="provide-split grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-stretch lg:gap-8"
+			data-motion-item="up"
+			data-motion-delay="75"
+		>
+			<div
+				class="provide-visual relative min-h-[22rem] overflow-hidden rounded-2xl border border-white/10 bg-ink-950 sm:min-h-[24rem] lg:min-h-0 lg:h-full"
+			>
+				{
+					items.map((item, i) => (
+						<img
+							src={item.image}
+							alt={item.imageAlt}
+							class:list={[
+								'provide-visual__img absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-[cubic-bezier(0.33,1,0.68,1)]',
+								i === 0 ? 'opacity-100' : 'opacity-0',
+							]}
+							data-provide-image={item.id}
+							loading={i === 0 ? 'eager' : 'lazy'}
+							decoding="async"
+							width="1200"
+							height="900"
+						/>
+					))
+				}
+				<div
+					class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/5"
+					aria-hidden="true"
+				/>
+				<div class="absolute inset-x-0 bottom-0 p-6 sm:p-7">
+					<p
+						class="font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-gold-400"
+						data-provide-tagline
+					>
+						{items[0]?.tagline}
+					</p>
+					<p
+						class="mt-1 font-display text-xl leading-tight text-ink-50 sm:text-2xl"
+						data-provide-visual-title
+					>
+						{items[0]?.title}
+					</p>
+					<p
+						class="mt-2 max-w-sm font-sans text-sm leading-relaxed text-ink-200/90"
+						data-provide-caption
+					>
+						{items[0]?.description}
+					</p>
+				</div>
+			</div>
+
+			<div
+				class="provide-content flex min-h-[22rem] flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-sm sm:min-h-[24rem] sm:p-7 lg:min-h-0 lg:h-full lg:p-9"
+			>
+				<header class="mb-7 shrink-0 lg:mb-9">
+					<p class="mb-3 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400">
+						What we offer
+					</p>
+					<h2
+						id="provide-heading"
+						class="font-display text-2xl leading-tight tracking-tight text-ink-50 sm:text-3xl lg:text-[2.125rem]"
+					>
+						What We Provide?
+					</h2>
+					<p class="mt-4 max-w-lg font-sans text-[0.9375rem] leading-relaxed text-ink-400 sm:text-base">
+						{intro}
+					</p>
+				</header>
+
+				<div
+					class="provide-tabs flex min-h-0 flex-1 flex-col gap-2 sm:gap-2.5"
+					role="tablist"
+					aria-label="What we provide"
+				>
+					{
+						items.map((item, i) => (
+							<button
+								type="button"
+								class:list={[
+									'provide-tab w-full rounded-xl text-left transition-colors duration-300',
+									i === 0 && 'provide-tab--active',
+								]}
+								data-provide-tab={item.id}
+								role="tab"
+								aria-selected={i === 0}
+								id={`provide-tab-${item.id}`}
+							>
+								<span class="flex items-start gap-3.5 px-3 py-3.5 sm:gap-4 sm:px-4 sm:py-4">
+									<span
+										class="provide-tab__icon mt-0.5 inline-flex size-10 shrink-0 items-center justify-center rounded-lg border sm:size-11"
+										aria-hidden="true"
+									>
+										<ProvideIcon name={item.icon} class="size-5" />
+									</span>
+									<span class="min-w-0 flex-1">
+										<span class="provide-tab__tagline block font-sans text-[0.625rem] font-semibold uppercase tracking-[0.12em]">
+											{item.tagline}
+										</span>
+										<span class="provide-tab__title mt-0.5 block font-display text-base leading-snug sm:text-lg">
+											{item.title}
+										</span>
+										<span class="provide-tab__desc mt-2 block font-sans text-sm leading-relaxed">
+											{item.description}
+										</span>
+									</span>
+								</span>
+							</button>
+						))
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script define:vars={{ items, defaultId }}>
+	function initProvideSection(root) {
+		const split = root.querySelector('.provide-split');
+		const tabs = [...root.querySelectorAll('[data-provide-tab]')];
+		const images = [...root.querySelectorAll('[data-provide-image]')];
+		const tagline = root.querySelector('[data-provide-tagline]');
+		const visualTitle = root.querySelector('[data-provide-visual-title]');
+		const caption = root.querySelector('[data-provide-caption]');
+		const data = Object.fromEntries(items.map((item) => [item.id, item]));
+
+		if (tabs.length === 0 || !split) return;
+
+		function syncHeights() {
+			if (window.matchMedia('(min-width: 1024px)').matches) {
+				const visual = root.querySelector('.provide-visual');
+				const content = root.querySelector('.provide-content');
+				if (!visual || !content) return;
+				const h = Math.max(visual.offsetHeight, content.offsetHeight, 680);
+				split.style.minHeight = `${h}px`;
+				visual.style.minHeight = `${h}px`;
+				content.style.minHeight = `${h}px`;
+			} else {
+				split.style.minHeight = '';
+				root.querySelector('.provide-visual')?.style.removeProperty('min-height');
+				root.querySelector('.provide-content')?.style.removeProperty('min-height');
+			}
+		}
+
+		function setActive(id) {
+			const item = data[id];
+			if (!item) return;
+
+			tabs.forEach((tab) => {
+				const isActive = tab.dataset.provideTab === id;
+				tab.setAttribute('aria-selected', String(isActive));
+				tab.classList.toggle('provide-tab--active', isActive);
+			});
+
+			images.forEach((img) => {
+				const show = img.dataset.provideImage === id;
+				img.classList.toggle('opacity-100', show);
+				img.classList.toggle('opacity-0', !show);
+			});
+
+			if (tagline) tagline.textContent = item.tagline;
+			if (visualTitle) visualTitle.textContent = item.title;
+			if (caption) caption.textContent = item.description;
+		}
+
+		tabs.forEach((tab) => {
+			tab.addEventListener('click', () => setActive(tab.dataset.provideTab ?? defaultId));
+		});
+
+		setActive(defaultId);
+		syncHeights();
+
+		let resizeTimer;
+		window.addEventListener('resize', () => {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(syncHeights, 100);
+		});
+	}
+
+	document.querySelectorAll('[data-provide-section]').forEach(initProvideSection);
+</script>
+
+<style>
+	@media (min-width: 1024px) {
+		.provide-split {
+			min-height: 42rem;
+		}
+
+		.provide-visual,
+		.provide-content {
+			height: 100%;
+		}
+	}
+
+	.provide-tab {
+		border: 1px solid transparent;
+		background: transparent;
+	}
+
+	.provide-tab:hover:not(.provide-tab--active) {
+		background: rgba(255, 255, 255, 0.04);
+	}
+
+	.provide-tab--active {
+		border-color: hsl(36 75% 65% / 0.35);
+		background: rgba(212, 165, 116, 0.08);
+	}
+
+	.provide-tab__icon {
+		border-color: hsl(0 0% 100% / 0.12);
+		background: hsl(0 0% 100% / 0.04);
+		color: hsl(0 6% 68%);
+	}
+
+	.provide-tab--active .provide-tab__icon {
+		border-color: hsl(36 75% 65% / 0.4);
+		background: hsl(36 75% 65% / 0.12);
+		color: hsl(36 75% 65%);
+	}
+
+	.provide-tab__tagline {
+		color: hsl(0 6% 68%);
+	}
+
+	.provide-tab--active .provide-tab__tagline {
+		color: hsl(36 75% 65%);
+	}
+
+	.provide-tab__title {
+		color: hsl(0 5% 82%);
+	}
+
+	.provide-tab--active .provide-tab__title {
+		color: hsl(0 5% 98%);
+	}
+
+	.provide-tab__desc {
+		color: hsl(0 6% 58%);
+	}
+
+	.provide-tab--active .provide-tab__desc {
+		color: hsl(0 5% 78%);
+	}
+
+	.provide-tab:focus-visible {
+		outline: 2px solid hsl(36 75% 65%);
+		outline-offset: 2px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.provide-visual__img {
+			transition: opacity 0.2s ease;
+		}
+	}
+</style>

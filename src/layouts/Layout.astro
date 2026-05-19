@@ -1,23 +1,41 @@
+---
+import '../styles/global.css';
+import MotionInit from '../components/MotionInit.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = 'Blessed Tours — Hajj & Umrah from the UK',
+	description = 'Trusted UK partner for Hajj, Umrah, and Islamic travel. Affordable packages, expert guidance, and complete pilgrimage services.',
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<meta property="og:image" content="/logo.png" />
+		<meta property="og:site_name" content="Blessed Tours" />
+		<link rel="icon" type="image/png" href="/logo.png" />
+		<link rel="apple-touch-icon" href="/logo.png" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
+			rel="stylesheet"
+		/>
+		<title>{title}</title>
 	</head>
-	<body>
+	<body class="min-h-dvh bg-ink-950 font-sans text-ink-50 antialiased">
 		<slot />
+		<SiteFooter />
+		<MotionInit />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

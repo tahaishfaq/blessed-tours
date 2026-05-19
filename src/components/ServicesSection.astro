@@ -1,0 +1,229 @@
+---
+import type { ServiceCard } from '../data/services';
+
+interface Props {
+	services: ServiceCard[];
+	seeAllHref?: string;
+}
+
+const { services, seeAllHref = '/umrah-packages' } = Astro.props;
+
+/** Stagger delays — must match existing keys in motion.css */
+const cardDelays = ['150', '225', '300', '375', '450', '525', '600', '675'] as const;
+---
+
+<section
+	class="section-block section-block--divider services-section px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24"
+	aria-labelledby="services-heading"
+	data-services-carousel
+>
+	<div class="relative mx-auto max-w-7xl" data-motion-root data-motion-trigger="inview">
+		<div
+			class="mb-10 flex flex-col gap-8 sm:mb-12 md:flex-row md:items-end md:justify-between lg:mb-14"
+		>
+			<div class="max-w-2xl">
+				<p
+					class="mb-4 inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm transition-colors duration-300 hover:border-gold-500/35 hover:bg-gold-500/10"
+					data-motion-item="up"
+					data-motion-delay="0"
+				>
+					Our Services
+				</p>
+				<h2
+					id="services-heading"
+					class="font-display text-3xl leading-[1.15] tracking-tight text-ink-50 sm:text-4xl lg:text-[2.75rem]"
+					data-motion-item="up"
+					data-motion-delay="75"
+				>
+					Your journey to the blessed lands begins here
+				</h2>
+			</div>
+			<div
+				class="flex shrink-0 items-center gap-3 self-start md:self-auto"
+				data-motion-item="up"
+				data-motion-delay="150"
+			>
+				<a
+					href={seeAllHref}
+					class="inline-flex items-center rounded-full border border-white/20 bg-white/[0.04] px-5 py-2.5 font-sans text-sm font-semibold text-ink-50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gold-500/50 hover:bg-gold-500/10 hover:text-gold-300 active:translate-y-0"
+				>
+					See all services
+				</a>
+				<a
+					href={seeAllHref}
+					class="group inline-flex size-11 items-center justify-center rounded-full bg-gold-500 text-ink-900 shadow-md shadow-gold-900/30 transition-all duration-300 hover:scale-110 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/25 active:scale-95"
+					aria-label="View all services"
+				>
+					<svg class="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"></path>
+					</svg>
+				</a>
+			</div>
+		</div>
+
+		<div class="relative">
+			<div class="overflow-hidden rounded-none sm:rounded-2xl">
+				<div
+					class="services-section__track flex items-start gap-4 transition-[transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform sm:gap-5 lg:gap-6"
+					data-services-track
+					style="transform: translateX(0);"
+				>
+					{
+						services.map((s, i) => (
+							<article
+								class="services-section__card w-[85vw] shrink-0 sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-1rem)]"
+								data-service-card
+							>
+								<a
+									href={s.href}
+									class="group relative isolate block aspect-[3/4] max-h-[28rem] w-full overflow-hidden rounded-3xl shadow-xl shadow-black/50 transition-shadow duration-500 ease-out hover:shadow-2xl hover:shadow-black/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500 sm:max-h-none sm:aspect-[4/5] lg:aspect-[3/4]"
+									data-service-motion-card
+									data-motion-delay={cardDelays[i] ?? '600'}
+								>
+									<img
+										src={s.image}
+										alt=""
+										class="absolute inset-0 h-full w-full object-cover transition-[transform,filter] duration-[1.45s] ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-105 group-hover:brightness-105"
+										loading="lazy"
+										decoding="async"
+										width="800"
+										height="1000"
+										data-service-img
+									/>
+									<div
+										class:list={[
+											'absolute inset-0 hidden h-full w-full origin-center bg-cover bg-center transition-[transform,opacity] duration-[1.45s] ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-105 group-hover:opacity-90',
+											s.fallbackClass,
+										]}
+										data-service-fallback
+										aria-hidden="true"
+									/>
+									<div
+										class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 transition-opacity duration-500 group-hover:from-black/80 group-hover:via-black/35"
+										aria-hidden="true"
+									/>
+									<div
+										class="absolute inset-0 bg-gradient-to-br from-gold-500/0 to-transparent opacity-0 transition-opacity duration-500 group-hover:from-gold-500/15 group-hover:opacity-100"
+										aria-hidden="true"
+									/>
+									<span
+										class="absolute top-4 right-4 z-10 inline-flex size-10 items-center justify-center rounded-full border border-white/20 bg-black/40 text-gold-400 shadow-lg backdrop-blur-md transition-all duration-300 group-hover:scale-110 group-hover:border-gold-500/60 group-hover:bg-gold-500 group-hover:text-ink-900 group-hover:shadow-gold-500/30"
+										aria-hidden="true"
+									>
+										<svg class="size-4 transition-transform duration-300 group-hover:translate-x-px group-hover:-translate-y-px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25">
+											<path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"></path>
+										</svg>
+									</span>
+									<div class="absolute right-0 bottom-0 left-0 p-5 sm:p-6">
+										<h3 class="font-display text-xl leading-tight text-white drop-shadow-sm transition-colors duration-300 group-hover:text-gold-50 sm:text-2xl lg:text-2xl">
+											{s.title}
+										</h3>
+										<p class="mt-1.5 font-sans text-sm text-gold-200/90 transition-colors duration-300 group-hover:text-gold-100 sm:text-base">
+											{s.subtitle}
+										</p>
+									</div>
+								</a>
+							</article>
+						))
+					}
+				</div>
+			</div>
+
+			<div class="mt-8 flex justify-center gap-3 sm:mt-10" data-motion-item="in" data-motion-delay="675">
+				<button
+					type="button"
+					class="inline-flex size-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-ink-50 shadow-sm backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:border-gold-500/50 hover:bg-gold-500/15 hover:text-gold-300 active:scale-95 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:opacity-35"
+					aria-label="Previous services"
+					data-services-prev
+				>
+					<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"></path>
+					</svg>
+				</button>
+				<button
+					type="button"
+					class="inline-flex size-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-ink-50 shadow-sm backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:border-gold-500/50 hover:bg-gold-500/15 hover:text-gold-300 active:scale-95 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:opacity-35"
+					aria-label="Next services"
+					data-services-next
+				>
+					<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"></path>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	function initServicesCarousel(root: HTMLElement) {
+		const track = root.querySelector<HTMLElement>('[data-services-track]');
+		const prev = root.querySelector<HTMLButtonElement>('[data-services-prev]');
+		const next = root.querySelector<HTMLButtonElement>('[data-services-next]');
+		const cards = [...root.querySelectorAll<HTMLElement>('[data-service-card]')];
+
+		if (!track || !prev || !next || cards.length === 0) return;
+
+		root.querySelectorAll<HTMLImageElement>('[data-service-img]').forEach((img) => {
+			const card = img.closest('a');
+			const fb = card?.querySelector<HTMLElement>('[data-service-fallback]');
+			img.addEventListener('error', () => {
+				img.classList.add('hidden');
+				fb?.classList.remove('hidden');
+			});
+		});
+
+		let index = 0;
+
+		function visibleCount() {
+			const w = window.innerWidth;
+			if (w >= 1024) return 3;
+			if (w >= 640) return 2;
+			return 1;
+		}
+
+		function maxIndex() {
+			const v = visibleCount();
+			return Math.max(0, cards.length - v);
+		}
+
+		function cardStepPx(): number {
+			const first = cards[0];
+			const second = cards[1];
+			if (!first || !second) return first?.offsetWidth ?? 0;
+			return second.offsetLeft - first.offsetLeft;
+		}
+
+		function update() {
+			const step = cardStepPx();
+			const offset = index * step;
+			track.style.transform = `translateX(-${offset}px)`;
+
+			const max = maxIndex();
+			prev.disabled = index <= 0;
+			next.disabled = index >= max;
+		}
+
+		function go(delta: number) {
+			const max = maxIndex();
+			index = Math.min(max, Math.max(0, index + delta));
+			update();
+		}
+
+		prev.addEventListener('click', () => go(-1));
+		next.addEventListener('click', () => go(1));
+
+		let resizeTimer: ReturnType<typeof setTimeout>;
+		window.addEventListener('resize', () => {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(() => {
+				index = Math.min(index, maxIndex());
+				update();
+			}, 120);
+		});
+
+		update();
+	}
+
+	document.querySelectorAll<HTMLElement>('[data-services-carousel]').forEach(initServicesCarousel);
+</script>

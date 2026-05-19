@@ -1,0 +1,350 @@
+---
+import type { HeroSlide } from '../data/hero-slides';
+
+interface Props {
+	slides: HeroSlide[];
+	autoplayMs?: number;
+}
+
+const { slides, autoplayMs = 8000 } = Astro.props;
+
+const slideCount = slides.length;
+---
+
+<section
+	class="hero-carousel relative isolate min-h-svh min-h-[32rem] w-full overflow-hidden bg-black sm:min-h-[36rem] lg:min-h-[min(100dvh,56rem)]"
+	data-autoplay={autoplayMs}
+	aria-roledescription="carousel"
+	aria-label="Featured journeys"
+>
+	<div class="hero-carousel__track absolute inset-0">
+		{
+			slides.map((slide, index) => (
+				<div
+					class:list={[
+						'hero-carousel__slide absolute inset-0 transition-opacity duration-700 ease-out',
+						index === 0 ? 'z-10 opacity-100' : 'z-0 opacity-0',
+					]}
+					data-slide={index}
+					data-slide-id={slide.id}
+					aria-hidden={index !== 0}
+				>
+					{slide.video ? (
+						<video
+							class="absolute inset-0 h-full w-full object-cover object-[50%_55%] sm:object-[50%_48%] lg:object-[50%_42%]"
+							muted
+							loop
+							playsinline
+							preload={index === 0 ? 'auto' : 'metadata'}
+							poster={slide.poster}
+							data-video
+						>
+							<source src={slide.video} type="video/mp4" />
+						</video>
+					) : null}
+					<div
+						class:list={[
+							'absolute inset-0 h-full w-full',
+							slide.fallbackClass ?? 'bg-gradient-to-br from-black via-ink-950 to-ink-800',
+							slide.video ? 'hidden' : '',
+						]}
+						data-fallback
+						role="img"
+						aria-label={slide.alt}
+					/>
+					{slide.poster && slide.video ? (
+						<img
+							src={slide.poster}
+							alt=""
+							class="absolute inset-0 hidden h-full w-full object-cover"
+							data-poster-fallback
+							loading={index === 0 ? 'eager' : 'lazy'}
+						/>
+					) : null}
+					<div
+						class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/10 to-black/55"
+						aria-hidden="true"
+					/>
+					<div
+						class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/25"
+						aria-hidden="true"
+					/>
+				</div>
+			))
+		}
+	</div>
+
+	<div
+		class="relative z-20 flex min-h-svh min-h-[32rem] flex-col px-4 pt-[4.75rem] pb-[4.5rem] sm:min-h-[36rem] sm:px-6 sm:pt-28 sm:pb-20 md:pt-[7.5rem] lg:min-h-[min(100dvh,56rem)] lg:px-8 lg:pt-32 lg:pb-16"
+	>
+		<div
+			class="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 content-end gap-6 sm:gap-8 md:content-center lg:grid-cols-12 lg:items-center lg:gap-6"
+			data-motion-root
+			data-motion-trigger="both"
+		>
+			<div
+				class="relative text-center md:max-w-xl md:text-left lg:col-span-5 lg:col-start-1 lg:max-w-none lg:self-center"
+				data-hero-headline
+			>
+				{
+					slides.map((slide, index) => (
+						<div
+							class:list={[
+								'hero-carousel__copy transition-opacity duration-500 ease-out',
+								index === 0
+									? 'relative opacity-100'
+									: 'pointer-events-none absolute inset-0 opacity-0',
+							]}
+							data-hero-copy={index}
+							aria-hidden={index !== 0}
+						>
+							<p
+								class="mb-2 font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-gold-500 sm:mb-3 sm:text-xs"
+								data-motion-item={index === 0 ? 'up' : undefined}
+								data-motion-delay={index === 0 ? '150' : undefined}
+							>
+								{slide.eyebrow}
+							</p>
+							<h1
+								class="mb-3 font-display text-[1.75rem] leading-tight tracking-tight text-ink-50 sm:mb-4 sm:text-3xl md:text-4xl lg:max-w-lg lg:text-[2.75rem] lg:leading-[1.1]"
+								data-motion-item={index === 0 ? 'up' : undefined}
+								data-motion-delay={index === 0 ? '275' : undefined}
+							>
+								{slide.title}
+							</h1>
+							<p
+								class="mx-auto max-w-md font-sans text-sm leading-relaxed text-ink-50/90 sm:text-base md:mx-0 md:text-lg lg:max-w-md"
+								data-motion-item={index === 0 ? 'up' : undefined}
+								data-motion-delay={index === 0 ? '400' : undefined}
+							>
+								{slide.description}
+							</p>
+							<p class="mt-5 sm:mt-6">
+								<a
+									href={slide.ctaHref}
+									class="inline-flex items-center rounded-full border border-gold-500/50 bg-gold-500/10 px-5 py-2.5 font-sans text-sm font-semibold text-gold-300 backdrop-blur-sm transition-all duration-300 hover:border-gold-400 hover:bg-gold-500/20 hover:text-gold-200"
+								>
+									{slide.ctaLabel}
+								</a>
+							</p>
+						</div>
+					))
+				}
+			</div>
+			<div
+				class="pointer-events-none hidden min-h-[4rem] lg:col-span-2 lg:col-start-6 lg:block xl:min-h-[6rem]"
+				aria-hidden="true"
+			/>
+			<div
+				class="mx-auto w-full max-w-md md:max-w-lg lg:col-span-5 lg:col-start-8 lg:mx-0 lg:flex lg:max-w-none lg:justify-end lg:self-center"
+			>
+				<slot name="form" />
+			</div>
+		</div>
+	</div>
+
+	{
+		slideCount > 1 && (
+			<div
+				class="absolute bottom-4 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 sm:bottom-6"
+				role="tablist"
+				aria-label="Choose slide"
+				data-motion-root
+				data-motion-trigger="load"
+			>
+				{slides.map((slide, index) => (
+					<button
+						type="button"
+						class:list={[
+							'h-2 rounded-full transition-all duration-300',
+							index === 0 ? 'w-7 bg-gold-500' : 'w-2 bg-white/40 hover:bg-white/70',
+						]}
+						data-motion-item="in"
+						data-motion-delay={String(900 + index * 75)}
+						data-dot={index}
+						role="tab"
+						aria-selected={index === 0}
+						aria-label={`Go to slide ${index + 1}: ${slide.eyebrow}`}
+					/>
+				))}
+			</div>
+		)
+	}
+</section>
+
+<script>
+	function initHeroCarousel(root: HTMLElement) {
+		const slides = [...root.querySelectorAll<HTMLElement>('[data-slide]')];
+		const dots = [...root.querySelectorAll<HTMLButtonElement>('[data-dot]')];
+		const copyPanels = [...root.querySelectorAll<HTMLElement>('[data-hero-copy]')];
+		const autoplayMs = Number(root.dataset.autoplay) || 8000;
+		const bookingForm = root.querySelector('[data-booking-form]');
+
+		let current = 0;
+		let timer: ReturnType<typeof setInterval> | null = null;
+		let touchStartX = 0;
+
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		function getVideo(slideEl: HTMLElement) {
+			return slideEl.querySelector<HTMLVideoElement>('[data-video]');
+		}
+
+		function showPosterFallback(slideEl: HTMLElement) {
+			const video = getVideo(slideEl);
+			const poster = slideEl.querySelector<HTMLElement>('[data-poster-fallback]');
+			const fallback = slideEl.querySelector<HTMLElement>('[data-fallback]');
+			if (video) video.classList.add('hidden');
+			if (poster) poster.classList.remove('hidden');
+			if (fallback) fallback.classList.remove('hidden');
+		}
+
+		function pauseAll() {
+			slides.forEach((slide) => {
+				const video = getVideo(slide);
+				if (video) {
+					video.pause();
+					video.currentTime = 0;
+				}
+			});
+		}
+
+		function playActiveVideo(index: number) {
+			const video = getVideo(slides[index]);
+			if (!video) return;
+
+			const fallback = slides[index].querySelector<HTMLElement>('[data-fallback]');
+			const poster = slides[index].querySelector<HTMLElement>('[data-poster-fallback]');
+
+			video.classList.remove('hidden');
+			if (fallback) fallback.classList.add('hidden');
+			if (poster) poster.classList.add('hidden');
+
+			video.play().catch(() => {
+				showPosterFallback(slides[index]);
+			});
+		}
+
+		function updateCopy(index: number) {
+			copyPanels.forEach((panel, i) => {
+				const active = i === index;
+				panel.setAttribute('aria-hidden', String(!active));
+				panel.classList.toggle('opacity-100', active);
+				panel.classList.toggle('opacity-0', !active);
+				panel.classList.toggle('pointer-events-none', !active);
+				panel.classList.toggle('relative', active);
+				panel.classList.toggle('absolute', !active);
+				panel.classList.toggle('inset-0', !active);
+			});
+		}
+
+		function goTo(index: number) {
+			const next = (index + slides.length) % slides.length;
+			if (next === current) return;
+
+			slides[current].classList.replace('z-10', 'z-0');
+			slides[current].classList.replace('opacity-100', 'opacity-0');
+			slides[current].setAttribute('aria-hidden', 'true');
+
+			current = next;
+
+			slides[current].classList.replace('z-0', 'z-10');
+			slides[current].classList.replace('opacity-0', 'opacity-100');
+			slides[current].setAttribute('aria-hidden', 'false');
+
+			dots.forEach((dot, i) => {
+				const active = i === current;
+				dot.setAttribute('aria-selected', String(active));
+				dot.classList.toggle('w-7', active);
+				dot.classList.toggle('bg-gold-500', active);
+				dot.classList.toggle('w-2', !active);
+				dot.classList.toggle('bg-white/40', !active);
+			});
+
+			updateCopy(current);
+			pauseAll();
+			playActiveVideo(current);
+		}
+
+		function next() {
+			goTo(current + 1);
+		}
+
+		function prev() {
+			goTo(current - 1);
+		}
+
+		function startAutoplay() {
+			if (prefersReducedMotion || autoplayMs <= 0) return;
+			stopAutoplay();
+			timer = setInterval(next, autoplayMs);
+		}
+
+		function stopAutoplay() {
+			if (timer) {
+				clearInterval(timer);
+				timer = null;
+			}
+		}
+
+		if (slides.length > 1) {
+			dots.forEach((dot) => {
+				dot.addEventListener('click', () => {
+					goTo(Number(dot.dataset.dot));
+					startAutoplay();
+				});
+			});
+		}
+
+		root.addEventListener('mouseenter', stopAutoplay);
+		root.addEventListener('mouseleave', startAutoplay);
+
+		bookingForm?.addEventListener('focusin', stopAutoplay);
+		bookingForm?.addEventListener('focusout', (e) => {
+			if (!bookingForm.contains(e.relatedTarget as Node)) {
+				startAutoplay();
+			}
+		});
+
+		root.addEventListener(
+			'touchstart',
+			(e) => {
+				if (bookingForm?.contains(e.target as Node)) return;
+				touchStartX = e.changedTouches[0].screenX;
+				stopAutoplay();
+			},
+			{ passive: true },
+		);
+
+		root.addEventListener(
+			'touchend',
+			(e) => {
+				if (bookingForm?.contains(e.target as Node)) return;
+				const delta = e.changedTouches[0].screenX - touchStartX;
+				if (Math.abs(delta) > 50) {
+					delta > 0 ? prev() : next();
+				}
+				startAutoplay();
+			},
+			{ passive: true },
+		);
+
+		slides.forEach((slide) => {
+			const video = getVideo(slide);
+			video?.addEventListener('error', () => showPosterFallback(slide));
+		});
+
+		const firstVideo = getVideo(slides[0]);
+		if (firstVideo) {
+			const fallback = slides[0].querySelector<HTMLElement>('[data-fallback]');
+			fallback?.classList.add('hidden');
+			firstVideo.play().catch(() => showPosterFallback(slides[0]));
+		}
+
+		if (slides.length > 1) {
+			startAutoplay();
+		}
+	}
+
+	document.querySelectorAll<HTMLElement>('.hero-carousel').forEach(initHeroCarousel);
+</script>

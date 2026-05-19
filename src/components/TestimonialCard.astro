@@ -1,0 +1,32 @@
+---
+import type { Testimonial } from '../data/testimonials';
+
+interface Props {
+	item: Testimonial;
+}
+
+const { item } = Astro.props;
+---
+
+<article
+	class="testimonial-card group shrink-0 rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-sm transition-[border-color,box-shadow] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] hover:border-gold-500/25 hover:shadow-[0_16px_40px_-24px_rgba(0,0,0,0.45)] sm:rounded-[1.35rem] sm:p-6"
+>
+	<p class="font-sans text-sm leading-relaxed text-ink-200 sm:text-[0.9375rem]">
+		&ldquo;{item.quote}&rdquo;
+	</p>
+	<footer class="mt-5 flex items-center gap-3">
+		<img
+			src={item.avatar}
+			alt={`${item.name}, ${item.location}`}
+			class="size-10 shrink-0 rounded-full object-cover ring-2 ring-gold-500/30"
+			width="40"
+			height="40"
+			loading="lazy"
+			decoding="async"
+		/>
+		<div class="min-w-0">
+			<p class="truncate font-sans text-sm font-semibold text-ink-50">{item.name}</p>
+			<p class="truncate font-sans text-xs text-ink-400">{item.location}</p>
+		</div>
+	</footer>
+</article>
