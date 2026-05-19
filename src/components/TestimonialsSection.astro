@@ -1,7 +1,14 @@
 ---
 import TestimonialCard from './TestimonialCard.astro';
 import type { Testimonial } from '../data/testimonials';
-import { testimonialsHeading, testimonialsIntro, testimonialsByColumn } from '../data/testimonials';
+import {
+	testimonials,
+	testimonialsHeading,
+	testimonialsIntro,
+	testimonialsByColumn,
+} from '../data/testimonials';
+
+const mobileMarqueeDuration = '58s';
 
 interface Props {
 	items?: Testimonial[];
@@ -83,14 +90,32 @@ const columnMeta = [
 				}
 			</div>
 
-			<ul class="mt-6 flex flex-col gap-4 lg:hidden" aria-label="Testimonials">
-				{
-					columns.flat().map((item) => (
-						<li>
-							<TestimonialCard item={item} />
-						</li>
-					))
-				}
+			<div
+				class="testimonials-mobile-marquee relative mt-2 h-[26rem] overflow-hidden sm:h-[30rem] lg:hidden"
+				aria-hidden="false"
+			>
+				<div
+					class="testimonials-track testimonials-track--mobile-up flex flex-col gap-4 will-change-transform"
+					style={`--testimonials-duration: ${mobileMarqueeDuration}`}
+				>
+					{testimonials.map((item) => (
+						<TestimonialCard item={item} />
+					))}
+					{testimonials.map((item) => (
+						<TestimonialCard item={item} />
+					))}
+				</div>
+			</div>
+
+			<ul
+				class="testimonials-mobile-static mt-6 hidden flex-col gap-4 lg:hidden"
+				aria-label="Testimonials"
+			>
+				{testimonials.map((item) => (
+					<li>
+						<TestimonialCard item={item} />
+					</li>
+				))}
 			</ul>
 		</div>
 	</div>
@@ -115,6 +140,17 @@ const columnMeta = [
 		}
 	}
 
+	/* Mobile + tablet: single column scrolling up */
+	@media (max-width: 1023px) {
+		.testimonials-track--mobile-up {
+			animation: testimonials-scroll-up var(--testimonials-duration, 58s) linear infinite;
+		}
+
+		.testimonials-mobile-marquee:hover .testimonials-track--mobile-up {
+			animation-play-state: paused;
+		}
+	}
+
 	@media (min-width: 1024px) {
 		.testimonials-track--down {
 			transform: translate3d(0, -50%, 0);
@@ -135,21 +171,24 @@ const columnMeta = [
 
 	@media (prefers-reduced-motion: reduce) {
 		.testimonials-track--up,
-		.testimonials-track--down {
+		.testimonials-track--down,
+		.testimonials-track--mobile-up {
 			animation: none;
 			transform: none;
 		}
 
-		.testimonials-col {
+		.testimonials-col,
+		.testimonials-mobile-marquee {
 			height: auto;
 			overflow: visible;
 		}
 
-		.testimonials-marquee__grid {
+		.testimonials-marquee__grid,
+		.testimonials-mobile-marquee {
 			display: none;
 		}
 
-		.testimonials-marquee > ul {
+		.testimonials-mobile-static {
 			display: flex;
 		}
 	}

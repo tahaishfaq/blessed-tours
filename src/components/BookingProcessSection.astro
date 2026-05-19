@@ -45,7 +45,7 @@ const stepNums = ['01', '02', '03', '04'] as const;
 		</div>
 
 		<ol
-			class="booking-timeline relative grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6"
+			class="booking-timeline relative grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6"
 		>
 			{
 				steps.map((item, i) => (
@@ -55,25 +55,25 @@ const stepNums = ['01', '02', '03', '04'] as const;
 						data-motion-delay={stepDelays[i] ?? '375'}
 					>
 						<article
-							class="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-sm transition-[border-color,transform,box-shadow] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] hover:border-gold-500/30 hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.45)] sm:p-6"
+							class="relative z-[1] flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 pb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-sm transition-[border-color,transform,box-shadow] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] hover:border-gold-500/30 hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.45)] sm:p-6"
 						>
 							<span
-								class="pointer-events-none absolute -top-3 right-4 font-display text-5xl leading-none text-gold-500/[0.12] select-none sm:text-6xl"
+								class="pointer-events-none absolute top-3 right-3 font-display text-[2.75rem] leading-none text-gold-500/[0.09] select-none sm:-top-3 sm:right-4 sm:text-5xl sm:text-gold-500/[0.12] lg:text-6xl"
 								aria-hidden="true"
 							>
 								{stepNums[i]}
 							</span>
 
-							<div class="relative mb-5 flex items-center">
+							<div class="relative mb-4 flex items-center sm:mb-5">
 								<span
-									class="inline-flex size-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-gold-400 transition-transform duration-500 group-hover:scale-105"
+									class="booking-timeline__icon inline-flex size-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-gold-400 transition-transform duration-500 group-hover:scale-105"
 									aria-hidden="true"
 								>
 									<BookingStepIcon name={item.icon} class="size-5" />
 								</span>
 							</div>
 
-							<h3 class="relative font-display text-lg leading-tight text-ink-50 sm:text-xl">
+							<h3 class="relative max-w-[calc(100%-3.5rem)] font-display text-lg leading-tight text-ink-50 sm:max-w-none sm:text-xl">
 								{item.title}
 							</h3>
 							<p class="relative mt-2.5 flex-1 font-sans text-sm leading-relaxed text-ink-400">
@@ -88,14 +88,14 @@ const stepNums = ['01', '02', '03', '04'] as const;
 </section>
 
 <style>
-	/* Horizontal connectors — aligned through icon row on desktop */
-	@media (min-width: 1024px) {
-		.booking-timeline__step:not(:last-child)::after {
+	/* Connectors on tablet + desktop only (no lines on mobile) */
+	@media (min-width: 640px) and (max-width: 1023px) {
+		.booking-timeline__step:nth-child(odd)::after {
 			content: '';
 			position: absolute;
-			top: 2.875rem; /* p-6 + half of size-11 icon */
-			left: 4.25rem; /* after icon (1.5rem pad + 2.75rem icon) */
-			width: calc(100% - 4.25rem + 3rem); /* card remainder + gap + next card padding */
+			top: 2.875rem;
+			left: 4.25rem;
+			width: calc(100% - 4.25rem + 1.25rem);
 			height: 1px;
 			transform: translateY(-50%);
 			background: linear-gradient(
@@ -108,24 +108,22 @@ const stepNums = ['01', '02', '03', '04'] as const;
 		}
 	}
 
-	@media (max-width: 1023px) {
-		.booking-timeline {
-			padding-left: 0.25rem;
-		}
-
-		.booking-timeline__step:not(:last-child)::before {
+	@media (min-width: 1024px) {
+		.booking-timeline__step:not(:last-child)::after {
 			content: '';
 			position: absolute;
-			left: 1.375rem;
-			top: 3.75rem;
-			bottom: -1rem;
-			width: 1px;
+			top: 2.875rem;
+			left: 4.25rem;
+			width: calc(100% - 4.25rem + 3rem);
+			height: 1px;
+			transform: translateY(-50%);
 			background: linear-gradient(
-				180deg,
-				hsl(36 75% 65% / 0.45),
-				hsl(36 75% 65% / 0.12)
+				90deg,
+				hsl(36 75% 65% / 0.55),
+				hsl(36 75% 65% / 0.22)
 			);
 			pointer-events: none;
+			z-index: 1;
 		}
 	}
 

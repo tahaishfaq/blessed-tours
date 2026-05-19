@@ -183,15 +183,32 @@ function isActive(href: string) {
 	</div>
 
 	<div
-		class:list={[
-			'hidden max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain lg:hidden',
-			overlay
-				? 'border-t border-white/15 bg-black/40 backdrop-blur-xl'
-				: 'border-t border-white/10 bg-black/95 backdrop-blur-md',
-		]}
-		data-mobile-menu
+		class="mobile-menu-backdrop fixed inset-0 z-40 hidden bg-black/50 backdrop-blur-[2px] lg:hidden"
+		data-mobile-backdrop
+		aria-hidden="true"
+	></div>
+
+	<div
+		class="mobile-menu-wrapper pointer-events-none fixed inset-x-0 top-16 z-50 hidden px-3 pt-2 sm:px-4 lg:hidden"
+		data-mobile-menu-wrapper
 	>
-		<nav class="mx-auto max-w-7xl space-y-1 px-4 py-4 sm:px-6" aria-label="Mobile">
+		<div
+			class="mobile-menu-panel relative mx-auto max-w-lg overflow-hidden rounded-2xl border border-white/25 bg-white/[0.08] shadow-[0_8px_40px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-2xl"
+			data-mobile-menu
+		>
+			<div
+				class="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.14] via-white/[0.04] to-transparent"
+				aria-hidden="true"
+			></div>
+			<div
+				class="pointer-events-none absolute top-0 right-6 left-6 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"
+				aria-hidden="true"
+			></div>
+
+			<nav
+				class="relative max-h-[min(28rem,calc(100dvh-6rem))] space-y-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-5 sm:py-5"
+				aria-label="Mobile"
+			>
 			{
 				mainNav.map((item) =>
 					item.children ? (
@@ -280,24 +297,106 @@ function isActive(href: string) {
 				</a>
 			</div>
 		</nav>
+		</div>
 	</div>
 </header>
 
+<style>
+	.mobile-menu-backdrop {
+		opacity: 0;
+		transition: opacity 0.45s cubic-bezier(0.33, 1, 0.68, 1);
+	}
+
+	.mobile-menu-backdrop.is-open {
+		opacity: 1;
+	}
+
+	.mobile-menu-panel {
+		opacity: 0;
+		transform: translateY(-0.75rem) scale(0.98);
+		transition:
+			opacity 0.45s cubic-bezier(0.33, 1, 0.68, 1),
+			transform 0.45s cubic-bezier(0.33, 1, 0.68, 1);
+	}
+
+	.mobile-menu-wrapper.is-open .mobile-menu-panel {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.mobile-menu-backdrop,
+		.mobile-menu-panel {
+			transition: none;
+		}
+
+		.mobile-menu-panel {
+			transform: none;
+		}
+	}
+</style>
+
 <script>
+	const MENU_TRANSITION_MS = 450;
+
 	function initSiteHeader(header: HTMLElement) {
 		const toggle = header.querySelector<HTMLButtonElement>('[data-menu-toggle]');
 		const menu = header.querySelector<HTMLElement>('[data-mobile-menu]');
+		const backdrop = header.querySelector<HTMLElement>('[data-mobile-backdrop]');
+		const wrapper = header.querySelector<HTMLElement>('[data-mobile-menu-wrapper]');
 		const iconOpen = header.querySelector<SVGElement>('[data-menu-icon-open]');
 		const iconClose = header.querySelector<SVGElement>('[data-menu-icon-close]');
 
-		if (!toggle || !menu) return;
+		if (!toggle || !menu || !backdrop || !wrapper) return;
 
-		toggle.addEventListener('click', () => {
-			const open = menu.classList.toggle('hidden') === false;
+		let isOpen = false;
+		let closeTimer: ReturnType<typeof setTimeout> | undefined;
+
+		function setMenuOpen(open: boolean) {
+			if (open === isOpen) return;
+			isOpen = open;
+
+			window.clearTimeout(closeTimer);
+
 			toggle.setAttribute('aria-expanded', String(open));
+			toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
 			iconOpen?.classList.toggle('hidden', open);
 			iconClose?.classList.toggle('hidden', !open);
 			document.body.classList.toggle('overflow-hidden', open);
+
+			if (open) {
+				backdrop.classList.remove('hidden');
+				wrapper.classList.remove('hidden');
+				requestAnimationFrame(() => {
+					backdrop.classList.add('is-open');
+					wrapper.classList.add('is-open');
+					wrapper.classList.remove('pointer-events-none');
+				});
+				return;
+			}
+
+			backdrop.classList.remove('is-open');
+			wrapper.classList.remove('is-open');
+			wrapper.classList.add('pointer-events-none');
+
+			closeTimer = window.setTimeout(() => {
+				if (!isOpen) {
+					backdrop.classList.add('hidden');
+					wrapper.classList.add('hidden');
+				}
+			}, MENU_TRANSITION_MS);
+		}
+
+		toggle.addEventListener('click', () => setMenuOpen(!isOpen));
+
+		backdrop.addEventListener('click', () => setMenuOpen(false));
+
+		menu.querySelectorAll('a').forEach((link) => {
+			link.addEventListener('click', () => setMenuOpen(false));
+		});
+
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape' && isOpen) setMenuOpen(false);
 		});
 	}
 
