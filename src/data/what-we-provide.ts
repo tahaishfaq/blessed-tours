@@ -29,8 +29,8 @@ export const whatWeProvide: ProvideCard[] = [
 		description:
 			'Comfortable 3 to 5-star hotels near Haram and Masjid Nabawi, with options for families, groups, and solo travellers walking distance or a short shuttle from the mosques.',
 		image:
-			'https://images.pexels.com/photos/34631242/pexels-photo-34631242.jpeg?auto=compress&cs=tinysrgb&w=1200',
-		imageAlt: 'Luxury hotel room interior',
+			'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314195/pexels-quang-nguyen-vinh-222549-29000012_aonifl.jpg',
+		imageAlt: 'Twin hotel room with bright modern interior',
 		icon: 'hotel',
 		cards: [
 			{
@@ -39,8 +39,8 @@ export const whatWeProvide: ProvideCard[] = [
 				description:
 					'Selected hotels close to Masjid al-Haram with family rooms, breakfast options, and support for group check-ins.',
 				image:
-					'https://images.pexels.com/photos/34631242/pexels-photo-34631242.jpeg?auto=compress&cs=tinysrgb&w=900',
-				imageAlt: 'Premium hotel room prepared for guests',
+					'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314195/pexels-quang-nguyen-vinh-222549-29000012_aonifl.jpg',
+				imageAlt: 'Twin hotel room prepared for guests',
 				highlights: ['Near Haram', 'Family rooms', 'Breakfast options'],
 			},
 			{
@@ -49,8 +49,8 @@ export const whatWeProvide: ProvideCard[] = [
 				description:
 					'Comfortable hotels around the central Medina area, chosen for easy access to prayers and relaxed family movement.',
 				image:
-					'https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=900',
-				imageAlt: 'Hotel bedroom with warm lighting',
+					'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314184/pexels-yasirgurbuz-12808985_xvnn7h.jpg',
+				imageAlt: 'Hotel room near holy city accommodation',
 				highlights: ['Central location', 'Twin sharing', 'Lift access'],
 			},
 			{
@@ -59,8 +59,8 @@ export const whatWeProvide: ProvideCard[] = [
 				description:
 					'Clean, reliable accommodation for pilgrims who want a practical stay with shuttle or short-transfer access.',
 				image:
-					'https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=900',
-				imageAlt: 'Comfortable hotel bedroom with neutral decor',
+					'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314184/pexels-yasirgurbuz-12808985_xvnn7h.jpg',
+				imageAlt: 'Comfortable hotel room for group stays',
 				highlights: ['Group friendly', 'Shuttle access', 'Best value'],
 			},
 		],
@@ -72,8 +72,8 @@ export const whatWeProvide: ProvideCard[] = [
 		description:
 			'Affordable flight options with top airlines for every budget, including direct and connecting routes from UK airports to Jeddah, Medina, and beyond.',
 		image:
-			'https://images.pexels.com/photos/35427894/pexels-photo-35427894.jpeg?auto=compress&cs=tinysrgb&w=1200',
-		imageAlt: 'Saudia aircraft at the airport',
+			'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314153/pexels-kokorevas-19082534_dil9d3.jpg',
+		imageAlt: 'Aircraft wing above clouds at sunset',
 		icon: 'flight',
 		cards: [
 			{
@@ -82,8 +82,8 @@ export const whatWeProvide: ProvideCard[] = [
 				description:
 					'Route planning from key UK airports with practical arrival timings for hotel check-in and onward transfers.',
 				image:
-					'https://images.pexels.com/photos/35427894/pexels-photo-35427894.jpeg?auto=compress&cs=tinysrgb&w=900',
-				imageAlt: 'Aircraft parked at an airport gate',
+					'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314154/pexels-angela-victoria-703352-23179682_dc1y9i.jpg',
+				imageAlt: 'Pakistan International Airlines aircraft flying through clouds',
 				highlights: ['UK departures', 'Jeddah or Medina', 'Timed transfers'],
 			},
 			{
@@ -92,8 +92,8 @@ export const whatWeProvide: ProvideCard[] = [
 				description:
 					'Balanced fare options for families and groups who need reliable flights without stretching the package budget.',
 				image:
-					'https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg?auto=compress&cs=tinysrgb&w=900',
-				imageAlt: 'Aircraft flying through clouds',
+					'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314153/pexels-kokorevas-19082534_dil9d3.jpg',
+				imageAlt: 'Aircraft wing above warm sunset clouds',
 				highlights: ['Flexible budgets', 'Group fares', 'Checked baggage'],
 			},
 			{
@@ -102,8 +102,8 @@ export const whatWeProvide: ProvideCard[] = [
 				description:
 					'Upgrade support for travellers who prefer more comfort, shorter queues, and a calmer long-haul journey.',
 				image:
-					'https://images.pexels.com/photos/2026324/pexels-photo-2026324.jpeg?auto=compress&cs=tinysrgb&w=900',
-				imageAlt: 'Aircraft cabin seats',
+					'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314154/pexels-angela-victoria-703352-23179682_dc1y9i.jpg',
+				imageAlt: 'Pakistan International Airlines aircraft in flight',
 				highlights: ['Upgrade support', 'Priority options', 'Comfort seating'],
 			},
 		],
@@ -115,8 +115,8 @@ export const whatWeProvide: ProvideCard[] = [
 		description:
 			'Air-conditioned coaches and private transfers between airports, hotels, and holy sites — reliable scheduling that keeps your group together throughout the journey.',
 		image:
-			'https://images.pexels.com/photos/35016971/pexels-photo-35016971.jpeg?auto=compress&cs=tinysrgb&w=1200',
-		imageAlt: 'Mosque illuminated at night in Saudi Arabia',
+			'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314152/cmn8tbdcgahuoq8akqxy9xjp0-rear-cover-comp-ret.desktop_dhv6uy.jpg',
+		imageAlt: 'Minibus travelling on a scenic road',
 		icon: 'transport',
 		cards: [
 			{
@@ -125,8 +125,8 @@ export const whatWeProvide: ProvideCard[] = [
 				description:
 					'Organised pickup from Jeddah or Medina airports with support for luggage, groups, and family arrivals.',
 				image:
-					'https://images.pexels.com/photos/68629/pexels-photo-68629.jpeg?auto=compress&cs=tinysrgb&w=900',
-				imageAlt: 'Coach bus parked for passengers',
+					'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314184/pexels-mingao-welfarecar-555708794-18247486_bnfgih.jpg',
+				imageAlt: 'Accessible private van ready for passenger transfer',
 				highlights: ['Airport pickup', 'Luggage support', 'Group coordination'],
 			},
 			{
@@ -135,8 +135,8 @@ export const whatWeProvide: ProvideCard[] = [
 				description:
 					'Comfortable travel between holy cities with schedules arranged around hotel timings and prayer needs.',
 				image:
-					'https://images.pexels.com/photos/1178448/pexels-photo-1178448.jpeg?auto=compress&cs=tinysrgb&w=900',
-				imageAlt: 'Road travel through a warm landscape',
+					'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314152/cmn8tbdcgahuoq8akqxy9xjp0-rear-cover-comp-ret.desktop_dhv6uy.jpg',
+				imageAlt: 'Minibus on a curved road at sunrise',
 				highlights: ['City-to-city', 'Air-conditioned', 'Planned timing'],
 			},
 			{
@@ -145,8 +145,8 @@ export const whatWeProvide: ProvideCard[] = [
 				description:
 					'Transport for important ziyarat locations with group-friendly planning and clear meeting points.',
 				image:
-					'https://images.pexels.com/photos/35016971/pexels-photo-35016971.jpeg?auto=compress&cs=tinysrgb&w=900',
-				imageAlt: 'Mosque courtyard illuminated at night',
+					'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314190/pexels-theamritdev-35865324_ziggv8.jpg',
+				imageAlt: 'Driver holding a steering wheel during a transfer',
 				highlights: ['Ziyarat routes', 'Meeting points', 'Group support'],
 			},
 		],
@@ -158,8 +158,8 @@ export const whatWeProvide: ProvideCard[] = [
 		description:
 			'Quick and hassle-free electronic visa processing for all pilgrims, with clear document checklists and support from our UK team before you travel.',
 		image:
-			'https://i.pinimg.com/736x/0f/47/ba/0f47ba2b267f1d9458afe347f1566ab7.jpg',
-		imageAlt: 'Saudi passports with boarding passes ready for travel',
+			'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314164/pexels-ethanrwilkinson-5428705_or8nah.jpg',
+		imageAlt: 'British passport held ready for travel',
 		icon: 'visa',
 		cards: [
 			{
@@ -168,8 +168,8 @@ export const whatWeProvide: ProvideCard[] = [
 				description:
 					'Clear checklist and submission guidance so every traveller knows what is needed before the journey.',
 				image:
-					'https://i.pinimg.com/736x/0f/47/ba/0f47ba2b267f1d9458afe347f1566ab7.jpg',
-				imageAlt: 'Travel documents prepared for visa processing',
+					'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314164/pexels-ethanrwilkinson-5428705_or8nah.jpg',
+				imageAlt: 'British passport prepared for visa processing',
 				highlights: ['Checklist support', 'Application guidance', 'Pre-travel checks'],
 			},
 			{
@@ -178,8 +178,8 @@ export const whatWeProvide: ProvideCard[] = [
 				description:
 					'Help for families travelling together, keeping passport details and traveller requirements organised.',
 				image:
-					'https://images.pexels.com/photos/7235904/pexels-photo-7235904.jpeg?auto=compress&cs=tinysrgb&w=900',
-				imageAlt: 'Passport and travel documents on a desk',
+					'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314205/pexels-gustavo-fring-3885598_pgkvid.jpg',
+				imageAlt: 'Traveller waiting with passport and travel documents',
 				highlights: ['Family groups', 'Passport checks', 'Organised details'],
 			},
 			{
@@ -188,8 +188,8 @@ export const whatWeProvide: ProvideCard[] = [
 				description:
 					'Final checks across visa, flights, hotel confirmations, and passenger details before you leave the UK.',
 				image:
-					'https://images.pexels.com/photos/7368317/pexels-photo-7368317.jpeg?auto=compress&cs=tinysrgb&w=900',
-				imageAlt: 'Traveller reviewing documents before departure',
+					'https://res.cloudinary.com/diyzpo5gt/image/upload/v1779314205/pexels-gustavo-fring-3885598_pgkvid.jpg',
+				imageAlt: 'Traveller reviewing passport before departure',
 				highlights: ['Final review', 'Flight matching', 'Ready to travel'],
 			},
 		],

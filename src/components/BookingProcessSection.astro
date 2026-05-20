@@ -2,6 +2,7 @@
 import type { BookingStep } from '../data/booking-process';
 import { bookingProcessIntro } from '../data/booking-process';
 import BookingStepIcon from './BookingStepIcon.astro';
+import SectionHeaderFrame from './SectionHeaderFrame.astro';
 
 interface Props {
 	steps: BookingStep[];
@@ -19,30 +20,14 @@ const stepNums = ['01', '02', '03', '04'] as const;
 	aria-labelledby="booking-process-heading"
 >
 	<div class="relative mx-auto max-w-7xl" data-motion-root data-motion-trigger="inview">
-		<div class="mx-auto mb-12 max-w-2xl text-center lg:mb-16">
-			<p
-				class="mb-4 inline-flex rounded-full border border-white/12 bg-white/[0.05] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm"
-				data-motion-item="up"
-				data-motion-delay="0"
-			>
-				How it works
-			</p>
-			<h2
-				id="booking-process-heading"
-				class="font-display text-3xl leading-[1.1] tracking-tight text-ink-50 sm:text-4xl lg:text-[2.75rem]"
-				data-motion-item="up"
-				data-motion-delay="75"
-			>
-				Easy Booking Process
-			</h2>
-			<p
-				class="mt-4 font-sans text-base leading-relaxed text-ink-400 sm:text-lg"
-				data-motion-item="up"
-				data-motion-delay="150"
-			>
-				{intro}
-			</p>
-		</div>
+		<SectionHeaderFrame
+			eyebrow="How it works"
+			heading="Easy Booking Process"
+			headingId="booking-process-heading"
+			description={intro}
+			align="center"
+			class="lg:mb-16"
+		/>
 
 		<ol
 			class="booking-timeline relative grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6"

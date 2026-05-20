@@ -1,5 +1,6 @@
 ---
 import TestimonialCard from './TestimonialCard.astro';
+import SectionHeaderFrame from './SectionHeaderFrame.astro';
 import type { Testimonial } from '../data/testimonials';
 import {
 	testimonials,
@@ -31,30 +32,13 @@ const columnMeta = [
 	aria-labelledby="testimonials-heading"
 >
 	<div class="relative mx-auto max-w-7xl" data-motion-root data-motion-trigger="inview">
-		<div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
-			<p
-				class="mb-4 inline-flex rounded-full border border-white/12 bg-white/[0.05] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm"
-				data-motion-item="up"
-				data-motion-delay="0"
-			>
-				Reviews
-			</p>
-			<h2
-				id="testimonials-heading"
-				class="font-display text-3xl leading-[1.1] tracking-tight text-ink-50 sm:text-4xl lg:text-[2.75rem]"
-				data-motion-item="up"
-				data-motion-delay="75"
-			>
-				{heading}
-			</h2>
-			<p
-				class="mt-4 font-sans text-base leading-relaxed text-ink-400 sm:text-lg"
-				data-motion-item="up"
-				data-motion-delay="150"
-			>
-				{intro}
-			</p>
-		</div>
+		<SectionHeaderFrame
+			eyebrow="Reviews"
+			heading={heading}
+			headingId="testimonials-heading"
+			description={intro}
+			align="center"
+		/>
 
 		<div
 			class="testimonials-marquee relative mx-auto max-w-6xl"

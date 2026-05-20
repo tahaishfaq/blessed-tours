@@ -1,0 +1,92 @@
+---
+interface Props {
+	eyebrow?: string;
+	heading: string;
+	headingId?: string;
+	description?: string;
+	/** Left-aligned split (default) or centered stack */
+	align?: 'left' | 'center';
+	/** Row of buttons (default) or stacked contact block */
+	actionsLayout?: 'inline' | 'stack';
+	class?: string;
+	motionDelayEyebrow?: string;
+	motionDelayHeading?: string;
+	motionDelayDescription?: string;
+}
+
+const {
+	eyebrow,
+	heading,
+	headingId,
+	description,
+	align = 'left',
+	actionsLayout = 'inline',
+	class: className = '',
+	motionDelayEyebrow = '0',
+	motionDelayHeading = '75',
+	motionDelayDescription = '150',
+} = Astro.props;
+
+const hasActions = Astro.slots.has('actions');
+const isCenter = align === 'center';
+---
+
+<header
+	class:list={[
+		'section-header-frame mb-10 rounded-3xl border border-gold-500/20 bg-white/[0.035] px-5 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm sm:mb-12 sm:px-7 sm:py-6 lg:mb-14',
+		isCenter
+			? 'mx-auto max-w-2xl text-center'
+			: hasActions
+				? 'flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10'
+				: 'max-w-3xl',
+		className,
+	]}
+>
+	<div class:list={[isCenter ? 'mx-auto' : 'min-w-0 flex-1', !isCenter && hasActions ? 'max-w-3xl' : '']}>
+		{eyebrow && (
+			<p
+				class="mb-3 inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm transition-colors duration-300 hover:border-gold-500/35 hover:bg-gold-500/10 sm:mb-4"
+				data-motion-item="up"
+				data-motion-delay={motionDelayEyebrow}
+			>
+				{eyebrow}
+			</p>
+		)}
+		<h2
+			id={headingId}
+			class="font-display text-3xl leading-[1.12] tracking-tight text-ink-50 sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]"
+			data-motion-item="up"
+			data-motion-delay={motionDelayHeading}
+		>
+			{heading}
+		</h2>
+		{description && (
+			<p
+				class="mt-3 max-w-2xl font-sans text-[0.9375rem] leading-relaxed text-ink-400 sm:mt-4 sm:text-base lg:max-w-3xl"
+				data-motion-item="up"
+				data-motion-delay={motionDelayDescription}
+			>
+				{description}
+			</p>
+		)}
+		<slot />
+	</div>
+
+	{
+		hasActions && (
+			<div
+				class:list={[
+					'flex shrink-0 gap-3',
+					actionsLayout === 'stack'
+						? 'flex-col items-start lg:max-w-xs lg:items-end'
+						: 'flex-wrap items-center',
+					isCenter ? 'mt-5 justify-center' : 'self-start lg:self-auto lg:pb-0.5',
+				]}
+				data-motion-item="up"
+				data-motion-delay={motionDelayDescription}
+			>
+				<slot name="actions" />
+			</div>
+		)
+	}
+</header>
