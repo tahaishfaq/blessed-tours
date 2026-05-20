@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+
+const privacySections = [
+	{
+		id: 'personal-information',
+		title: 'Personal Information',
+		body: 'We collect your basic details such as name, email, phone number, and travel choices when you book or contact us.',
+	},
+	{
+		id: 'how-we-use-your-data',
+		title: 'How We Use Your Data',
+		body: 'Your data is used to manage bookings, improve our services, and send updates related to your trip.',
+	},
+	{
+		id: 'sharing-your-data',
+		title: 'Sharing Your Data',
+		body: 'We only share your information with trusted travel partners involved in delivering your service, such as airlines and hotels.',
+	},
+	{
+		id: 'marketing',
+		title: 'Marketing',
+		body: 'We may send you promotional offers or travel updates, but only if you have given us permission.',
+	},
+	{
+		id: 'data-security',
+		title: 'Data Security',
+		body: 'We follow strict measures to keep your information secure and prevent unauthorised access.',
+	},
+	{
+		id: 'cookies',
+		title: 'Cookies',
+		body: 'Our website uses cookies to enhance your browsing experience and understand visitor behaviour.',
+	},
+	{
+		id: 'your-rights',
+		title: 'Your Rights',
+		body: 'You can request access, correction, or deletion of your data at any time by contacting us.',
+	},
+	{
+		id: 'data-storage',
+		title: 'Data Storage',
+		body: 'We store your data only for as long as needed for bookings or legal purposes.',
+	},
+	{
+		id: 'third-party-links',
+		title: 'Third-Party Links',
+		body: 'Our site may link to other websites; we are not responsible for their privacy practices.',
+	},
+	{
+		id: 'updates-to-policy',
+		title: 'Updates to Policy',
+		body: 'We may update this privacy policy from time to time. The latest version will always be available on our website.',
+	},
+];
+---
+
+<Layout
+	title="Privacy Policy — Blessed Tours"
+	description="Read the Blessed Tours privacy policy to understand how we collect, use, share, protect, and store your personal data."
+>
+	<main class="landing-page">
+		<SiteHeader />
+
+		<section class="section-block px-4 pt-16 pb-10 sm:px-6 sm:pt-20 sm:pb-14 lg:px-8 lg:pt-24">
+			<div class="mx-auto max-w-7xl" data-motion-root data-motion-trigger="load">
+				<div class="grid gap-8 lg:grid-cols-[0.72fr_0.28fr] lg:items-end">
+					<div class="max-w-3xl">
+						<p
+							class="mb-4 inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm"
+							data-motion-item="up"
+							data-motion-delay="0"
+						>
+							Privacy information
+						</p>
+						<h1
+							class="font-display text-4xl leading-none tracking-tight text-ink-50 sm:text-5xl lg:text-[4rem]"
+							data-motion-item="up"
+							data-motion-delay="75"
+						>
+							Privacy Policy
+						</h1>
+						<p
+							class="mt-5 max-w-2xl font-sans text-base leading-relaxed text-ink-300 sm:text-lg"
+							data-motion-item="up"
+							data-motion-delay="150"
+						>
+							This policy explains how we collect, use, share, and protect your personal
+							information when you contact us, browse our website, or book travel services with
+							Blessed Tours.
+						</p>
+					</div>
+
+					<div
+						class="rounded-3xl border border-white/10 bg-white/[0.05] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm"
+						data-motion-item="up"
+						data-motion-delay="225"
+					>
+						<p class="font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-gold-400">
+							Applies to
+						</p>
+						<p class="mt-2 font-display text-2xl leading-tight text-ink-50">Website & enquiries</p>
+						<p class="mt-3 font-sans text-sm leading-relaxed text-ink-400">
+							This policy covers personal details, booking choices, marketing permissions,
+							cookies, storage, and your data rights.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section-block section-block--divider px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+			<div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[18rem_1fr] lg:gap-10">
+				<aside class="lg:sticky lg:top-28 lg:self-start" aria-label="Privacy sections">
+					<div
+						class="rounded-3xl border border-white/10 bg-white/[0.04] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-sm"
+						data-motion-root
+						data-motion-trigger="inview"
+					>
+						<p
+							class="px-2 font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-gold-400"
+							data-motion-item="up"
+							data-motion-delay="0"
+						>
+							On this page
+						</p>
+						<nav class="mt-3 flex gap-2 overflow-x-auto pb-1 lg:grid lg:gap-1 lg:overflow-visible lg:pb-0">
+							{
+								privacySections.map((section, index) => (
+									<a
+										href={`#${section.id}`}
+										class="shrink-0 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 font-sans text-sm text-ink-300 transition-colors duration-300 hover:bg-white/[0.06] hover:text-gold-300 lg:rounded-xl lg:border-0 lg:bg-transparent lg:px-2.5"
+										data-motion-item="up"
+										data-motion-delay={String(75 + index * 25)}
+									>
+										{section.title}
+									</a>
+								))
+							}
+						</nav>
+					</div>
+				</aside>
+
+				<div class="min-w-0" data-motion-root data-motion-trigger="inview">
+					<div class="grid gap-4">
+						{
+							privacySections.map((section, index) => (
+								<article
+									id={section.id}
+									class="scroll-mt-28 rounded-3xl border border-white/10 bg-white/[0.045] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-sm transition-colors duration-300 hover:border-gold-500/25 hover:bg-white/[0.06] sm:p-6"
+									data-motion-item="up"
+									data-motion-delay={String(Math.min(index * 40, 500))}
+								>
+									<div class="grid gap-4 sm:grid-cols-[3rem_1fr] sm:gap-5">
+										<span class="inline-flex size-11 items-center justify-center rounded-2xl border border-gold-500/25 bg-gold-500/10 font-sans text-sm font-bold text-gold-300">
+											{String(index + 1).padStart(2, '0')}
+										</span>
+										<div>
+											<h2 class="font-display text-xl leading-tight text-ink-50 sm:text-2xl">
+												{section.title}
+											</h2>
+											<p class="mt-3 max-w-3xl font-sans text-[0.9375rem] leading-relaxed text-ink-300 sm:text-base">
+												{section.body}
+											</p>
+										</div>
+									</div>
+								</article>
+							))
+						}
+					</div>
+
+					<div
+						class="mt-6 overflow-hidden rounded-3xl border border-gold-500/25 bg-gold-500/10 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] sm:p-7"
+						data-motion-item="up"
+						data-motion-delay="525"
+					>
+						<p class="font-display text-2xl leading-tight text-ink-50">
+							Questions about this policy?
+						</p>
+						<p class="mt-3 max-w-2xl font-sans text-base leading-relaxed text-ink-300">
+							For any questions or concerns regarding our Privacy Policy, please do not hesitate
+							to contact us.
+						</p>
+						<div class="mt-5 flex flex-col gap-3 sm:flex-row">
+							<a
+								href="tel:02037731172"
+								class="inline-flex items-center justify-center rounded-full border border-gold-500/35 bg-gold-500/15 px-5 py-2.5 font-sans text-sm font-semibold text-gold-300 transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-500/22 active:translate-y-0"
+							>
+								Call 0203-773-1172
+							</a>
+							<a
+								href="mailto:info@blessedtours.co.uk"
+								class="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.05] px-5 py-2.5 font-sans text-sm font-semibold text-ink-50 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold-500/35 hover:text-gold-300 active:translate-y-0"
+							>
+								Email us
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>

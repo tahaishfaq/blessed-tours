@@ -18,257 +18,305 @@ const defaultId = items[0]?.id ?? '';
 	data-provide-section
 >
 	<div class="relative mx-auto max-w-7xl" data-motion-root data-motion-trigger="inview">
+		<header class="max-w-3xl">
+			<div data-motion-item="up" data-motion-delay="75">
+				<p
+					class="mb-4 inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm transition-colors duration-300 hover:border-gold-500/35 hover:bg-gold-500/10"
+				>
+					What we offer
+				</p>
+				<h2
+					id="provide-heading"
+					class="font-display text-3xl leading-tight tracking-tight text-ink-50 sm:text-4xl lg:text-[2.75rem]"
+				>
+					What We Provide?
+				</h2>
+				<p class="mt-4 max-w-2xl font-sans text-[0.9375rem] leading-relaxed text-ink-400 sm:text-base">
+					{intro}
+				</p>
+			</div>
+		</header>
+
 		<div
-			class="provide-split grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-stretch lg:gap-8"
+			class="mt-8 rounded-3xl border border-white/10 bg-white/[0.04] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-sm sm:mt-10 sm:p-4 lg:p-5"
 			data-motion-item="up"
-			data-motion-delay="75"
+			data-motion-delay="225"
 		>
 			<div
-				class="provide-visual relative min-h-[22rem] overflow-hidden rounded-2xl border border-white/10 bg-ink-950 sm:min-h-[24rem] lg:min-h-0 lg:h-full"
+				class="provide-tabs flex gap-2 overflow-x-auto pb-2"
+				role="tablist"
+				aria-label="What we provide"
 			>
 				{
 					items.map((item, i) => (
-						<img
-							src={item.image}
-							alt={item.imageAlt}
+						<button
+							type="button"
 							class:list={[
-								'provide-visual__img absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-[cubic-bezier(0.33,1,0.68,1)]',
-								i === 0 ? 'opacity-100' : 'opacity-0',
+								'provide-tab inline-flex min-w-max items-center gap-2 rounded-full border px-4 py-2.5 font-sans text-sm font-semibold transition-all duration-300',
+								i === 0 ? 'provide-tab--active' : '',
 							]}
-							data-provide-image={item.id}
-							loading={i === 0 ? 'eager' : 'lazy'}
-							decoding="async"
-							width="1200"
-							height="900"
-						/>
+							data-provide-tab={item.id}
+							role="tab"
+							aria-selected={i === 0}
+							aria-controls={`provide-panel-${item.id}`}
+							id={`provide-tab-${item.id}`}
+						>
+							<span
+								class="provide-tab__icon grid size-8 shrink-0 place-items-center rounded-full border"
+								aria-hidden="true"
+							>
+								<ProvideIcon name={item.icon} class="size-4" />
+							</span>
+							<span>{item.title}</span>
+						</button>
 					))
 				}
-				<div
-					class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/5"
-					aria-hidden="true"
-				/>
-				<div class="absolute inset-x-0 bottom-0 p-6 sm:p-7">
-					<p
-						class="font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-gold-400"
-						data-provide-tagline
-					>
-						{items[0]?.tagline}
-					</p>
-					<p
-						class="mt-1 font-display text-xl leading-tight text-ink-50 sm:text-2xl"
-						data-provide-visual-title
-					>
-						{items[0]?.title}
-					</p>
-					<p
-						class="mt-2 max-w-sm font-sans text-sm leading-relaxed text-ink-200/90"
-						data-provide-caption
-					>
-						{items[0]?.description}
-					</p>
-				</div>
 			</div>
 
-			<div
-				class="provide-content flex min-h-[22rem] flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-sm sm:min-h-[24rem] sm:p-7 lg:min-h-0 lg:h-full lg:p-9"
-			>
-				<header class="mb-7 shrink-0 lg:mb-9">
-					<p class="mb-3 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400">
-						What we offer
-					</p>
-					<h2
-						id="provide-heading"
-						class="font-display text-2xl leading-tight tracking-tight text-ink-50 sm:text-3xl lg:text-[2.125rem]"
-					>
-						What We Provide?
-					</h2>
-					<p class="mt-4 max-w-lg font-sans text-[0.9375rem] leading-relaxed text-ink-400 sm:text-base">
-						{intro}
-					</p>
-				</header>
-
-				<div
-					class="provide-tabs flex min-h-0 flex-1 flex-col gap-2 sm:gap-2.5"
-					role="tablist"
-					aria-label="What we provide"
-				>
-					{
-						items.map((item, i) => (
-							<button
-								type="button"
-								class:list={[
-									'provide-tab w-full rounded-xl text-left transition-colors duration-300',
-									i === 0 && 'provide-tab--active',
-								]}
-								data-provide-tab={item.id}
-								role="tab"
-								aria-selected={i === 0}
-								id={`provide-tab-${item.id}`}
-							>
-								<span class="flex items-start gap-3.5 px-3 py-3.5 sm:gap-4 sm:px-4 sm:py-4">
-									<span
-										class="provide-tab__icon mt-0.5 inline-flex size-10 shrink-0 items-center justify-center rounded-lg border sm:size-11"
-										aria-hidden="true"
-									>
-										<ProvideIcon name={item.icon} class="size-5" />
-									</span>
-									<span class="min-w-0 flex-1">
-										<span class="provide-tab__tagline block font-sans text-[0.625rem] font-semibold uppercase tracking-[0.12em]">
+			<div class="mt-5">
+				{
+					items.map((item, i) => (
+						<div
+							class:list={['provide-panel', i === 0 ? '' : 'hidden']}
+							id={`provide-panel-${item.id}`}
+							data-provide-panel={item.id}
+							role="tabpanel"
+							aria-labelledby={`provide-tab-${item.id}`}
+						>
+							<div class="grid gap-5 lg:grid-cols-[0.72fr_1.28fr] lg:items-stretch">
+								<div class="relative overflow-hidden rounded-2xl border border-white/10 bg-ink-950 p-5 sm:p-6">
+									<img
+										src={item.image}
+										alt={item.imageAlt}
+										class="absolute inset-0 h-full w-full object-cover opacity-30"
+										loading={i === 0 ? 'eager' : 'lazy'}
+										decoding="async"
+										width="900"
+										height="700"
+									/>
+									<div class="absolute inset-0 bg-gradient-to-br from-ink-950 via-ink-950/75 to-ink-950/30" />
+									<div class="relative flex min-h-[18rem] flex-col justify-end">
+										<span class="mb-4 inline-flex size-12 items-center justify-center rounded-xl border border-gold-400/30 bg-gold-500/10 text-gold-300">
+											<ProvideIcon name={item.icon} class="size-6" />
+										</span>
+										<p class="font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-gold-400">
 											{item.tagline}
-										</span>
-										<span class="provide-tab__title mt-0.5 block font-display text-base leading-snug sm:text-lg">
+										</p>
+										<h3 class="mt-2 font-display text-3xl leading-tight text-ink-50">
 											{item.title}
-										</span>
-										<span class="provide-tab__desc mt-2 block font-sans text-sm leading-relaxed">
+										</h3>
+										<p class="mt-4 max-w-md font-sans text-sm leading-relaxed text-ink-200/85">
 											{item.description}
-										</span>
-									</span>
-								</span>
-							</button>
-						))
-					}
-				</div>
+										</p>
+									</div>
+								</div>
+
+								<div class="min-w-0 rounded-2xl border border-white/10 bg-ink-950/45 p-3 sm:p-4">
+									<div class="mb-4 flex items-center justify-between gap-3 px-1">
+										<div>
+											<p class="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-gold-400">
+												{item.title} options
+											</p>
+											<p class="mt-1 font-sans text-sm text-ink-400">
+												Swipe or use arrows to explore what is included.
+											</p>
+										</div>
+										<div class="hidden items-center gap-2 sm:flex">
+											<button
+												type="button"
+												class="provide-control"
+												aria-label={`Previous ${item.title} card`}
+												data-provide-prev={item.id}
+											>
+												<svg class="size-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+													<path
+														d="M12.5 4.5L7 10l5.5 5.5"
+														stroke="currentColor"
+														stroke-width="1.8"
+														stroke-linecap="round"
+														stroke-linejoin="round"></path>
+												</svg>
+											</button>
+											<button
+												type="button"
+												class="provide-control"
+												aria-label={`Next ${item.title} card`}
+												data-provide-next={item.id}
+											>
+												<svg class="size-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+													<path
+														d="M7.5 4.5L13 10l-5.5 5.5"
+														stroke="currentColor"
+														stroke-width="1.8"
+														stroke-linecap="round"
+														stroke-linejoin="round"></path>
+												</svg>
+											</button>
+										</div>
+									</div>
+
+									<div
+										class="provide-carousel flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth pb-2"
+										data-provide-carousel={item.id}
+									>
+										{item.cards.map((card) => (
+											<article class="provide-card min-w-[82%] snap-start overflow-hidden rounded-2xl border border-white/10 bg-white/[0.05] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:min-w-[20rem] lg:min-w-[21rem]">
+												<img
+													src={card.image}
+													alt={card.imageAlt}
+													class="h-44 w-full object-cover"
+													loading="lazy"
+													decoding="async"
+													width="650"
+													height="440"
+												/>
+												<div class="p-4">
+													<p class="font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-gold-400">
+														{card.meta}
+													</p>
+													<h4 class="mt-1 font-display text-xl leading-tight text-ink-50">
+														{card.title}
+													</h4>
+													<p class="mt-3 font-sans text-sm leading-relaxed text-ink-300">
+														{card.description}
+													</p>
+													<div class="mt-4 flex flex-wrap gap-2">
+														{card.highlights.map((highlight) => (
+															<span class="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 font-sans text-xs font-semibold text-ink-200">
+																{highlight}
+															</span>
+														))}
+													</div>
+												</div>
+											</article>
+										))}
+									</div>
+								</div>
+							</div>
+						</div>
+					))
+				}
 			</div>
 		</div>
 	</div>
 </section>
 
-<script define:vars={{ items, defaultId }}>
+<script define:vars={{ defaultId }}>
 	function initProvideSection(root) {
-		const split = root.querySelector('.provide-split');
 		const tabs = [...root.querySelectorAll('[data-provide-tab]')];
-		const images = [...root.querySelectorAll('[data-provide-image]')];
-		const tagline = root.querySelector('[data-provide-tagline]');
-		const visualTitle = root.querySelector('[data-provide-visual-title]');
-		const caption = root.querySelector('[data-provide-caption]');
-		const data = Object.fromEntries(items.map((item) => [item.id, item]));
+		const panels = [...root.querySelectorAll('[data-provide-panel]')];
+		const carousels = Object.fromEntries(
+			[...root.querySelectorAll('[data-provide-carousel]')].map((el) => [
+				el.dataset.provideCarousel,
+				el,
+			]),
+		);
 
-		if (tabs.length === 0 || !split) return;
-
-		function syncHeights() {
-			if (window.matchMedia('(min-width: 1024px)').matches) {
-				const visual = root.querySelector('.provide-visual');
-				const content = root.querySelector('.provide-content');
-				if (!visual || !content) return;
-				const h = Math.max(visual.offsetHeight, content.offsetHeight, 680);
-				split.style.minHeight = `${h}px`;
-				visual.style.minHeight = `${h}px`;
-				content.style.minHeight = `${h}px`;
-			} else {
-				split.style.minHeight = '';
-				root.querySelector('.provide-visual')?.style.removeProperty('min-height');
-				root.querySelector('.provide-content')?.style.removeProperty('min-height');
-			}
-		}
+		if (tabs.length === 0) return;
 
 		function setActive(id) {
-			const item = data[id];
-			if (!item) return;
-
 			tabs.forEach((tab) => {
 				const isActive = tab.dataset.provideTab === id;
 				tab.setAttribute('aria-selected', String(isActive));
 				tab.classList.toggle('provide-tab--active', isActive);
 			});
 
-			images.forEach((img) => {
-				const show = img.dataset.provideImage === id;
-				img.classList.toggle('opacity-100', show);
-				img.classList.toggle('opacity-0', !show);
+			panels.forEach((panel) => {
+				panel.classList.toggle('hidden', panel.dataset.providePanel !== id);
 			});
+		}
 
-			if (tagline) tagline.textContent = item.tagline;
-			if (visualTitle) visualTitle.textContent = item.title;
-			if (caption) caption.textContent = item.description;
+		function scrollCarousel(id, direction) {
+			const carousel = carousels[id];
+			if (!carousel) return;
+			const card = carousel.querySelector('.provide-card');
+			const distance = card ? card.getBoundingClientRect().width + 12 : 340;
+			carousel.scrollBy({ left: distance * direction, behavior: 'smooth' });
 		}
 
 		tabs.forEach((tab) => {
 			tab.addEventListener('click', () => setActive(tab.dataset.provideTab ?? defaultId));
 		});
 
-		setActive(defaultId);
-		syncHeights();
-
-		let resizeTimer;
-		window.addEventListener('resize', () => {
-			clearTimeout(resizeTimer);
-			resizeTimer = setTimeout(syncHeights, 100);
+		root.querySelectorAll('[data-provide-prev]').forEach((button) => {
+			button.addEventListener('click', () => scrollCarousel(button.dataset.providePrev, -1));
 		});
+
+		root.querySelectorAll('[data-provide-next]').forEach((button) => {
+			button.addEventListener('click', () => scrollCarousel(button.dataset.provideNext, 1));
+		});
+
+		setActive(defaultId);
 	}
 
 	document.querySelectorAll('[data-provide-section]').forEach(initProvideSection);
 </script>
 
 <style>
-	@media (min-width: 1024px) {
-		.provide-split {
-			min-height: 42rem;
-		}
+	.provide-tabs,
+	.provide-carousel {
+		scrollbar-width: none;
+	}
 
-		.provide-visual,
-		.provide-content {
-			height: 100%;
-		}
+	.provide-tabs::-webkit-scrollbar,
+	.provide-carousel::-webkit-scrollbar {
+		display: none;
 	}
 
 	.provide-tab {
-		border: 1px solid transparent;
-		background: transparent;
+		border-color: hsl(0 0% 100% / 0.1);
+		background: hsl(0 0% 100% / 0.04);
+		color: hsl(0 6% 72%);
 	}
 
 	.provide-tab:hover:not(.provide-tab--active) {
-		background: rgba(255, 255, 255, 0.04);
+		background: hsl(0 0% 100% / 0.07);
+		color: hsl(0 5% 92%);
 	}
 
 	.provide-tab--active {
-		border-color: hsl(36 75% 65% / 0.35);
-		background: rgba(212, 165, 116, 0.08);
+		border-color: hsl(36 75% 65% / 0.45);
+		background: hsl(36 75% 65% / 0.14);
+		color: hsl(36 75% 72%);
 	}
 
 	.provide-tab__icon {
-		border-color: hsl(0 0% 100% / 0.12);
+		border-color: hsl(0 0% 100% / 0.1);
 		background: hsl(0 0% 100% / 0.04);
-		color: hsl(0 6% 68%);
 	}
 
 	.provide-tab--active .provide-tab__icon {
 		border-color: hsl(36 75% 65% / 0.4);
 		background: hsl(36 75% 65% / 0.12);
-		color: hsl(36 75% 65%);
 	}
 
-	.provide-tab__tagline {
-		color: hsl(0 6% 68%);
+	.provide-control {
+		display: inline-grid;
+		width: 2.5rem;
+		height: 2.5rem;
+		place-items: center;
+		border: 1px solid hsl(0 0% 100% / 0.12);
+		border-radius: 999px;
+		background: hsl(0 0% 100% / 0.05);
+		color: hsl(0 5% 92%);
+		transition:
+			background-color 0.3s ease,
+			border-color 0.3s ease,
+			transform 0.3s ease;
 	}
 
-	.provide-tab--active .provide-tab__tagline {
-		color: hsl(36 75% 65%);
+	.provide-control:hover {
+		border-color: hsl(36 75% 65% / 0.45);
+		background: hsl(36 75% 65% / 0.12);
 	}
 
-	.provide-tab__title {
-		color: hsl(0 5% 82%);
+	.provide-control:active {
+		transform: scale(0.96);
 	}
 
-	.provide-tab--active .provide-tab__title {
-		color: hsl(0 5% 98%);
-	}
-
-	.provide-tab__desc {
-		color: hsl(0 6% 58%);
-	}
-
-	.provide-tab--active .provide-tab__desc {
-		color: hsl(0 5% 78%);
-	}
-
-	.provide-tab:focus-visible {
+	.provide-tab:focus-visible,
+	.provide-control:focus-visible {
 		outline: 2px solid hsl(36 75% 65%);
-		outline-offset: 2px;
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.provide-visual__img {
-			transition: opacity 0.2s ease;
-		}
+		outline-offset: 3px;
 	}
 </style>

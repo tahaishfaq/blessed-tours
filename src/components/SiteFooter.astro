@@ -5,6 +5,7 @@ import {
 	footerContact,
 	footerLegalLinks,
 	footerPackageLinks,
+	footerSocialLinks,
 	footerTagline,
 } from '../data/footer';
 import { phone, whatsapp } from '../data/navigation';
@@ -65,6 +66,47 @@ function isActive(href: string) {
 						</svg>
 						{phone.label}
 					</a>
+				</div>
+				<div class="mt-6">
+					<p class="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-gold-400">
+						Follow us
+					</p>
+					<div class="mt-3 flex flex-wrap gap-2.5">
+						{
+							footerSocialLinks.map((link) => (
+								<a
+									href={link.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={link.label}
+									class="inline-flex size-10 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] text-ink-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold-500/45 hover:bg-gold-500/10 hover:text-gold-300 active:translate-y-0"
+								>
+									{link.icon === 'tiktok' && (
+										<svg class="size-4.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+											<path d="M16.6 5.82a5.95 5.95 0 003.57 1.21V10a8.86 8.86 0 01-3.55-.75v5.61A6.14 6.14 0 1110.5 8.72c.37 0 .74.03 1.1.1v3.05a3.11 3.11 0 00-1.1-.2 3.16 3.16 0 103.15 3.16V2h2.95v3.82z" />
+										</svg>
+									)}
+									{link.icon === 'instagram' && (
+										<svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+											<rect x="4" y="4" width="16" height="16" rx="4.5" />
+											<circle cx="12" cy="12" r="3.6" />
+											<path stroke-linecap="round" d="M17.3 6.9h.01" />
+										</svg>
+									)}
+									{link.icon === 'facebook' && (
+										<svg class="size-4.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+											<path d="M14.2 8.15V6.9c0-.62.42-.77.72-.77h1.83V3.18L14.23 3.17c-2.8 0-3.44 2.1-3.44 3.44v1.54H9.17v3.03h1.62V21h3.41v-9.82h2.3l.31-3.03H14.2z" />
+										</svg>
+									)}
+									{link.icon === 'linkedin' && (
+										<svg class="size-4.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+											<path d="M6.94 8.9H3.8V20h3.14V8.9zM5.37 4a1.82 1.82 0 100 3.64A1.82 1.82 0 005.37 4zm6.54 4.9H8.9V20h3.01v-5.82c0-1.53.29-3.02 2.19-3.02 1.87 0 1.9 1.75 1.9 3.12V20h3.01v-6.45c0-3.17-.68-5.6-4.38-5.6-1.78 0-2.97.98-3.46 1.9h-.04V8.9z" />
+										</svg>
+									)}
+								</a>
+							))
+						}
+					</div>
 				</div>
 			</div>
 

@@ -1,0 +1,196 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+
+const commitments = [
+	{
+		title: 'UK-based guidance',
+		description:
+			'Support from enquiry to return, with clear communication before and during your journey.',
+	},
+	{
+		title: 'Comfort-led planning',
+		description:
+			'Flights, hotels, and ground arrangements selected around ease, worship, and family needs.',
+	},
+	{
+		title: 'Pilgrimage support',
+		description:
+			'Practical guidance for Hajj and Umrah travellers so each step feels prepared and calm.',
+	},
+];
+
+const chooseUs = [
+	'Customized Hajj and Umrah packages from the UK',
+	'Trusted flight options for different budgets',
+	'Comfortable hotels near the Haram and Masjid Nabawi',
+	'Full support to make your pilgrimage easy and memorable',
+];
+---
+
+<Layout
+	title="About Us — Blessed Tours"
+	description="Learn about Blessed Tours, a trusted UK Islamic travel agency providing Hajj and Umrah packages with flights, hotels, and pilgrimage guidance."
+>
+	<main class="landing-page">
+		<SiteHeader />
+
+		<section class="section-block px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-16 lg:px-8 lg:pt-24 lg:pb-20">
+			<div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.58fr_0.42fr] lg:items-stretch">
+				<div class="flex flex-col justify-center" data-motion-root data-motion-trigger="load">
+					<p
+						class="mb-4 inline-flex w-fit rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm"
+						data-motion-item="up"
+						data-motion-delay="0"
+					>
+						About Blessed Tours
+					</p>
+					<h1
+						class="max-w-3xl font-display text-4xl leading-none tracking-tight text-ink-50 sm:text-5xl lg:text-[4.5rem]"
+						data-motion-item="up"
+						data-motion-delay="75"
+					>
+						Islamic travel planned with care, clarity, and purpose.
+					</h1>
+					<p
+						class="mt-6 max-w-2xl font-sans text-base leading-relaxed text-ink-300 sm:text-lg"
+						data-motion-item="up"
+						data-motion-delay="150"
+					>
+						At Blessed Tours, we are a trusted Islamic travel agency dedicated to providing
+						exceptional packages for Hajj and Umrah from the UK. With a focus on comfort,
+						affordability, and spiritual fulfilment, we ensure every journey is seamless and
+						memorable.
+					</p>
+					<p
+						class="mt-4 max-w-2xl font-sans text-base leading-relaxed text-ink-400"
+						data-motion-item="up"
+						data-motion-delay="225"
+					>
+						Our expert team handles everything: flights, hotels, and guidance, so you can travel
+						with peace of mind.
+					</p>
+				</div>
+
+				<div
+					class="relative min-h-[20rem] overflow-hidden rounded-[2rem] border border-white/10 bg-ink-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] sm:min-h-[24rem] lg:min-h-[26rem]"
+					data-motion-root
+					data-motion-trigger="load"
+					data-motion-item="scale"
+					data-motion-delay="200"
+				>
+					<img
+						src="https://images.pexels.com/photos/35016971/pexels-photo-35016971.jpeg?auto=compress&cs=tinysrgb&w=1100"
+						alt="Illuminated mosque courtyard for Islamic travel"
+						class="absolute inset-0 h-full w-full object-cover opacity-70"
+						loading="eager"
+						decoding="async"
+						width="1100"
+						height="900"
+					/>
+					<div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/35 to-transparent" />
+					<div class="absolute right-5 bottom-5 left-5 rounded-3xl border border-white/12 bg-ink-950/70 p-5 backdrop-blur-md">
+						<p class="font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-gold-400">
+							Our promise
+						</p>
+						<p class="mt-2 font-display text-2xl leading-tight text-ink-50">
+							Your focus stays on worship. We handle the journey around it.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section-block section-block--divider px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+			<div class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.42fr_0.58fr] lg:gap-8">
+				<div
+					class="rounded-[2rem] border border-gold-500/25 bg-gold-500/10 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] sm:p-8"
+					data-motion-root
+					data-motion-trigger="inview"
+					data-motion-item="up"
+				>
+					<p class="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-gold-400">
+						Our Vision
+					</p>
+					<h2 class="mt-3 font-display text-3xl leading-tight text-ink-50 sm:text-4xl">
+						Making the holy journey easier for Muslims across the UK.
+					</h2>
+					<p class="mt-5 font-sans text-[0.9375rem] leading-relaxed text-ink-300 sm:text-base">
+						Our goal is to make the holy journey of Hajj and Umrah easy, affordable, and
+						meaningful for every Muslim in the UK by offering well-planned packages and a
+						stress-free experience.
+					</p>
+				</div>
+
+				<div class="grid gap-4" data-motion-root data-motion-trigger="inview">
+					{
+						commitments.map((item, index) => (
+							<article
+								class="rounded-3xl border border-white/10 bg-white/[0.045] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-sm sm:p-6"
+								data-motion-item="up"
+								data-motion-delay={String(index * 90)}
+							>
+								<div class="grid gap-4 sm:grid-cols-[3rem_1fr] sm:gap-5">
+									<span class="inline-flex size-11 items-center justify-center rounded-2xl border border-gold-500/25 bg-gold-500/10 font-sans text-sm font-bold text-gold-300">
+										{String(index + 1).padStart(2, '0')}
+									</span>
+									<div>
+										<h3 class="font-display text-2xl leading-tight text-ink-50">{item.title}</h3>
+										<p class="mt-2 max-w-2xl font-sans text-[0.9375rem] leading-relaxed text-ink-300 sm:text-base">
+											{item.description}
+										</p>
+									</div>
+								</div>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section class="section-block section-block--divider px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+			<div class="mx-auto max-w-7xl" data-motion-root data-motion-trigger="inview">
+				<div class="max-w-3xl" data-motion-item="up" data-motion-delay="0">
+						<p class="mb-4 inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm">
+							Why choose us?
+						</p>
+						<h2 class="max-w-xl font-display text-3xl leading-tight tracking-tight text-ink-50 sm:text-4xl lg:text-[2.75rem]">
+							Trusted arrangements for your sacred journey.
+						</h2>
+						<p class="mt-5 max-w-2xl font-sans text-[0.9375rem] leading-relaxed text-ink-400 sm:text-base">
+							We provide customized Hajj and Umrah packages from the UK with trusted flights,
+							comfortable hotels near the Haram and Masjid Nabawi, and full support to make your
+							pilgrimage easy and memorable.
+						</p>
+				</div>
+
+				<div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+					{
+						chooseUs.map((item, index) => (
+							<div
+								class="group rounded-3xl border border-white/10 bg-white/[0.045] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-sm transition-[border-color,background-color,transform] duration-300 hover:-translate-y-1 hover:border-gold-500/30 hover:bg-white/[0.065]"
+								data-motion-item="up"
+								data-motion-delay={String(160 + index * 70)}
+							>
+								<span class="inline-flex size-10 items-center justify-center rounded-2xl border border-gold-500/25 bg-gold-500/10 text-gold-300 transition-transform duration-300 group-hover:scale-105">
+									<svg class="size-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+										<path
+											d="M4 10.5l3.5 3.5L16 5.5"
+											stroke="currentColor"
+											stroke-width="1.8"
+											stroke-linecap="round"
+											stroke-linejoin="round"></path>
+									</svg>
+								</span>
+								<p class="mt-5 font-sans text-[0.95rem] font-semibold leading-relaxed text-ink-100">
+									{item}
+								</p>
+							</div>
+						))
+					}
+				</div>
+
+			</div>
+		</section>
+	</main>
+</Layout>
