@@ -18,16 +18,18 @@ import { whatWeProvide } from '../data/what-we-provide';
 
 <Layout>
 	<main class="landing-page">
-		<div class="relative">
+		<div class="relative mb-[17rem] min-[420px]:mb-[13rem] md:mb-28 lg:mb-16">
 			<SiteHeader overlay />
-			<HeroCarousel slides={heroSlides}>
-				<HeroBookingForm slot="form" idPrefix="hero-booking-desktop" />
+			<HeroCarousel slides={heroSlides} />
+			<div class="absolute right-0 bottom-0 left-0 z-40 translate-y-1/2 px-4 sm:px-6 lg:px-8">
+				<div class="mx-auto max-w-7xl" data-motion-root data-motion-trigger="load">
 				<HeroBookingForm
-					slot="mobile-form"
-					idPrefix="hero-booking-mobile"
+					idPrefix="hero-booking-bar"
 					dateInputType="text"
+					layout="bar"
 				/>
-			</HeroCarousel>
+				</div>
+			</div>
 		</div>
 
 		<ServicesSection services={serviceCards} seeAllHref="/umrah-packages" />

@@ -8,10 +8,12 @@ import {
 interface Props {
 	idPrefix?: string;
 	dateInputType?: 'date' | 'text';
+	layout?: 'card' | 'bar';
 }
 
-const { idPrefix = 'hero-booking', dateInputType = 'date' } = Astro.props;
+const { idPrefix = 'hero-booking', dateInputType = 'date', layout = 'card' } = Astro.props;
 const usesTextDate = dateInputType === 'text';
+const isBar = layout === 'bar';
 const cityId = `${idPrefix}-departure-city`;
 const travelersId = `${idPrefix}-travelers`;
 const nightsId = `${idPrefix}-nights`;
@@ -31,7 +33,12 @@ const dateClass = `${fieldClass} pt-4 pb-0 [&::-webkit-calendar-picker-indicator
 ---
 
 <form
-	class="hero-booking-form group relative isolate w-full overflow-hidden rounded-2xl border border-white/25 bg-white/[0.08] p-3 shadow-[0_8px_40px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-2xl transition-[border-color,box-shadow,background-color] duration-500 hover:border-white/35 hover:bg-white/[0.11] hover:shadow-[0_12px_48px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.2)] focus-within:border-gold-500/35 focus-within:bg-white/[0.1] focus-within:shadow-[0_12px_48px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.08),inset_0_1px_0_rgba(255,255,255,0.22)] sm:p-4 lg:max-w-[22rem] xl:max-w-md"
+	class:list={[
+		'hero-booking-form group relative isolate w-full overflow-hidden border border-white/25 bg-white/[0.08] shadow-[0_8px_40px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-2xl transition-[border-color,box-shadow,background-color] duration-500 hover:border-white/35 hover:bg-white/[0.11] hover:shadow-[0_12px_48px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.2)] focus-within:border-gold-500/35 focus-within:bg-white/[0.1] focus-within:shadow-[0_12px_48px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.08),inset_0_1px_0_rgba(255,255,255,0.22)]',
+		isBar
+			? 'rounded-3xl p-3 sm:p-4 lg:p-5'
+			: 'rounded-2xl p-3 sm:p-4 lg:max-w-[22rem] xl:max-w-md',
+	]}
 	action="#"
 	method="post"
 	data-booking-form
@@ -49,7 +56,12 @@ const dateClass = `${fieldClass} pt-4 pb-0 [&::-webkit-calendar-picker-indicator
 	></div>
 
 	<div
-		class="relative grid grid-cols-1 gap-2.5 min-[400px]:grid-cols-2 sm:gap-3"
+		class:list={[
+			'relative grid grid-cols-1 gap-2.5 sm:gap-3',
+			isBar
+				? 'min-[420px]:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8'
+				: 'min-[400px]:grid-cols-2',
+		]}
 		data-motion-stagger
 	>
 		<!-- Departure date -->

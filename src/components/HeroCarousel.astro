@@ -9,10 +9,12 @@ interface Props {
 const { slides, autoplayMs = 8000 } = Astro.props;
 
 const slideCount = slides.length;
+const hasFormSlot = Astro.slots.has('form');
+const hasMobileFormSlot = Astro.slots.has('mobile-form');
 ---
 
 <section
-	class="hero-carousel relative z-20 isolate min-h-[100svh] w-full overflow-hidden bg-ink-950 sm:min-h-[36rem] lg:min-h-[min(100dvh,56rem)]"
+	class="hero-carousel relative z-20 isolate min-h-[82svh] w-full overflow-hidden bg-ink-950 sm:min-h-[40rem] md:min-h-[42rem] lg:min-h-[93dvh]"
 	data-autoplay={autoplayMs}
 	aria-roledescription="carousel"
 	aria-label="Featured journeys"
@@ -79,7 +81,7 @@ const slideCount = slides.length;
 	</div>
 
 	<div
-		class="relative z-20 flex min-h-[100svh] flex-col px-0 pt-[62svh] pb-[4.5rem] sm:min-h-[36rem] sm:px-6 sm:pt-28 sm:pb-20 md:pt-[7.5rem] lg:min-h-[min(100dvh,56rem)] lg:px-8 lg:pt-32 lg:pb-16"
+		class="relative z-20 flex min-h-[82svh] flex-col px-0 pt-[62svh] pb-[3rem] sm:min-h-[40rem] sm:px-6 sm:pt-24 sm:pb-16 md:min-h-[42rem] md:pt-[6.5rem] lg:min-h-[93dvh] lg:px-8 lg:pt-28 lg:pb-10"
 	>
 		<div
 			class="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 content-start gap-6 sm:content-end sm:gap-8 md:content-center lg:grid-cols-12 lg:items-center lg:gap-6"
@@ -126,68 +128,78 @@ const slideCount = slides.length;
 						</div>
 					))
 				}
-				<div class="mx-auto mt-5 flex w-full max-w-xs justify-center sm:mt-6 md:hidden">
-					<button
-						type="button"
-						class="flex h-12 w-full items-center justify-center rounded-full border border-gold-400/55 bg-gold-500/95 px-6 font-sans text-sm font-bold tracking-wide text-ink-950 shadow-[0_10px_28px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.35)] transition-all duration-300 hover:bg-gold-400 active:scale-[0.98]"
-						data-mobile-quote-open
-					>
-						Get quote
-					</button>
-				</div>
-				<div
-					class="mx-auto mt-5 hidden w-full max-w-md sm:mt-6 md:mx-0 md:block lg:max-w-[22rem] xl:max-w-md"
-				>
-					<slot name="form" />
-				</div>
+				{
+					hasMobileFormSlot && (
+						<div class="mx-auto mt-5 flex w-full max-w-xs justify-center sm:mt-6 md:hidden">
+							<button
+								type="button"
+								class="flex h-12 w-full items-center justify-center rounded-full border border-gold-400/55 bg-gold-500/95 px-6 font-sans text-sm font-bold tracking-wide text-ink-950 shadow-[0_10px_28px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.35)] transition-all duration-300 hover:bg-gold-400 active:scale-[0.98]"
+								data-mobile-quote-open
+							>
+								Get quote
+							</button>
+						</div>
+					)
+				}
+				{
+					hasFormSlot && (
+						<div class="mx-auto mt-5 hidden w-full max-w-md sm:mt-6 md:mx-0 md:block lg:max-w-[22rem] xl:max-w-md">
+							<slot name="form" />
+						</div>
+					)
+				}
 			</div>
 		</div>
 	</div>
 
-	<div
-		class="fixed inset-0 z-[100] hidden items-end justify-center bg-black/10 px-0 py-3 md:hidden"
-		data-mobile-quote-modal
-		aria-hidden="true"
-	>
-		<button
-			type="button"
-			class="absolute inset-0 cursor-default"
-			aria-label="Close quote form"
-			data-mobile-quote-close
-		></button>
-		<div
-			class="relative mx-2 max-h-[calc(100svh-1.5rem)] w-full overflow-y-auto rounded-3xl border border-white/15 bg-ink-950/90 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)]"
-			role="dialog"
-			aria-modal="true"
-			aria-labelledby="mobile-quote-title"
-		>
-			<div class="mb-3 flex items-start justify-between gap-3 px-1">
-				<div>
-					<p class="font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-gold-400">
-						Plan your trip
-					</p>
-					<h2 id="mobile-quote-title" class="mt-1 font-display text-2xl leading-none text-ink-50">
-						Get a quote
-					</h2>
-				</div>
+	{
+		hasMobileFormSlot && (
+			<div
+				class="fixed inset-0 z-[100] hidden items-end justify-center bg-black/10 px-0 py-3 md:hidden"
+				data-mobile-quote-modal
+				aria-hidden="true"
+			>
 				<button
 					type="button"
-					class="grid size-9 shrink-0 place-items-center rounded-full border border-white/15 bg-white/10 text-ink-50 transition-colors duration-300 hover:bg-white/15"
+					class="absolute inset-0 cursor-default"
 					aria-label="Close quote form"
 					data-mobile-quote-close
+				></button>
+				<div
+					class="relative mx-2 max-h-[calc(100svh-1.5rem)] w-full overflow-y-auto rounded-3xl border border-white/15 bg-ink-950/90 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)]"
+					role="dialog"
+					aria-modal="true"
+					aria-labelledby="mobile-quote-title"
 				>
-					<svg class="size-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-						<path
-							d="M5 5l10 10M15 5L5 15"
-							stroke="currentColor"
-							stroke-width="1.8"
-							stroke-linecap="round"></path>
-					</svg>
-				</button>
+					<div class="mb-3 flex items-start justify-between gap-3 px-1">
+						<div>
+							<p class="font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-gold-400">
+								Plan your trip
+							</p>
+							<h2 id="mobile-quote-title" class="mt-1 font-display text-2xl leading-none text-ink-50">
+								Get a quote
+							</h2>
+						</div>
+						<button
+							type="button"
+							class="grid size-9 shrink-0 place-items-center rounded-full border border-white/15 bg-white/10 text-ink-50 transition-colors duration-300 hover:bg-white/15"
+							aria-label="Close quote form"
+							data-mobile-quote-close
+						>
+							<svg class="size-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+								<path
+									d="M5 5l10 10M15 5L5 15"
+									stroke="currentColor"
+									stroke-width="1.8"
+									stroke-linecap="round"></path>
+							</svg>
+						</button>
+					</div>
+					<slot name="mobile-form" />
+				</div>
 			</div>
-			<slot name="mobile-form" />
-		</div>
-	</div>
+		)
+	}
 
 	{
 		slideCount > 1 && (
