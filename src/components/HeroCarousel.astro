@@ -12,12 +12,12 @@ const slideCount = slides.length;
 ---
 
 <section
-	class="hero-carousel relative isolate min-h-svh min-h-[32rem] w-full overflow-hidden bg-black sm:min-h-[36rem] lg:min-h-[min(100dvh,56rem)]"
+	class="hero-carousel relative z-20 isolate min-h-[100svh] w-full overflow-hidden bg-ink-950 sm:min-h-[36rem] lg:min-h-[min(100dvh,56rem)]"
 	data-autoplay={autoplayMs}
 	aria-roledescription="carousel"
 	aria-label="Featured journeys"
 >
-	<div class="hero-carousel__track absolute inset-0">
+	<div class="hero-carousel__track absolute top-0 right-0 left-0 h-[62svh] overflow-hidden sm:inset-0 sm:h-auto">
 		{
 			slides.map((slide, index) => (
 				<div
@@ -31,11 +31,11 @@ const slideCount = slides.length;
 				>
 					{slide.video ? (
 						<video
-							class="absolute inset-0 h-full w-full object-cover object-[50%_55%] sm:object-[50%_48%] lg:object-[50%_42%]"
+							class="absolute inset-0 h-full w-full object-cover object-[50%_50%] sm:object-[50%_48%] lg:object-[50%_42%]"
 							muted
 							loop
 							playsinline
-							preload={index === 0 ? 'auto' : 'metadata'}
+							preload={index === 0 ? 'auto' : 'none'}
 							poster={slide.poster}
 							data-video
 						>
@@ -56,17 +56,21 @@ const slideCount = slides.length;
 						<img
 							src={slide.poster}
 							alt=""
-							class="absolute inset-0 hidden h-full w-full object-cover"
+							class:list={[
+								'absolute inset-0 h-full w-full object-cover object-[50%_50%] sm:object-[50%_48%] lg:object-[50%_42%]',
+								index === 0 ? '' : 'hidden',
+							]}
 							data-poster-fallback
-							loading={index === 0 ? 'eager' : 'lazy'}
+							loading={index <= 1 ? 'eager' : 'lazy'}
+							decoding="async"
 						/>
 					) : null}
 					<div
-						class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/10 to-black/55"
+						class="absolute inset-0 bg-gradient-to-b from-black/35 via-black/5 to-black/35 sm:bg-gradient-to-r sm:from-black/80 sm:via-black/10 sm:to-black/55"
 						aria-hidden="true"
 					/>
 					<div
-						class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/25"
+						class="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-black/20 sm:from-black/45 sm:via-transparent sm:to-black/25"
 						aria-hidden="true"
 					/>
 				</div>
@@ -75,15 +79,15 @@ const slideCount = slides.length;
 	</div>
 
 	<div
-		class="relative z-20 flex min-h-svh min-h-[32rem] flex-col px-4 pt-[4.75rem] pb-[4.5rem] sm:min-h-[36rem] sm:px-6 sm:pt-28 sm:pb-20 md:pt-[7.5rem] lg:min-h-[min(100dvh,56rem)] lg:px-8 lg:pt-32 lg:pb-16"
+		class="relative z-20 flex min-h-[100svh] flex-col px-0 pt-[62svh] pb-[4.5rem] sm:min-h-[36rem] sm:px-6 sm:pt-28 sm:pb-20 md:pt-[7.5rem] lg:min-h-[min(100dvh,56rem)] lg:px-8 lg:pt-32 lg:pb-16"
 	>
 		<div
-			class="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 content-end gap-6 sm:gap-8 md:content-center lg:grid-cols-12 lg:items-center lg:gap-6"
+			class="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 content-start gap-6 sm:content-end sm:gap-8 md:content-center lg:grid-cols-12 lg:items-center lg:gap-6"
 			data-motion-root
 			data-motion-trigger="both"
 		>
 			<div
-				class="relative text-center md:max-w-xl md:text-left lg:col-span-5 lg:col-start-1 lg:max-w-none lg:self-center"
+				class="relative border-t border-white/10 bg-ink-950/95 px-5 py-6 text-center shadow-[0_-18px_55px_rgba(0,0,0,0.45)] sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:shadow-none md:max-w-xl md:text-left lg:col-span-5 lg:col-start-1 lg:max-w-none lg:self-center"
 				data-hero-headline
 			>
 				{
@@ -106,7 +110,7 @@ const slideCount = slides.length;
 								{slide.eyebrow}
 							</p>
 							<h1
-								class="mb-3 font-display text-[1.75rem] leading-tight tracking-tight text-ink-50 sm:mb-4 sm:text-3xl md:text-4xl lg:max-w-lg lg:text-[2.75rem] lg:leading-[1.1]"
+								class="mb-3 font-display text-[1.625rem] leading-tight tracking-tight text-ink-50 sm:mb-4 sm:text-3xl md:text-4xl lg:max-w-lg lg:text-[2.75rem] lg:leading-[1.1]"
 								data-motion-item={index === 0 ? 'up' : undefined}
 								data-motion-delay={index === 0 ? '275' : undefined}
 							>
@@ -119,34 +123,76 @@ const slideCount = slides.length;
 							>
 								{slide.description}
 							</p>
-							<p class="mt-5 sm:mt-6">
-								<a
-									href={slide.ctaHref}
-									class="inline-flex items-center rounded-full border border-gold-500/50 bg-gold-500/10 px-5 py-2.5 font-sans text-sm font-semibold text-gold-300 backdrop-blur-sm transition-all duration-300 hover:border-gold-400 hover:bg-gold-500/20 hover:text-gold-200"
-								>
-									{slide.ctaLabel}
-								</a>
-							</p>
 						</div>
 					))
 				}
+				<div class="mx-auto mt-5 flex w-full max-w-xs justify-center sm:mt-6 md:hidden">
+					<button
+						type="button"
+						class="flex h-12 w-full items-center justify-center rounded-full border border-gold-400/55 bg-gold-500/95 px-6 font-sans text-sm font-bold tracking-wide text-ink-950 shadow-[0_10px_28px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.35)] transition-all duration-300 hover:bg-gold-400 active:scale-[0.98]"
+						data-mobile-quote-open
+					>
+						Get quote
+					</button>
+				</div>
+				<div
+					class="mx-auto mt-5 hidden w-full max-w-md sm:mt-6 md:mx-0 md:block lg:max-w-[22rem] xl:max-w-md"
+				>
+					<slot name="form" />
+				</div>
 			</div>
-			<div
-				class="pointer-events-none hidden min-h-[4rem] lg:col-span-2 lg:col-start-6 lg:block xl:min-h-[6rem]"
-				aria-hidden="true"
-			/>
-			<div
-				class="mx-auto w-full max-w-md md:max-w-lg lg:col-span-5 lg:col-start-8 lg:mx-0 lg:flex lg:max-w-none lg:justify-end lg:self-center"
-			>
-				<slot name="form" />
+		</div>
+	</div>
+
+	<div
+		class="fixed inset-0 z-[100] hidden items-end justify-center bg-black/10 px-0 py-3 md:hidden"
+		data-mobile-quote-modal
+		aria-hidden="true"
+	>
+		<button
+			type="button"
+			class="absolute inset-0 cursor-default"
+			aria-label="Close quote form"
+			data-mobile-quote-close
+		></button>
+		<div
+			class="relative mx-2 max-h-[calc(100svh-1.5rem)] w-full overflow-y-auto rounded-3xl border border-white/15 bg-ink-950/90 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)]"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="mobile-quote-title"
+		>
+			<div class="mb-3 flex items-start justify-between gap-3 px-1">
+				<div>
+					<p class="font-sans text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-gold-400">
+						Plan your trip
+					</p>
+					<h2 id="mobile-quote-title" class="mt-1 font-display text-2xl leading-none text-ink-50">
+						Get a quote
+					</h2>
+				</div>
+				<button
+					type="button"
+					class="grid size-9 shrink-0 place-items-center rounded-full border border-white/15 bg-white/10 text-ink-50 transition-colors duration-300 hover:bg-white/15"
+					aria-label="Close quote form"
+					data-mobile-quote-close
+				>
+					<svg class="size-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+						<path
+							d="M5 5l10 10M15 5L5 15"
+							stroke="currentColor"
+							stroke-width="1.8"
+							stroke-linecap="round"></path>
+					</svg>
+				</button>
 			</div>
+			<slot name="mobile-form" />
 		</div>
 	</div>
 
 	{
 		slideCount > 1 && (
 			<div
-				class="absolute bottom-4 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 sm:bottom-6"
+							class="absolute top-[calc(62svh-2.5rem)] left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 sm:top-auto sm:bottom-6"
 				role="tablist"
 				aria-label="Choose slide"
 				data-motion-root
@@ -174,17 +220,37 @@ const slideCount = slides.length;
 
 <script>
 	function initHeroCarousel(root: HTMLElement) {
+		if (root.dataset.carouselReady === 'true') return;
+		root.dataset.carouselReady = 'true';
+
 		const slides = [...root.querySelectorAll<HTMLElement>('[data-slide]')];
 		const dots = [...root.querySelectorAll<HTMLButtonElement>('[data-dot]')];
 		const copyPanels = [...root.querySelectorAll<HTMLElement>('[data-hero-copy]')];
 		const autoplayMs = Number(root.dataset.autoplay) || 8000;
-		const bookingForm = root.querySelector('[data-booking-form]');
+		const bookingForms = [...root.querySelectorAll<HTMLElement>('[data-booking-form]')];
+		const quoteOpenButtons = [
+			...root.querySelectorAll<HTMLButtonElement>('[data-mobile-quote-open]'),
+		];
+		const quoteCloseButtons = [
+			...root.querySelectorAll<HTMLButtonElement>('[data-mobile-quote-close]'),
+		];
+		const quoteModal = root.querySelector<HTMLElement>('[data-mobile-quote-modal]');
 
 		let current = 0;
 		let timer: ReturnType<typeof setInterval> | null = null;
 		let touchStartX = 0;
+		let previousDocumentOverflow = '';
+		let previousBodyOverflow = '';
 
 		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		function isInsideProtectedUi(target: EventTarget | null) {
+			if (!(target instanceof Node)) return false;
+			return (
+				bookingForms.some((form) => form.contains(target)) ||
+				Boolean(quoteModal?.contains(target))
+			);
+		}
 
 		function getVideo(slideEl: HTMLElement) {
 			return slideEl.querySelector<HTMLVideoElement>('[data-video]');
@@ -201,28 +267,52 @@ const slideCount = slides.length;
 
 		function pauseAll() {
 			slides.forEach((slide) => {
-				const video = getVideo(slide);
-				if (video) {
-					video.pause();
-					video.currentTime = 0;
-				}
+				getVideo(slide)?.pause();
 			});
 		}
 
-		function playActiveVideo(index: number) {
+		function preloadSlide(index: number) {
 			const video = getVideo(slides[index]);
+			if (!video || video.readyState >= HTMLMediaElement.HAVE_METADATA) return;
+			video.preload = 'auto';
+			video.load();
+		}
+
+		function playActiveVideo(index: number) {
+			const slideEl = slides[index];
+			const video = getVideo(slideEl);
 			if (!video) return;
 
-			const fallback = slides[index].querySelector<HTMLElement>('[data-fallback]');
-			const poster = slides[index].querySelector<HTMLElement>('[data-poster-fallback]');
+			const fallback = slideEl.querySelector<HTMLElement>('[data-fallback]');
+			const poster = slideEl.querySelector<HTMLElement>('[data-poster-fallback]');
 
 			video.classList.remove('hidden');
-			if (fallback) fallback.classList.add('hidden');
-			if (poster) poster.classList.add('hidden');
 
-			video.play().catch(() => {
-				showPosterFallback(slides[index]);
-			});
+			const beginPlayback = () => {
+				if (fallback) fallback.classList.add('hidden');
+				if (poster) poster.classList.add('hidden');
+				video.play().catch(() => showPosterFallback(slideEl));
+			};
+
+			if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+				beginPlayback();
+				return;
+			}
+
+			if (poster) {
+				poster.classList.remove('hidden');
+				fallback?.classList.add('hidden');
+			} else {
+				fallback?.classList.remove('hidden');
+			}
+
+			video.load();
+			video.addEventListener('loadeddata', beginPlayback, { once: true });
+			video.addEventListener(
+				'error',
+				() => showPosterFallback(slideEl),
+				{ once: true },
+			);
 		}
 
 		function updateCopy(index: number) {
@@ -264,6 +354,7 @@ const slideCount = slides.length;
 			updateCopy(current);
 			pauseAll();
 			playActiveVideo(current);
+			preloadSlide((current + 1) % slides.length);
 		}
 
 		function next() {
@@ -275,6 +366,7 @@ const slideCount = slides.length;
 		}
 
 		function startAutoplay() {
+			if (quoteModal?.getAttribute('aria-hidden') === 'false') return;
 			if (prefersReducedMotion || autoplayMs <= 0) return;
 			stopAutoplay();
 			timer = setInterval(next, autoplayMs);
@@ -285,6 +377,34 @@ const slideCount = slides.length;
 				clearInterval(timer);
 				timer = null;
 			}
+		}
+
+		function openQuoteModal() {
+			if (!quoteModal) return;
+			previousDocumentOverflow = document.documentElement.style.overflow;
+			previousBodyOverflow = document.body.style.overflow;
+			root.scrollIntoView({ block: 'start' });
+			document.documentElement.style.overflow = 'hidden';
+			document.body.style.overflow = 'hidden';
+			quoteModal.classList.remove('hidden');
+			quoteModal.classList.add('flex');
+			quoteModal.setAttribute('aria-hidden', 'false');
+			stopAutoplay();
+			window.setTimeout(() => {
+				quoteModal
+					.querySelector<HTMLElement>('[data-booking-form] input, [data-booking-form] select')
+					?.focus();
+			}, 50);
+		}
+
+		function closeQuoteModal() {
+			if (!quoteModal) return;
+			document.documentElement.style.overflow = previousDocumentOverflow;
+			document.body.style.overflow = previousBodyOverflow;
+			quoteModal.classList.add('hidden');
+			quoteModal.classList.remove('flex');
+			quoteModal.setAttribute('aria-hidden', 'true');
+			startAutoplay();
 		}
 
 		if (slides.length > 1) {
@@ -299,17 +419,28 @@ const slideCount = slides.length;
 		root.addEventListener('mouseenter', stopAutoplay);
 		root.addEventListener('mouseleave', startAutoplay);
 
-		bookingForm?.addEventListener('focusin', stopAutoplay);
-		bookingForm?.addEventListener('focusout', (e) => {
-			if (!bookingForm.contains(e.relatedTarget as Node)) {
-				startAutoplay();
+		bookingForms.forEach((bookingForm) => {
+			bookingForm.addEventListener('focusin', stopAutoplay);
+			bookingForm.addEventListener('focusout', (e) => {
+				if (!bookingForm.contains(e.relatedTarget as Node)) {
+					startAutoplay();
+				}
+			});
+		});
+
+		quoteOpenButtons.forEach((button) => button.addEventListener('click', openQuoteModal));
+		quoteCloseButtons.forEach((button) => button.addEventListener('click', closeQuoteModal));
+
+		root.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && quoteModal?.getAttribute('aria-hidden') === 'false') {
+				closeQuoteModal();
 			}
 		});
 
 		root.addEventListener(
 			'touchstart',
 			(e) => {
-				if (bookingForm?.contains(e.target as Node)) return;
+				if (isInsideProtectedUi(e.target)) return;
 				touchStartX = e.changedTouches[0].screenX;
 				stopAutoplay();
 			},
@@ -319,7 +450,7 @@ const slideCount = slides.length;
 		root.addEventListener(
 			'touchend',
 			(e) => {
-				if (bookingForm?.contains(e.target as Node)) return;
+				if (isInsideProtectedUi(e.target)) return;
 				const delta = e.changedTouches[0].screenX - touchStartX;
 				if (Math.abs(delta) > 50) {
 					delta > 0 ? prev() : next();
@@ -334,14 +465,9 @@ const slideCount = slides.length;
 			video?.addEventListener('error', () => showPosterFallback(slide));
 		});
 
-		const firstVideo = getVideo(slides[0]);
-		if (firstVideo) {
-			const fallback = slides[0].querySelector<HTMLElement>('[data-fallback]');
-			fallback?.classList.add('hidden');
-			firstVideo.play().catch(() => showPosterFallback(slides[0]));
-		}
-
+		playActiveVideo(0);
 		if (slides.length > 1) {
+			preloadSlide(1);
 			startAutoplay();
 		}
 	}

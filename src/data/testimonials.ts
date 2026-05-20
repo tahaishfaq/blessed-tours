@@ -8,7 +8,7 @@ export type Testimonial = {
 
 /** Stable placeholder portrait per reviewer */
 function avatarPlaceholder(seed: string): string {
-	return `https://picsum.photos/seed/blessed-${encodeURIComponent(seed)}/160/160`;
+	return `https://picsum.photos/seed/blessed-${encodeURIComponent(seed)}/80/80`;
 }
 
 export const testimonialsHeading = 'Client Reviews & Feedback';

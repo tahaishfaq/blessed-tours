@@ -22,7 +22,7 @@ export const heroSlides: HeroSlide[] = [
 	{
 		id: 'hajj',
 		video:
-			'https://res.cloudinary.com/diyzpo5gt/video/upload/v1779184342/15514888_3840_2160_60fps_gj4ztr.mp4',
+			'https://res.cloudinary.com/diyzpo5gt/video/upload/q_auto,f_mp4/v1779184342/15514888_3840_2160_60fps_gj4ztr.mp4',
 		fallbackClass: 'bg-gradient-to-br from-black via-ink-950 to-ink-800',
 		alt: 'Hajj packages',
 		eyebrow: 'Hajj Packages',
@@ -35,7 +35,9 @@ export const heroSlides: HeroSlide[] = [
 	{
 		id: 'umrah',
 		video:
-			'https://res.cloudinary.com/diyzpo5gt/video/upload/v1779184549/12138052_1920_1080_60fps_qiqtyu.mp4',
+			'https://res.cloudinary.com/diyzpo5gt/video/upload/q_auto,f_mp4/v1779184549/12138052_1920_1080_60fps_qiqtyu.mp4',
+		poster:
+			'https://images.pexels.com/photos/28988872/pexels-photo-28988872.jpeg?auto=compress&cs=tinysrgb&w=1200',
 		fallbackClass: 'bg-gradient-to-br from-ink-950 via-ink-900 to-black',
 		alt: 'Umrah packages',
 		eyebrow: 'Umrah Packages',
@@ -48,7 +50,7 @@ export const heroSlides: HeroSlide[] = [
 	{
 		id: 'flights',
 		video:
-			'https://res.cloudinary.com/diyzpo5gt/video/upload/v1779184597/14306385_3840_2160_24fps_urctau.mp4',
+			'https://res.cloudinary.com/diyzpo5gt/video/upload/q_auto,f_mp4/v1779184597/14306385_3840_2160_24fps_urctau.mp4',
 		fallbackClass: 'bg-gradient-to-br from-black via-ink-900 to-ink-950',
 		alt: 'Flights to the holy lands',
 		eyebrow: 'Flights',
@@ -61,7 +63,7 @@ export const heroSlides: HeroSlide[] = [
 	{
 		id: 'holidays',
 		video:
-			'https://res.cloudinary.com/diyzpo5gt/video/upload/v1779184640/13875963_3840_2160_24fps_cwnqoe.mp4',
+			'https://res.cloudinary.com/diyzpo5gt/video/upload/q_auto,f_mp4/v1779184640/13875963_3840_2160_24fps_cwnqoe.mp4',
 		fallbackClass: 'bg-gradient-to-br from-ink-950 via-black to-ink-900',
 		alt: 'Holiday packages',
 		eyebrow: 'Holiday Packages',

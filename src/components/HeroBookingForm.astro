@@ -5,6 +5,20 @@ import {
 	travelerOptions,
 } from '../data/booking-options';
 
+interface Props {
+	idPrefix?: string;
+	dateInputType?: 'date' | 'text';
+}
+
+const { idPrefix = 'hero-booking', dateInputType = 'date' } = Astro.props;
+const usesTextDate = dateInputType === 'text';
+const cityId = `${idPrefix}-departure-city`;
+const travelersId = `${idPrefix}-travelers`;
+const nightsId = `${idPrefix}-nights`;
+const nameId = `${idPrefix}-full-name`;
+const phoneId = `${idPrefix}-phone`;
+const emailId = `${idPrefix}-email`;
+
 /** Glass field — readable on video while matching the panel */
 const fieldClass =
 	'h-11 w-full rounded-lg border border-white/50 bg-white/88 px-3 font-sans text-sm leading-none text-ink-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] backdrop-blur-md outline-none transition-all duration-300 placeholder:text-ink-400 hover:border-white/70 hover:bg-white/95 focus:border-gold-400/80 focus:bg-white focus:ring-2 focus:ring-gold-500/25';
@@ -46,15 +60,25 @@ const dateClass = `${fieldClass} pt-4 pb-0 [&::-webkit-calendar-picker-indicator
 				>
 					Departure date
 				</span>
-				<input type="date" name="departure" required class={dateClass} />
+				<input
+					type={dateInputType}
+					name="departure"
+					required
+					class={dateClass}
+					placeholder={usesTextDate ? 'DD/MM/YYYY' : undefined}
+					inputmode={usesTextDate ? 'numeric' : undefined}
+					pattern={usesTextDate ? '\\d{2}/\\d{2}/\\d{4}' : undefined}
+					maxlength={usesTextDate ? '10' : undefined}
+					autocomplete="off"
+				/>
 			</label>
 		</div>
 
 		<!-- Departure city -->
 		<div class="relative h-11">
-			<label class="sr-only" for="departure-city">Departure city</label>
+			<label class="sr-only" for={cityId}>Departure city</label>
 			<div class="relative h-full">
-				<select id="departure-city" name="city" required class={selectClass}>
+				<select id={cityId} name="city" required class={selectClass}>
 					<option value="" disabled selected>Departure city</option>
 					{departureCities.map((city) => <option value={city}>{city}</option>)}
 				</select>
@@ -74,9 +98,9 @@ const dateClass = `${fieldClass} pt-4 pb-0 [&::-webkit-calendar-picker-indicator
 
 		<!-- Travelers -->
 		<div class="relative h-11">
-			<label class="sr-only" for="travelers">Travelers</label>
+			<label class="sr-only" for={travelersId}>Travelers</label>
 			<div class="relative h-full">
-				<select id="travelers" name="travelers" required class={selectClass}>
+				<select id={travelersId} name="travelers" required class={selectClass}>
 					<option value="" disabled selected>Travelers</option>
 					{travelerOptions.map((opt) => (
 						<option value={opt.value}>{opt.label}</option>
@@ -98,9 +122,9 @@ const dateClass = `${fieldClass} pt-4 pb-0 [&::-webkit-calendar-picker-indicator
 
 		<!-- Nights -->
 		<div class="relative h-11">
-			<label class="sr-only" for="nights">Nights</label>
+			<label class="sr-only" for={nightsId}>Nights</label>
 			<div class="relative h-full">
-				<select id="nights" name="nights" required class={selectClass}>
+				<select id={nightsId} name="nights" required class={selectClass}>
 					<option value="" disabled selected>Nights</option>
 					{nightOptions.map((opt) => (
 						<option value={opt.value}>{opt.label}</option>
@@ -122,9 +146,9 @@ const dateClass = `${fieldClass} pt-4 pb-0 [&::-webkit-calendar-picker-indicator
 
 		<!-- Full name -->
 		<div class="relative h-11">
-			<label class="sr-only" for="full-name">Full name</label>
+			<label class="sr-only" for={nameId}>Full name</label>
 			<input
-				id="full-name"
+				id={nameId}
 				type="text"
 				name="name"
 				required
@@ -136,9 +160,9 @@ const dateClass = `${fieldClass} pt-4 pb-0 [&::-webkit-calendar-picker-indicator
 
 		<!-- Phone -->
 		<div class="relative h-11">
-			<label class="sr-only" for="phone">Phone</label>
+			<label class="sr-only" for={phoneId}>Phone</label>
 			<input
-				id="phone"
+				id={phoneId}
 				type="tel"
 				name="phone"
 				required
@@ -150,9 +174,9 @@ const dateClass = `${fieldClass} pt-4 pb-0 [&::-webkit-calendar-picker-indicator
 
 		<!-- Email -->
 		<div class="relative h-11">
-			<label class="sr-only" for="email">Email</label>
+			<label class="sr-only" for={emailId}>Email</label>
 			<input
-				id="email"
+				id={emailId}
 				type="email"
 				name="email"
 				required
@@ -181,14 +205,25 @@ const dateClass = `${fieldClass} pt-4 pb-0 [&::-webkit-calendar-picker-indicator
 
 <script>
 	function initBookingForm(form: HTMLFormElement) {
+		if (form.dataset.bookingReady === 'true') return;
+		form.dataset.bookingReady = 'true';
+
 		const departure = form.querySelector<HTMLInputElement>('input[name="departure"]');
 		const submitBtn = form.querySelector<HTMLButtonElement>('[data-submit]');
 		const submitLabel = form.querySelector<HTMLElement>('[data-submit-label]');
 		const successMsg = form.querySelector<HTMLElement>('[data-success]');
 
-		if (departure) {
+		if (departure?.type === 'date') {
 			const today = new Date().toISOString().split('T')[0];
 			departure.min = today;
+		}
+
+		if (departure?.type === 'text') {
+			departure.addEventListener('input', () => {
+				const digits = departure.value.replace(/\D/g, '').slice(0, 8);
+				const parts = [digits.slice(0, 2), digits.slice(2, 4), digits.slice(4, 8)].filter(Boolean);
+				departure.value = parts.join('/');
+			});
 		}
 
 		form.addEventListener('submit', async (e) => {
