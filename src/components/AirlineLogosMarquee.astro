@@ -1,0 +1,83 @@
+---
+const airlineLogos = [
+	{ name: 'Gulf Air', file: 'gulf-air-seeklogo.png' },
+	{ name: 'Emirates', file: 'emirates-airlines-seeklogo.png' },
+	{ name: 'Etihad Airways', file: 'etihad-airways-seeklogo.png' },
+	{ name: 'Oman Air', file: 'oman-air-seeklogo.png' },
+	{ name: 'British Airways', file: 'british-airways-seeklogo.png' },
+	{ name: 'Middle East Airlines', file: 'mea-middle-east-airlines-seeklogo.png' },
+	{ name: 'Virgin Atlantic', file: 'virgin-atlantic-seeklogo.png' },
+	{ name: 'Thai Airways', file: 'thai-airways-seeklogo.png' },
+	{ name: 'Wizz Air', file: 'wizz-air-seeklogo.png' },
+	{ name: 'Saudi Arabian Airlines', file: 'saudi-arabian-airlines-seeklogo.png' },
+	{ name: 'Pakistan International Airlines', file: 'pia-pakistan-international-airlines-seeklogo.png' },
+	{ name: 'Pegasus Airlines', file: 'pegasus-airlines-seeklogo.png' },
+	{ name: 'Turkish Airlines', file: 'thy-turk-hava-yollari-seeklogo.png' },
+	{ name: 'Lufthansa', file: 'lufthansa-seeklogo.png' },
+	{ name: 'Qatar Airways', file: 'qatar-airways-seeklogo.png' },
+];
+---
+
+<section class="section-block px-4 pt-0 pb-5 sm:px-6 sm:pb-6 lg:px-8 lg:pb-8" aria-labelledby="airline-logos-heading">
+	<div class="relative mx-auto max-w-7xl" data-motion-root data-motion-trigger="inview">
+		<div
+			class="relative overflow-hidden rounded-3xl border border-gold-500/20 bg-white/[0.035] py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm sm:py-6"
+			data-motion-item="up"
+			data-motion-delay="0"
+		>
+			<div class="mb-5 px-5 text-center sm:px-7">
+				<p class="mb-2 inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm">
+					Airline partners
+				</p>
+				<h2 id="airline-logos-heading" class="font-display text-2xl leading-tight tracking-tight text-ink-50 sm:text-3xl">
+					Fly with trusted global airlines
+				</h2>
+			</div>
+
+			<div class="airline-marquee group relative overflow-hidden" aria-label="Airline logos">
+				<div class="airline-marquee__track flex w-max will-change-transform group-hover:[animation-play-state:paused]">
+					{
+						[0, 1].map((groupIndex) => (
+							<div class="flex shrink-0 items-center gap-4 px-2 sm:gap-5 sm:px-2 lg:gap-6" aria-hidden={groupIndex === 1}>
+								{airlineLogos.map((logo) => (
+									<div class="group/logo grid h-20 w-36 shrink-0 place-items-center px-5 py-4 transition-transform duration-300 hover:scale-[1.03] sm:h-24 sm:w-44 lg:h-28 lg:w-52">
+										<img
+											src={`/images/Airline%20Logos/${logo.file}`}
+											alt={`${logo.name} logo`}
+											class="max-h-12 w-auto max-w-full object-contain opacity-100 transition-transform duration-300 group-hover/logo:scale-[1.04] sm:max-h-14 lg:max-h-16"
+											loading="lazy"
+											decoding="async"
+										/>
+									</div>
+								))}
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.airline-marquee__track {
+		animation: airline-marquee-scroll 58s linear infinite;
+		transform: translate3d(0, 0, 0);
+	}
+
+	@keyframes airline-marquee-scroll {
+		from {
+			transform: translate3d(0, 0, 0);
+		}
+
+		to {
+			transform: translate3d(-50%, 0, 0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.airline-marquee__track {
+			animation: none;
+		}
+	}
+</style>

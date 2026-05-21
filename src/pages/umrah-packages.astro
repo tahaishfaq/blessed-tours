@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import PackageImageCarousel from '../components/PackageImageCarousel.astro';
+import { umrahPackages } from '../data/umrah-packages';
+---
+
+<Layout
+	title="Umrah Packages — Blessed Tours"
+	description="Explore 3, 4 and 5 star Umrah land packages with hotel details, inclusions, and transparent starting prices."
+>
+	<main class="landing-page">
+		<SiteHeader />
+
+		<section class="section-block px-4 pt-16 pb-10 sm:px-6 sm:pt-20 sm:pb-14 lg:px-8 lg:pt-24 lg:pb-16">
+			<div class="mx-auto max-w-7xl" data-motion-root data-motion-trigger="load">
+				<p class="inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm" data-motion-item="up">Umrah Packages</p>
+				<h1 class="mt-4 max-w-3xl font-display text-4xl leading-tight text-ink-50 sm:text-5xl" data-motion-item="up" data-motion-delay="75">Choose the package that matches your budget and comfort</h1>
+				<p class="mt-4 max-w-3xl text-base leading-relaxed text-ink-300 sm:text-lg" data-motion-item="up" data-motion-delay="150">All options include visa support, medical insurance, transport, ziarats, and ongoing UK assistance.</p>
+			</div>
+		</section>
+
+		<section class="section-block section-block--divider px-4 pb-14 sm:px-6 sm:pb-18 lg:px-8 lg:pb-24">
+			<div class="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2 xl:grid-cols-3" data-motion-root data-motion-trigger="inview">
+				{
+					umrahPackages.map((pkg, i) => (
+						<article class="rounded-3xl border border-white/10 bg-white/[0.045] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-sm" data-motion-item="up" data-motion-delay={String(i * 90)}>
+							<div class="flex items-center justify-between gap-3">
+								<span class="inline-flex rounded-full border border-gold-500/30 bg-gold-500/10 px-3 py-1 font-sans text-xs font-semibold uppercase tracking-[0.12em] text-gold-300">{pkg.stars}</span>
+								<p class="font-display text-3xl leading-none text-gold-200">£{pkg.priceFromGbp}</p>
+							</div>
+							<h2 class="mt-4 font-display text-3xl leading-tight text-ink-50">{pkg.title}</h2>
+							<p class="mt-1 font-sans text-sm text-ink-300">{pkg.season}</p>
+							<div class="mt-4">
+								<PackageImageCarousel id={`all-${pkg.id}`} title={pkg.title} images={pkg.images} />
+							</div>
+							<div class="mt-4 rounded-2xl border border-white/10 bg-black/20 p-4 text-sm text-ink-200">
+								<p><span class="text-gold-300">Makkah Hotel:</span> {pkg.makkahHotel}</p>
+								<p class="mt-1"><span class="text-gold-300">Madinah Hotel:</span> {pkg.madinahHotel}</p>
+								<p class="mt-1"><span class="text-gold-300">Nights:</span> {pkg.makkahNights}N Makkah + {pkg.madinahNights}N Madinah ({pkg.nights} total)</p>
+								<p class="mt-1"><span class="text-gold-300">Room:</span> {pkg.roomType}</p>
+								<p class="mt-1"><span class="text-gold-300">Meal Plan:</span> {pkg.mealPlan}</p>
+							</div>
+							<div class="mt-4">
+								<p class="font-sans text-xs font-semibold uppercase tracking-[0.12em] text-gold-300">Inclusions</p>
+								<ul class="mt-2 space-y-1.5 text-sm text-ink-200">
+									{pkg.inclusions.map((item) => <li>• {item}</li>)}
+								</ul>
+							</div>
+							<a href="/contact-us" class="mt-5 inline-flex h-11 items-center justify-center rounded-full border border-gold-400/50 bg-gold-500/95 px-5 font-sans text-sm font-bold text-ink-900 transition-all hover:bg-gold-400">Request This Package</a>
+						</article>
+					))
+				}
+			</div>
+		</section>
+	</main>
+</Layout>

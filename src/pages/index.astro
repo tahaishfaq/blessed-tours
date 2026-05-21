@@ -5,11 +5,14 @@ import HeroCarousel from '../components/HeroCarousel.astro';
 import HeroBookingForm from '../components/HeroBookingForm.astro';
 import { heroSlides } from '../data/hero-slides';
 import ServicesSection from '../components/ServicesSection.astro';
+import UmrahPackagesSection from '../components/UmrahPackagesSection.astro';
+import FlightsSection from '../components/FlightsSection.astro';
 import WhatWeProvideSection from '../components/WhatWeProvideSection.astro';
 import BookingProcessSection from '../components/BookingProcessSection.astro';
 import FaqSection from '../components/FaqSection.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
 import NewsletterSection from '../components/NewsletterSection.astro';
+import AirlineLogosMarquee from '../components/AirlineLogosMarquee.astro';
 import { bookingProcessSteps } from '../data/booking-process';
 import { faqItems } from '../data/faq';
 import { serviceCards } from '../data/services';
@@ -18,7 +21,7 @@ import { whatWeProvide } from '../data/what-we-provide';
 
 <Layout>
 	<main class="landing-page">
-		<div class="relative mb-[17rem] min-[420px]:mb-[13rem] md:mb-28 lg:mb-16">
+		<div class="relative mb-[13rem] min-[420px]:mb-[9rem] md:mb-16 lg:mb-6">
 			<SiteHeader overlay />
 			<HeroCarousel slides={heroSlides} />
 			<div class="absolute right-0 bottom-0 left-0 z-40 translate-y-1/2 px-4 sm:px-6 lg:px-8">
@@ -33,6 +36,8 @@ import { whatWeProvide } from '../data/what-we-provide';
 		</div>
 
 		<ServicesSection services={serviceCards} seeAllHref="/umrah-packages" />
+		<UmrahPackagesSection />
+		<FlightsSection />
 
 		<WhatWeProvideSection items={whatWeProvide} />
 
@@ -43,5 +48,7 @@ import { whatWeProvide } from '../data/what-we-provide';
 		<FaqSection items={faqItems} />
 
 		<NewsletterSection />
+
+		<AirlineLogosMarquee />
 	</main>
 </Layout>

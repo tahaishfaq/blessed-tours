@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import PackageImageCarousel from '../components/PackageImageCarousel.astro';
+import { flightFares } from '../data/flight-fares';
+---
+
+<Layout
+	title="Flights — Blessed Tours"
+	description="See current featured flight fares and request the best route support from our UK team."
+>
+	<main class="landing-page">
+		<SiteHeader />
+
+		<section class="section-block px-4 pt-16 pb-10 sm:px-6 sm:pt-20 sm:pb-14 lg:px-8 lg:pt-24 lg:pb-16">
+			<div class="mx-auto max-w-7xl" data-motion-root data-motion-trigger="load">
+				<p class="inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm" data-motion-item="up">Flights</p>
+				<h1 class="mt-4 max-w-3xl font-display text-4xl leading-tight text-ink-50 sm:text-5xl" data-motion-item="up" data-motion-delay="75">Featured flight fares for popular routes</h1>
+				<p class="mt-4 max-w-3xl text-base leading-relaxed text-ink-300 sm:text-lg" data-motion-item="up" data-motion-delay="150">We compare route options and timings around your package needs, city of departure, and family requirements.</p>
+			</div>
+		</section>
+
+		<section class="section-block section-block--divider px-4 pb-14 sm:px-6 sm:pb-18 lg:px-8 lg:pb-24">
+			<div class="mx-auto grid max-w-7xl gap-5 md:grid-cols-2" data-motion-root data-motion-trigger="inview">
+				{
+					flightFares.map((fare, i) => (
+						<article class="rounded-3xl border border-white/10 bg-white/[0.045] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-sm" data-motion-item="up" data-motion-delay={String(i * 90)}>
+							<div class="flex items-start justify-between gap-4">
+								<div>
+									<p class="font-sans text-xs font-semibold uppercase tracking-[0.12em] text-gold-300">{fare.type}</p>
+									<h2 class="mt-2 font-display text-3xl leading-tight text-ink-50">{fare.route}</h2>
+								</div>
+								<p class="font-display text-4xl leading-none text-gold-200">£{fare.priceFromGbp}</p>
+							</div>
+							<div class="mt-4">
+								<PackageImageCarousel id={`flight-all-${fare.id}`} title={fare.route} images={fare.images} />
+							</div>
+							<p class="mt-4 rounded-2xl border border-white/10 bg-black/20 p-4 text-sm leading-relaxed text-ink-300">{fare.note}</p>
+							<div class="mt-5 flex flex-wrap gap-2">
+								<span class="inline-flex rounded-full border border-white/12 bg-white/[0.04] px-3 py-1 text-xs text-ink-300">Route guidance included</span>
+								<span class="inline-flex rounded-full border border-white/12 bg-white/[0.04] px-3 py-1 text-xs text-ink-300">Package coordination support</span>
+							</div>
+							<a href="/contact-us" class="mt-5 inline-flex h-11 items-center justify-center rounded-full border border-gold-400/50 bg-gold-500/95 px-5 font-sans text-sm font-bold text-ink-900 transition-all hover:bg-gold-400">Request Flight Quote</a>
+						</article>
+					))
+				}
+			</div>
+		</section>
+	</main>
+</Layout>

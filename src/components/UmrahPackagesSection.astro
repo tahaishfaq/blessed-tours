@@ -1,0 +1,68 @@
+---
+import SectionHeaderFrame from './SectionHeaderFrame.astro';
+import PackageImageCarousel from './PackageImageCarousel.astro';
+import { umrahPackages } from '../data/umrah-packages';
+
+const featured = umrahPackages.slice(0, 3);
+---
+
+<section
+	id="umrah-packages-section"
+	class="section-block section-block--divider px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12"
+	aria-labelledby="umrah-packages-heading"
+>
+	<div class="mx-auto max-w-7xl" data-motion-root data-motion-trigger="inview">
+		<SectionHeaderFrame
+			eyebrow="Umrah Packages"
+			heading="Curated Umrah options with transparent inclusions"
+			headingId="umrah-packages-heading"
+		>
+			<div slot="actions" class="flex items-center gap-3">
+				<a
+					href="/umrah-packages"
+					class="inline-flex items-center rounded-full border border-white/20 bg-white/[0.04] px-5 py-2.5 font-sans text-sm font-semibold text-ink-50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gold-500/50 hover:bg-gold-500/10 hover:text-gold-300 active:translate-y-0"
+				>
+					View all packages
+				</a>
+			</div>
+		</SectionHeaderFrame>
+
+		<div class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+			{
+				featured.map((pkg, i) => (
+					<article
+						class="rounded-3xl border border-white/10 bg-white/[0.045] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-sm transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-gold-500/35"
+						data-motion-item="up"
+						data-motion-delay={String(i * 90)}
+					>
+						<div class="mb-3 flex items-center justify-between gap-3">
+							<span class="inline-flex rounded-full border border-gold-500/30 bg-gold-500/10 px-3 py-1 font-sans text-xs font-semibold uppercase tracking-[0.12em] text-gold-300">
+								{pkg.stars}
+							</span>
+							<p class="font-display text-2xl leading-none text-gold-200">£{pkg.priceFromGbp}</p>
+						</div>
+						<h3 class="font-display text-2xl leading-tight text-ink-50">{pkg.title}</h3>
+						<p class="mt-1 font-sans text-sm text-ink-300">{pkg.season}</p>
+						<div class="mt-4">
+							<PackageImageCarousel id={`home-${pkg.id}`} title={pkg.title} images={pkg.images} />
+						</div>
+						<p class="mt-3 text-sm leading-relaxed text-ink-300">{pkg.highlight}</p>
+						<ul class="mt-4 space-y-1.5 text-sm text-ink-200">
+							<li><span class="text-gold-300">Makkah:</span> {pkg.makkahHotel} ({pkg.makkahNights}N)</li>
+							<li><span class="text-gold-300">Madinah:</span> {pkg.madinahHotel} ({pkg.madinahNights}N)</li>
+							<li><span class="text-gold-300">Room:</span> {pkg.roomType}</li>
+							<li><span class="text-gold-300">Meals:</span> {pkg.mealPlan}</li>
+						</ul>
+						<a
+							href="/umrah-packages"
+							class="mt-5 inline-flex items-center gap-2 font-sans text-sm font-semibold text-gold-300 transition-colors hover:text-gold-200"
+						>
+							See full details
+							<svg class="size-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4l6 6-6 6"/></svg>
+						</a>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

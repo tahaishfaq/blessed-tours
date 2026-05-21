@@ -27,7 +27,10 @@ export const footerContact = {
 		label: 'info@blessedtours.co.uk',
 		href: 'mailto:info@blessedtours.co.uk',
 	},
-	region: 'Serving pilgrims across the United Kingdom',
+	address: {
+		label: '28 Keswick Gardens, Ilford, IG4 5NB, United Kingdom',
+		href: 'https://maps.google.com/?q=28+Keswick+Gardens,+Ilford,+IG4+5NB,+United+Kingdom',
+	},
 } as const;
 
 export const footerSocialLinks = [

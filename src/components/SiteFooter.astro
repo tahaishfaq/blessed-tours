@@ -12,6 +12,13 @@ import { phone, whatsapp } from '../data/navigation';
 
 const pathname = Astro.url.pathname;
 const year = new Date().getFullYear();
+const paymentMethods = [
+	{ label: 'Visa', src: '/payments-icons/visa.svg' },
+	{ label: 'Mastercard', src: '/payments-icons/mastercard.svg' },
+	{ label: 'American Express', src: '/payments-icons/american-express.svg' },
+	{ label: 'PayPal', src: '/payments-icons/paypal.svg' },
+	{ label: 'Discover', src: '/payments-icons/discover.svg' },
+];
 
 function isActive(href: string) {
 	if (href === '/') return pathname === '/';
@@ -25,7 +32,8 @@ function isActive(href: string) {
 		aria-hidden="true"
 	></div>
 
-	<div class="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+	<div class="relative px-4 pt-8 pb-5 sm:px-6 sm:pt-10 sm:pb-6 lg:px-8 lg:pt-12 lg:pb-8">
+		<div class="mx-auto max-w-7xl rounded-3xl border border-gold-500/20 bg-white/[0.025] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm sm:p-6 lg:p-8">
 		<div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8 xl:gap-10">
 			<div class="sm:col-span-2 lg:col-span-5">
 				<Logo class="mb-5" />
@@ -112,15 +120,15 @@ function isActive(href: string) {
 
 			<nav class="lg:col-span-2" aria-label="Packages">
 				<h2 class="font-display text-base text-ink-50">Packages</h2>
-				<ul class="mt-4 space-y-2.5">
+				<ul class="mt-4 flex flex-wrap gap-2">
 					{
 						footerPackageLinks.map((link) => (
 							<li>
 								<a
 									href={link.href}
 									class:list={[
-										'footer-link font-sans text-sm text-ink-400 transition-colors duration-300 hover:text-gold-400',
-										isActive(link.href) && 'text-gold-400',
+										'footer-link inline-flex rounded-full border border-white/10 bg-white/[0.035] px-3.5 py-2 font-sans text-sm text-ink-400 transition-[border-color,background-color,color,transform] duration-300 hover:-translate-y-0.5 hover:border-gold-500/35 hover:bg-gold-500/10 hover:text-gold-300 active:translate-y-0',
+										isActive(link.href) && 'border-gold-500/35 bg-gold-500/10 text-gold-300',
 									]}
 								>
 									{link.label}
@@ -133,15 +141,15 @@ function isActive(href: string) {
 
 			<nav class="lg:col-span-2" aria-label="Company">
 				<h2 class="font-display text-base text-ink-50">Company</h2>
-				<ul class="mt-4 space-y-2.5">
+				<ul class="mt-4 flex flex-wrap gap-2">
 					{
 						footerCompanyLinks.map((link) => (
 							<li>
 								<a
 									href={link.href}
 									class:list={[
-										'footer-link font-sans text-sm text-ink-400 transition-colors duration-300 hover:text-gold-400',
-										isActive(link.href) && 'text-gold-400',
+										'footer-link inline-flex rounded-full border border-white/10 bg-white/[0.035] px-3.5 py-2 font-sans text-sm text-ink-400 transition-[border-color,background-color,color,transform] duration-300 hover:-translate-y-0.5 hover:border-gold-500/35 hover:bg-gold-500/10 hover:text-gold-300 active:translate-y-0',
+										isActive(link.href) && 'border-gold-500/35 bg-gold-500/10 text-gold-300',
 									]}
 								>
 									{link.label}
@@ -154,11 +162,11 @@ function isActive(href: string) {
 
 			<div class="lg:col-span-3">
 				<h2 class="font-display text-base text-ink-50">Contact</h2>
-				<ul class="mt-4 space-y-3">
+				<ul class="mt-4 flex flex-col gap-2">
 					<li>
 						<a
 							href={phone.href}
-							class="group inline-flex items-start gap-3 font-sans text-sm text-ink-400 transition-colors hover:text-ink-50"
+							class="group inline-flex w-fit items-start gap-3 rounded-full border border-white/10 bg-white/[0.035] px-3.5 py-2 font-sans text-sm text-ink-400 transition-[border-color,background-color,color,transform] hover:-translate-y-0.5 hover:border-gold-500/35 hover:bg-gold-500/10 hover:text-ink-50 active:translate-y-0"
 						>
 							<svg
 								class="mt-0.5 size-4 shrink-0 text-gold-400"
@@ -180,7 +188,7 @@ function isActive(href: string) {
 					<li>
 						<a
 							href={footerContact.email.href}
-							class="group inline-flex items-start gap-3 font-sans text-sm text-ink-400 transition-colors hover:text-ink-50"
+							class="group inline-flex w-fit items-start gap-3 rounded-full border border-white/10 bg-white/[0.035] px-3.5 py-2 font-sans text-sm text-ink-400 transition-[border-color,background-color,color,transform] hover:-translate-y-0.5 hover:border-gold-500/35 hover:bg-gold-500/10 hover:text-ink-50 active:translate-y-0"
 						>
 							<svg
 								class="mt-0.5 size-4 shrink-0 text-gold-400"
@@ -199,7 +207,13 @@ function isActive(href: string) {
 							<span>{footerContact.email.label}</span>
 						</a>
 					</li>
-					<li class="flex items-start gap-3 font-sans text-sm leading-relaxed text-ink-400">
+					<li>
+						<a
+							href={footerContact.address.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="group inline-flex w-fit items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.035] px-3.5 py-2 font-sans text-sm leading-relaxed text-ink-400 transition-[border-color,background-color,color,transform] hover:-translate-y-0.5 hover:border-gold-500/35 hover:bg-gold-500/10 hover:text-ink-50 active:translate-y-0"
+						>
 						<svg
 							class="mt-0.5 size-4 shrink-0 text-gold-400"
 							viewBox="0 0 24 24"
@@ -219,28 +233,50 @@ function isActive(href: string) {
 								d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
 							></path>
 						</svg>
-						<span>{footerContact.region}</span>
+						<span>{footerContact.address.label}</span>
+						</a>
 					</li>
 				</ul>
+
+				<div class="mt-5">
+					<p class="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-gold-400">
+						Payment via:
+					</p>
+					<div class="mt-3 flex max-w-xs flex-wrap gap-2">
+						{
+							paymentMethods.map((method) => (
+								<span class="grid h-8 min-w-14 place-items-center rounded-xl border border-white/20 bg-ink-900 px-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition-transform duration-300 hover:scale-[1.03]">
+									<img
+										src={method.src}
+										alt={`${method.label} payment logo`}
+										class="max-h-3.5 max-w-[4.5rem] object-contain"
+										loading="lazy"
+										decoding="async"
+									/>
+								</span>
+							))
+						}
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<div
-			class="mt-12 flex flex-col gap-4 border-t border-white/[0.06] pt-8 sm:flex-row sm:items-center sm:justify-between"
+			class="mt-10 flex flex-col gap-4 border-t border-gold-500/15 pt-6 sm:flex-row sm:items-center sm:justify-between"
 		>
 			<p class="font-sans text-sm text-ink-500">
 				&copy; {year} Blessed Tours. All rights reserved.
 			</p>
 			<nav aria-label="Legal">
-				<ul class="flex flex-wrap gap-x-6 gap-y-2">
+				<ul class="flex flex-wrap gap-2">
 					{
 						footerLegalLinks.map((link) => (
 							<li>
 								<a
 									href={link.href}
 									class:list={[
-										'font-sans text-sm text-ink-500 transition-colors duration-300 hover:text-gold-400',
-										isActive(link.href) && 'text-gold-400',
+										'inline-flex rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 font-sans text-sm text-ink-500 transition-[border-color,background-color,color] duration-300 hover:border-gold-500/30 hover:bg-gold-500/10 hover:text-gold-300',
+										isActive(link.href) && 'border-gold-500/35 bg-gold-500/10 text-gold-300',
 									]}
 								>
 									{link.label}
@@ -250,6 +286,7 @@ function isActive(href: string) {
 					}
 				</ul>
 			</nav>
+		</div>
 		</div>
 	</div>
 </footer>

@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { phone, whatsapp } from '../data/navigation';
+---
+
+<Layout
+	title="Hajj Packages 2027 — Blessed Tours"
+	description="Our 2027 Hajj packages are currently being prepared. Register your interest with Blessed Tours for priority updates and guidance."
+>
+	<main class="landing-page">
+		<SiteHeader />
+
+		<section class="section-block px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-16 lg:px-8 lg:pt-24 lg:pb-20">
+			<div class="mx-auto max-w-7xl" data-motion-root data-motion-trigger="load">
+				<p class="inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm" data-motion-item="up">
+					Hajj Packages
+				</p>
+				<h1 class="mt-4 max-w-4xl font-display text-4xl leading-tight text-ink-50 sm:text-5xl" data-motion-item="up" data-motion-delay="75">
+					2027 Hajj Packages Are Currently In Preparation
+				</h1>
+				<p class="mt-4 max-w-3xl text-base leading-relaxed text-ink-300 sm:text-lg" data-motion-item="up" data-motion-delay="150">
+					Our team is finalizing 2027 options with approved channels, accommodation planning, and full travel support details. Package releases will be published once confirmed.
+				</p>
+			</div>
+		</section>
+
+		<section class="section-block section-block--divider px-4 pb-14 sm:px-6 sm:pb-18 lg:px-8 lg:pb-24">
+			<div class="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1.3fr_1fr]" data-motion-root data-motion-trigger="inview">
+				<article class="rounded-3xl border border-white/10 bg-white/[0.045] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-sm" data-motion-item="up">
+					<h2 class="font-display text-3xl leading-tight text-ink-50">What We Are Preparing For 2027</h2>
+					<ul class="mt-4 space-y-2 text-sm leading-relaxed text-ink-200 sm:text-base">
+						<li>• Structured package tiers with clear hotel and proximity options.</li>
+						<li>• Compliance-first guidance aligned with official booking pathways.</li>
+						<li>• Family/group coordination and documentation assistance.</li>
+						<li>• Dedicated UK support before departure and throughout travel.</li>
+					</ul>
+					<p class="mt-5 rounded-2xl border border-gold-500/20 bg-gold-500/8 p-4 text-sm text-gold-100">
+						If you want priority notification when packages are released, contact us now and we will add your details to our 2027 Hajj update list.
+					</p>
+				</article>
+
+				<article class="rounded-3xl border border-white/10 bg-white/[0.045] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-sm" data-motion-item="up" data-motion-delay="90">
+					<p class="font-sans text-xs font-semibold uppercase tracking-[0.12em] text-gold-300">Register Interest</p>
+					<h3 class="mt-2 font-display text-2xl leading-tight text-ink-50">Speak With Our Team</h3>
+					<p class="mt-3 text-sm leading-relaxed text-ink-300">Share your expected group size, preferred travel period, and city of departure for early guidance.</p>
+
+					<div class="mt-5 grid gap-3">
+						<a
+							href={whatsapp.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex h-11 items-center justify-center rounded-full border border-[#25D366]/35 bg-[#25D366]/10 px-5 font-sans text-sm font-semibold text-[#5dde7a] transition-colors hover:bg-[#25D366]/16"
+						>
+							Message on WhatsApp
+						</a>
+						<a
+							href={phone.href}
+							class="inline-flex h-11 items-center justify-center rounded-full border border-gold-400/50 bg-gold-500/95 px-5 font-sans text-sm font-bold text-ink-900 transition-colors hover:bg-gold-400"
+						>
+							Call {phone.label}
+						</a>
+						<a
+							href="/contact-us"
+							class="inline-flex h-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] px-5 font-sans text-sm font-semibold text-ink-100 transition-colors hover:border-gold-500/45 hover:text-gold-200"
+						>
+							Send Enquiry
+						</a>
+					</div>
+				</article>
+			</div>
+		</section>
+	</main>
+</Layout>

@@ -1,0 +1,70 @@
+---
+interface Props {
+	id: string;
+	title: string;
+	images: string[];
+}
+
+const { id, title, images } = Astro.props;
+---
+
+<div class="relative" data-pkg-carousel={id}>
+	<div
+		class="flex snap-x snap-mandatory gap-2 overflow-x-auto rounded-2xl border border-white/10 bg-black/20 p-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+		data-pkg-track
+	>
+		{
+			images.map((image, index) => (
+				<img
+					src={image}
+					alt={`${title} image ${index + 1}`}
+					class="h-44 w-full min-w-full snap-start rounded-xl object-cover"
+					loading="lazy"
+					decoding="async"
+				/>
+			))
+		}
+	</div>
+	{images.length > 1 && (
+		<div class="pointer-events-none absolute inset-x-2 top-1/2 z-10 flex -translate-y-1/2 items-center justify-between">
+			<button
+				type="button"
+				class="pointer-events-auto inline-flex size-8 items-center justify-center rounded-full border border-white/20 bg-black/45 text-ink-50 backdrop-blur-sm transition-colors hover:border-gold-500/50 hover:text-gold-200"
+				aria-label={`Previous ${title} image`}
+				data-pkg-prev
+			>
+				<svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg>
+			</button>
+			<button
+				type="button"
+				class="pointer-events-auto inline-flex size-8 items-center justify-center rounded-full border border-white/20 bg-black/45 text-ink-50 backdrop-blur-sm transition-colors hover:border-gold-500/50 hover:text-gold-200"
+				aria-label={`Next ${title} image`}
+				data-pkg-next
+			>
+				<svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></svg>
+			</button>
+		</div>
+	)}
+</div>
+
+<script>
+	function initPackageCarousel(root: HTMLElement) {
+		if (root.dataset.ready === 'true') return;
+		root.dataset.ready = 'true';
+
+		const track = root.querySelector<HTMLElement>('[data-pkg-track]');
+		const prev = root.querySelector<HTMLButtonElement>('[data-pkg-prev]');
+		const next = root.querySelector<HTMLButtonElement>('[data-pkg-next]');
+		if (!track || !prev || !next) return;
+
+		function slideBy(delta: number) {
+			const width = track.clientWidth;
+			track.scrollBy({ left: delta * width, behavior: 'smooth' });
+		}
+
+		prev.addEventListener('click', () => slideBy(-1));
+		next.addEventListener('click', () => slideBy(1));
+	}
+
+	document.querySelectorAll<HTMLElement>('[data-pkg-carousel]').forEach(initPackageCarousel);
+</script>
