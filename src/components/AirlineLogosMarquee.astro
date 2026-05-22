@@ -18,19 +18,19 @@ const airlineLogos = [
 ];
 ---
 
-<section class="section-block px-4 pt-0 pb-5 sm:px-6 sm:pb-6 lg:px-8 lg:pb-8" aria-labelledby="airline-logos-heading">
-	<div class="relative mx-auto max-w-7xl" data-motion-root data-motion-trigger="inview">
+<section class="section-block w-full px-0 pt-0 pb-0" aria-labelledby="airline-logos-heading">
+	<div class="relative w-full max-w-none" data-motion-root data-motion-trigger="inview">
 		<div
-			class="relative overflow-hidden rounded-3xl border border-gold-500/20 bg-white/[0.035] py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm sm:py-6"
+			class="relative overflow-hidden pt-5 pb-1 sm:pt-6 sm:pb-2"
 			data-motion-item="up"
 			data-motion-delay="0"
 		>
-			<div class="mb-5 px-5 text-center sm:px-7">
-				<p class="mb-2 inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm">
-					Airline partners
+			<div class="mb-5 px-4 text-center sm:px-6 lg:px-8">
+				<p class="mb-3 inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm transition-colors duration-300 hover:border-gold-500/35 hover:bg-gold-500/10 sm:mb-4">
+					Our partners
 				</p>
-				<h2 id="airline-logos-heading" class="font-display text-2xl leading-tight tracking-tight text-ink-50 sm:text-3xl">
-					Fly with trusted global airlines
+				<h2 id="airline-logos-heading" class="font-display text-3xl leading-[1.12] tracking-tight text-ink-50 sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+					Our Airline Partners
 				</h2>
 			</div>
 
@@ -38,7 +38,7 @@ const airlineLogos = [
 				<div class="airline-marquee__track flex w-max will-change-transform group-hover:[animation-play-state:paused]">
 					{
 						[0, 1].map((groupIndex) => (
-							<div class="flex shrink-0 items-center gap-4 px-2 sm:gap-5 sm:px-2 lg:gap-6" aria-hidden={groupIndex === 1}>
+							<div class="flex shrink-0 items-center gap-4 px-3 sm:gap-5 sm:px-4 lg:gap-6" aria-hidden={groupIndex === 1}>
 								{airlineLogos.map((logo) => (
 									<div class="group/logo grid h-20 w-36 shrink-0 place-items-center px-5 py-4 transition-transform duration-300 hover:scale-[1.03] sm:h-24 sm:w-44 lg:h-28 lg:w-52">
 										<img

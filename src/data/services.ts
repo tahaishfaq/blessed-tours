@@ -3,16 +3,12 @@ export type ServiceCard = {
 	title: string;
 	subtitle: string;
 	href: string;
-	/** Replace with files in public/images/services/ when ready */
+	/** Path under public/ */
 	image: string;
 	/** Fallback when image fails to load */
 	fallbackClass: string;
 };
 
-/**
- * Swap `image` for local assets under `public/images/services/` for production.
- * Remote URLs are placeholders for layout preview.
- */
 export const serviceCards: ServiceCard[] = [
 	{
 		id: 'umrah',
@@ -37,8 +33,7 @@ export const serviceCards: ServiceCard[] = [
 		title: 'Flights',
 		subtitle: 'Economy to business with top airlines',
 		href: '/#flights-section',
-		image:
-			'https://res.cloudinary.com/diyzpo5gt/image/upload/f_auto,q_auto,w_800/v1779188491/ChatGPT_Image_May_19_2026_04_01_13_PM_hmxtq6.png',
+		image: '/images/service-images/For%20Flights.jpg',
 		fallbackClass: 'bg-gradient-to-br from-ink-950 to-black',
 	},
 	{
@@ -46,8 +41,15 @@ export const serviceCards: ServiceCard[] = [
 		title: 'Holiday Packages',
 		subtitle: 'Islamic tours & family getaways',
 		href: '/holiday-packages',
-		image:
-			'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80&auto=format&fit=crop',
+		image: '/images/service-images/for-holiday.jpg',
 		fallbackClass: 'bg-gradient-to-br from-ink-900 to-ink-950',
+	},
+	{
+		id: 'umrah-visa',
+		title: 'Umrah Visa',
+		subtitle: 'Fast e-visa support for UK pilgrims',
+		href: '/contact-us',
+		image: '/images/service-images/for%20umrah%20visa.jpg',
+		fallbackClass: 'bg-gradient-to-br from-gold-950 via-ink-900 to-black',
 	},
 ];
