@@ -79,6 +79,30 @@ const termsSections = [
 		body: 'These terms follow English law. Any disputes will go through the UK courts.',
 	},
 ];
+
+const bookingConditions = [
+	`All ticket(s) booked through us are non-changeable and non-refundable.`,
+	`All upfront deposits are non-refundable.`,
+	`Please note that it is the passenger’s responsibility to ensure that the outstanding balance payment is paid within the due date. Failure to do so will result in the cancellation of your booking and forfeiting of the upfront deposit. Please ensure to update us about any payments that you make.`,
+	`Cancellations / Refunds are subject to the guidelines / restrictions imposed by the airline company, less our administration charge. Refunds are normally processed within 3-6 months after the request. Refunds will not be paid out until received from the relevant airline/supplier.`,
+	`All changes / amendments are subject to fare restrictions / availability of seats at the time of making an amendment.`,
+	`All quotes are subject to availability and are not guaranteed until the ticket(s) have been issued. This applies even if full payment has been made, as airline fares and seat availability change on an ongoing basis. Ticket(s) are generally issued within 48-72 hours upon receipt of full payment. For travel on the following day, tickets will be issued within 12-24 hours. If you do not receive your tickets within these time periods, please contact us straightaway.`,
+	`As airlines prefer e-tickets as the mode of travel, no paper tickets will be issued.`,
+	`Passenger(s) are requested to reconfirm their booking(s) with the travel agency or airline company 72 hours prior to the flight departure time to obtain information about any last-minute changes, irrespective of the airline’s guidelines.`,
+	`Passenger(s) are advised to check-in at least 3 hours prior to the flight departure time for international flights, and 2 hours for domestic flights.`,
+	`It is your responsibility to ensure that all your travel documents are correct and valid for travel. This includes your e-ticket, passport, visa (if required), travel insurance (if required), and any additional travel document(s).`,
+	`We accept no liability if you are denied boarding or refused entry into any country due to failure on your part to carry the correct passport, visa, or other required documents. Travelers must ensure their passport is valid for at least 6 months from their return date of travel.`,
+	`The Umrah visa process may take up to 2 weeks. We hold no responsibility for any delays or refusals by Saudi authorities. The visa price can change without prior notice.`,
+	`Umrah package once booked and confirmed after receiving payment is non-changeable and non-refundable.`,
+	`While we will make every effort to meet passenger requirements, an alternate hotel with a similar type of room may need to be offered, with any rate difference charged accordingly.`,
+	`2 children below 5 years can be accommodated free with the parents’ room, but you must pay directly to the hotel for breakfast. We will make every effort to meet the departure/arrival dates of transportation and accommodation requirements, but we reserve the right to make minor adjustments due to availability constraints.`,
+	`Rooms, rates, and airfares are subject to availability and may change at the time of booking.`,
+	`We hold no responsibility if any supplier changes your hotel after confirmation due to any reason.`,
+	`We accept no liability if a new law or tax is implemented by Saudi authorities; passengers must comply with that. If you do not like the accommodation pre-reserved by your travel consultant, please note that issues related to the hotel rooms, such as cleanliness or maintenance, should be addressed by the hotel management. The agent may not have access to resolve such issues.`,
+	`All business-to-business transactions carried out on a credit card will attract a 3% surcharge above the amount. This surcharge is non-refundable in the event of a refund. Transactions carried out on a debit card are free from any surcharge. Documents such as passport copies or card details may be requested to verify unsuccessful or unauthorized payments.`,
+	`By responding to e-mail correspondence, you confirm that you have accepted and understood all the terms and conditions governing your booking with us.`,
+	`When you receive an invoice you are liable to reply to the e-mail confirming: this is the itinerary you require; you have checked all details and understand the full terms and conditions of your booking; you accept responsibility for the validity of your travel documents, including passports, visas, and health requirements; and you authorize us to proceed with your reservation. This quotation is only valid upon receipt of a deposit or full payment unless otherwise specified.`,
+];
 ---
 
 <Layout
@@ -163,6 +187,14 @@ const termsSections = [
 									</a>
 								))
 							}
+							<a
+								href="#booking-and-travel-conditions"
+								class="max-w-[78vw] shrink-0 truncate rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 font-sans text-sm text-ink-300 transition-colors duration-300 hover:bg-white/[0.06] hover:text-gold-300 lg:max-w-none lg:rounded-xl lg:border-0 lg:bg-transparent lg:px-2.5"
+								data-motion-item="up"
+								data-motion-delay="500"
+							>
+								Booking & Travel Conditions
+							</a>
 						</nav>
 					</div>
 				</aside>
@@ -194,6 +226,42 @@ const termsSections = [
 							))
 						}
 					</div>
+
+					<article
+						id="booking-and-travel-conditions"
+						class="mt-4 min-w-0 max-w-full scroll-mt-28 overflow-hidden rounded-3xl border border-gold-500/20 bg-white/[0.045] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-sm sm:p-6"
+						data-motion-item="up"
+						data-motion-delay="500"
+					>
+						<div class="grid gap-4 sm:grid-cols-[3rem_1fr] sm:gap-5">
+							<span class="inline-flex size-11 items-center justify-center rounded-2xl border border-gold-500/25 bg-gold-500/10 font-sans text-sm font-bold text-gold-300">
+								16
+							</span>
+							<div class="min-w-0 max-w-full">
+								<h2 class="break-words font-display text-xl leading-tight text-ink-50 sm:text-2xl">
+									Booking & Travel Conditions
+								</h2>
+								<p class="mt-3 max-w-full break-words font-sans text-[0.9375rem] leading-relaxed text-ink-300 sm:text-base">
+									The following conditions apply to bookings, flights, Umrah packages, payments,
+									travel documents, amendments, cancellations, and supplier arrangements.
+								</p>
+								<ol class="mt-5 grid gap-3">
+									{
+										bookingConditions.map((condition, index) => (
+											<li class="grid min-w-0 gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-3 sm:grid-cols-[2.25rem_1fr] sm:p-4">
+												<span class="inline-flex size-8 shrink-0 items-center justify-center rounded-xl border border-gold-500/25 bg-gold-500/10 font-sans text-xs font-bold text-gold-300">
+													{String(index + 1).padStart(2, '0')}
+												</span>
+												<p class="min-w-0 max-w-full break-words font-sans text-sm leading-relaxed text-ink-300 sm:text-[0.9375rem]">
+													{condition}
+												</p>
+											</li>
+										))
+									}
+								</ol>
+							</div>
+						</div>
+					</article>
 
 					<div
 						class="mt-6 overflow-hidden rounded-3xl border border-gold-500/25 bg-gold-500/10 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] sm:p-7"
