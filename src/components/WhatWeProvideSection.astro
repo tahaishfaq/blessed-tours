@@ -90,7 +90,7 @@ const defaultId = items[0]?.id ?? '';
 										width="900"
 										height="700"
 									/>
-									<div class="absolute inset-0 bg-gradient-to-br from-ink-950 via-ink-950/75 to-ink-950/30" />
+									<div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(14,12,10,0.58)_0%,rgba(14,12,10,0.42)_45%,rgba(176,132,64,0.22)_100%)]" />
 									<div class="relative flex min-h-[18rem] flex-col justify-end">
 										<span class="mb-4 inline-flex size-12 items-center justify-center rounded-xl border border-gold-400/30 bg-gold-500/10 text-gold-300">
 											<ProvideIcon name={item.icon} class="size-6" />
@@ -107,7 +107,7 @@ const defaultId = items[0]?.id ?? '';
 									</div>
 								</div>
 
-								<div class="min-w-0 rounded-2xl border border-white/10 bg-ink-950/45 p-3 sm:p-4">
+								<div class="min-w-0 rounded-2xl border border-white/10 bg-[linear-gradient(140deg,rgba(14,12,10,0.52)_0%,rgba(14,12,10,0.36)_48%,rgba(176,132,64,0.14)_100%)] p-3 sm:p-4">
 									<div class="mb-4 flex items-center justify-between gap-3 px-1">
 										<div>
 											<p class="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-gold-400">
@@ -156,7 +156,7 @@ const defaultId = items[0]?.id ?? '';
 										data-provide-carousel={item.id}
 									>
 										{item.cards.map((card) => (
-											<article class="provide-card min-w-[82%] snap-start overflow-hidden rounded-2xl border border-white/10 bg-white/[0.05] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:min-w-[20rem] lg:min-w-[21rem]">
+											<article class="provide-card min-w-[82%] snap-start overflow-hidden rounded-2xl border border-white/12 bg-[linear-gradient(150deg,rgba(17,15,13,0.72)_0%,rgba(22,18,14,0.62)_55%,rgba(170,126,58,0.14)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] sm:min-w-[20rem] lg:min-w-[21rem]">
 												<img
 													src={card.image}
 													alt={card.imageAlt}

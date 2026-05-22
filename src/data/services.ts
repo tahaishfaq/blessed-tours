@@ -50,22 +50,4 @@ export const serviceCards: ServiceCard[] = [
 			'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80&auto=format&fit=crop',
 		fallbackClass: 'bg-gradient-to-br from-ink-900 to-ink-950',
 	},
-	{
-		id: 'visa',
-		title: 'Umrah Visa',
-		subtitle: 'Fast e-visa support for pilgrims',
-		href: '/#umrah-packages-section',
-		image:
-			'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80&auto=format&fit=crop',
-		fallbackClass: 'bg-gradient-to-br from-black via-ink-900 to-ink-800',
-	},
-	{
-		id: 'group',
-		title: 'Group Travel',
-		subtitle: 'Schools, mosques & community blocks',
-		href: '/about-us',
-		image:
-			'https://images.unsplash.com/photo-1503220317375-16ad6288aed0?w=800&q=80&auto=format&fit=crop',
-		fallbackClass: 'bg-gradient-to-br from-ink-800 via-ink-900 to-black',
-	},
 ];

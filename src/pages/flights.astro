@@ -3,20 +3,80 @@ import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import PackageImageCarousel from '../components/PackageImageCarousel.astro';
 import { flightFares } from '../data/flight-fares';
+
+const seoTitle = 'Cheap Flights from UK to Saudi Arabia | Umrah Flights to Jeddah & Madinah';
+const seoDescription =
+	'Explore affordable flight deals from the UK to Saudi Arabia with Blessed Tours. Compare cheap Umrah flights to Jeddah and Madinah, with flexible dates and trusted support.';
 ---
 
-<Layout
-	title="Flights — Blessed Tours"
-	description="See current featured flight fares and request the best route support from our UK team."
->
+<Layout title={seoTitle} description={seoDescription}>
 	<main class="landing-page">
 		<SiteHeader />
 
-		<section class="section-block px-4 pt-16 pb-10 sm:px-6 sm:pt-20 sm:pb-14 lg:px-8 lg:pt-24 lg:pb-16">
+		<section class="section-block px-4 pt-18 pb-10 sm:px-6 sm:pt-22 sm:pb-12 lg:px-8 lg:pt-26 lg:pb-14">
 			<div class="mx-auto max-w-7xl" data-motion-root data-motion-trigger="load">
-				<p class="inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-400 backdrop-blur-sm" data-motion-item="up">Flights</p>
-				<h1 class="mt-4 max-w-3xl font-display text-4xl leading-tight text-ink-50 sm:text-5xl" data-motion-item="up" data-motion-delay="75">Featured flight fares for popular routes</h1>
-				<p class="mt-4 max-w-3xl text-base leading-relaxed text-ink-300 sm:text-lg" data-motion-item="up" data-motion-delay="150">We compare route options and timings around your package needs, city of departure, and family requirements.</p>
+				<div class="relative overflow-hidden rounded-[2rem] border border-white/15 bg-ink-950/40 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md sm:p-6 lg:p-8">
+					<img
+						src="https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg?auto=compress&cs=tinysrgb&w=1800"
+						alt="Aircraft silhouette at sunset"
+						class="absolute inset-0 h-full w-full object-cover"
+						loading="eager"
+						decoding="async"
+					/>
+					<div class="absolute inset-0 bg-[linear-gradient(140deg,rgba(13,11,10,0.66)_0%,rgba(13,11,10,0.52)_52%,rgba(191,145,71,0.26)_100%)]"></div>
+
+					<div class="relative z-10 text-center">
+						<p class="inline-flex rounded-full border border-white/20 bg-white/[0.08] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-[0.13em] text-gold-300 backdrop-blur-sm" data-motion-item="up">Flights</p>
+						<h1 class="mx-auto mt-4 max-w-4xl font-display text-4xl leading-tight text-ink-50 sm:text-5xl lg:text-6xl" data-motion-item="up" data-motion-delay="75">Cheap Flights From UK to Saudi Arabia</h1>
+						<p class="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-ink-100 sm:text-xl" data-motion-item="up" data-motion-delay="150">Affordable airfares, trusted routes, and flexible dates for Umrah flights to Jeddah and Madinah.</p>
+					</div>
+
+					<form class="relative z-10 mx-auto mt-7 grid max-w-[1360px] grid-cols-1 gap-3 rounded-[1.4rem] border border-white/20 bg-black/30 p-3 backdrop-blur-xl sm:grid-cols-2 lg:grid-cols-5">
+						<select class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 outline-none transition-all focus:border-gold-500">
+							<option>Round-trip</option>
+							<option>One-way</option>
+						</select>
+						<input type="text" placeholder="From" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" />
+						<input type="text" placeholder="To" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" />
+						<input type="text" placeholder="Start Date" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" />
+						<input type="text" placeholder="End Date" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" />
+						<input type="text" placeholder="Travelers" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" />
+						<select class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 outline-none transition-all focus:border-gold-500">
+							<option>Cabin Class</option>
+							<option>Economy</option>
+							<option>Premium Economy</option>
+							<option>Business</option>
+						</select>
+						<input type="text" placeholder="Name*" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" required />
+						<input type="tel" placeholder="Phone*" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" required />
+						<input type="email" placeholder="Email" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" />
+						<button type="submit" class="lg:col-span-5 inline-flex h-12 items-center justify-center rounded-xl border border-gold-400/55 bg-gold-500 px-6 font-sans text-base font-semibold text-ink-900 transition-all duration-300 hover:bg-gold-400 active:translate-y-px">Submit Flight Enquiry</button>
+					</form>
+				</div>
+			</div>
+		</section>
+
+		<section class="section-block section-block--divider px-4 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-14">
+			<div class="mx-auto max-w-7xl rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm sm:p-7">
+				<h2 class="font-display text-3xl leading-tight text-ink-50">Explore Affordable Flight Deals From the UK</h2>
+				<div class="mt-4 space-y-4 text-sm leading-relaxed text-ink-300 sm:text-base">
+					<p>At Blessed Tours, we specialise in offering cheap flight deals from the UK to Saudi Arabia, making your journey to Makkah and Madinah more affordable than ever. Whether you are planning to perform Umrah or visit family, we help you find low-cost flights without compromising on comfort or service.</p>
+					<p>We offer both one-way and return flights to major airports in Saudi Arabia, including Jeddah and Madinah, with access to trusted airlines and competitive fares. Our team regularly updates flight options to bring you the best seasonal offers, especially during Ramadan, school holidays, and off-peak travel times.</p>
+					<p>With flexible travel dates and reliable support, Blessed Tours makes it easy for UK pilgrims to reach the Holy Land at affordable prices so you can focus on your spiritual journey with peace of mind.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="section-block section-block--divider px-4 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-14">
+			<div class="mx-auto max-w-7xl rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm sm:p-7">
+				<h2 class="font-display text-3xl leading-tight text-ink-50">Tips for Finding the Cheapest Flights</h2>
+				<ul class="mt-4 space-y-3 text-sm leading-relaxed text-ink-300 sm:text-base">
+					<li><span class="text-gold-300 font-semibold">Book early:</span> Prices usually rise near departure, especially in Ramadan and school holiday periods.</li>
+					<li><span class="text-gold-300 font-semibold">Stay flexible with dates:</span> Mid-week and off-peak flight times can reduce fares significantly.</li>
+					<li><span class="text-gold-300 font-semibold">Compare nearby airports:</span> Manchester, Birmingham, and Heathrow can produce different pricing windows.</li>
+					<li><span class="text-gold-300 font-semibold">Set fare alerts:</span> Stay updated on short-term promotions and seasonal discounts.</li>
+					<li><span class="text-gold-300 font-semibold">Travel light where possible:</span> Hand-luggage fares can reduce overall trip cost on selected airlines.</li>
+				</ul>
 			</div>
 		</section>
 
