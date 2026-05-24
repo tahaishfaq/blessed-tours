@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import DatePickersInit from '../components/DatePickersInit.astro';
 import MotionInit from '../components/MotionInit.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 
@@ -36,6 +37,7 @@ const {
 	<body class="min-h-dvh bg-ink-950 font-sans text-ink-50 antialiased">
 		<slot />
 		<SiteFooter />
+		<DatePickersInit />
 		<MotionInit />
 	</body>
 </html>

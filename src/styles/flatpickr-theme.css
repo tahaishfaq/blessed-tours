@@ -1,0 +1,138 @@
+/* Blessed Tours skin over Flatpickr default structure (no layout overrides). */
+
+:root {
+	--bt-calendar-bg: hsl(0 7% 9% / 0.96);
+	--bt-calendar-panel: hsl(0 7% 12% / 0.94);
+	--bt-calendar-border: hsl(36 75% 65% / 0.35);
+	--bt-calendar-text: hsl(42 40% 94%);
+	--bt-calendar-muted: hsl(36 12% 62%);
+	--bt-calendar-gold: hsl(36 75% 65%);
+	--bt-calendar-gold-soft: hsl(36 75% 65% / 0.2);
+}
+
+.flatpickr-calendar {
+	background:
+		radial-gradient(130% 130% at 0% 0%, hsl(36 75% 65% / 0.14) 0%, transparent 42%),
+		linear-gradient(165deg, var(--bt-calendar-panel), var(--bt-calendar-bg));
+	border: 1px solid var(--bt-calendar-border);
+	border-radius: 16px;
+	box-shadow:
+		0 24px 55px hsl(0 0% 0% / 0.55),
+		inset 0 1px 0 hsl(0 0% 100% / 0.08);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+}
+
+.flatpickr-calendar::before,
+.flatpickr-calendar::after {
+	display: none;
+}
+
+.flatpickr-months .flatpickr-month {
+	color: var(--bt-calendar-text);
+	fill: var(--bt-calendar-text);
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months,
+.flatpickr-current-month input.cur-year {
+	color: var(--bt-calendar-text);
+	font-weight: 700;
+}
+
+.flatpickr-weekdays {
+	border-top: 1px solid hsl(36 75% 65% / 0.15);
+	border-bottom: 1px solid hsl(36 75% 65% / 0.15);
+	background: hsl(36 75% 65% / 0.06);
+}
+
+span.flatpickr-weekday {
+	color: hsl(36 80% 73%);
+	font-weight: 700;
+	letter-spacing: 0.02em;
+}
+
+.flatpickr-day {
+	color: var(--bt-calendar-text);
+	border-radius: 10px;
+	border: 1px solid transparent;
+}
+
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+	color: hsl(36 10% 55%);
+}
+
+.flatpickr-day:hover,
+.flatpickr-day:focus {
+	background: var(--bt-calendar-gold-soft);
+	border-color: hsl(36 75% 65% / 0.36);
+	color: hsl(42 40% 96%);
+}
+
+.flatpickr-day.today {
+	border-color: hsl(36 75% 65% / 0.58);
+	color: hsl(36 78% 74%);
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.selected:hover,
+.flatpickr-day.startRange:hover,
+.flatpickr-day.endRange:hover {
+	background: linear-gradient(165deg, hsl(36 75% 70%), hsl(36 75% 62%));
+	border-color: hsl(36 75% 60%);
+	color: hsl(0 7% 10%);
+	font-weight: 700;
+	box-shadow:
+		0 7px 14px hsl(36 75% 30% / 0.34),
+		inset 0 1px 0 hsl(0 0% 100% / 0.3);
+}
+
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+	color: hsl(36 8% 38%);
+}
+
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+	border-radius: 10px;
+	color: var(--bt-calendar-text);
+	fill: var(--bt-calendar-text);
+}
+
+.flatpickr-months .flatpickr-prev-month:hover,
+.flatpickr-months .flatpickr-next-month:hover {
+	background: hsl(36 75% 65% / 0.16);
+}
+
+/* Visible date inputs (flatpickr altInput) */
+input.flatpickr-input[data-date-variant],
+input.flatpickr-input.date-picker-alt--hero {
+	font-family: 'Source Sans Pro', ui-sans-serif, system-ui, sans-serif;
+}
+
+input.flatpickr-input.date-picker-alt--hero {
+	padding-top: 1rem;
+	padding-bottom: 0;
+	padding-right: 2.25rem;
+}
+
+.date-picker-field.is-open input.flatpickr-input,
+.date-picker-field.is-open input[data-date-picker] {
+	border-color: hsl(36 75% 65% / 0.8);
+	box-shadow:
+		0 0 0 2px hsl(36 75% 65% / 0.25),
+		inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+input[data-date-picker][disabled],
+input[data-date-picker][disabled] + input.flatpickr-input {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* Hidden value input */
+input[data-date-picker].flatpickr-input:not(.form-control) {
+	display: none;
+}

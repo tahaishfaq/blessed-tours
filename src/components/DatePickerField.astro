@@ -1,0 +1,107 @@
+---
+interface Props {
+	name: string;
+	label: string;
+	id?: string;
+	required?: boolean;
+	variant?: 'hero' | 'plain';
+	/** Marks a start field that bumps the minimum on its paired end field (use `linksTo` name). */
+	linksTo?: string;
+	class?: string;
+}
+
+const {
+	name,
+	label,
+	id,
+	required = false,
+	variant = 'plain',
+	linksTo,
+	class: className = '',
+} = Astro.props;
+
+const inputId = id ?? name;
+
+const heroFieldClass =
+	'h-11 w-full cursor-pointer rounded-lg border border-white/50 bg-white/88 px-3 font-sans text-sm leading-none text-ink-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] backdrop-blur-md outline-none transition-all duration-300 placeholder:text-ink-400 hover:border-white/70 hover:bg-white/95 focus:border-gold-400/80 focus:bg-white focus:ring-2 focus:ring-gold-500/25';
+
+const plainFieldClass =
+	'h-12 w-full cursor-pointer rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 outline-none transition-all placeholder:text-ink-500 focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25';
+
+const isHero = variant === 'hero';
+const inputClass = isHero ? heroFieldClass : plainFieldClass;
+const heroDateClass = isHero ? `${inputClass} date-picker-alt--hero pt-4 pb-0 pr-9` : inputClass;
+---
+
+{
+	isHero ? (
+		<div
+			class:list={['date-picker-field date-picker-field--hero relative h-11', className]}
+			data-date-picker-field
+		>
+			<label class="relative block h-full" for={inputId}>
+				<span class="pointer-events-none absolute top-1.5 left-3 z-10 font-sans text-[0.6875rem] font-semibold leading-none text-ink-500">
+					{label}
+				</span>
+				<input
+					type="text"
+					id={inputId}
+					name={name}
+					required={required}
+					readonly
+					data-date-picker
+					data-date-variant="hero"
+					data-date-min="today"
+					data-date-links-to={linksTo}
+					class={heroDateClass}
+					placeholder=""
+					autocomplete="off"
+					aria-label={label}
+				/>
+				<svg
+					class="pointer-events-none absolute top-1/2 right-3 z-10 size-4 -translate-y-1/2 text-ink-500"
+					viewBox="0 0 20 20"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.6"
+					aria-hidden="true"
+				>
+					<rect x="3" y="4.5" width="14" height="12" rx="2"></rect>
+					<path stroke-linecap="round" d="M3 8.5h14M7 3v3M13 3v3"></path>
+				</svg>
+			</label>
+		</div>
+	) : (
+		<div class:list={['date-picker-field relative', className]} data-date-picker-field>
+			<label class="sr-only" for={inputId}>
+				{label}
+			</label>
+			<input
+				type="text"
+				id={inputId}
+				name={name}
+				required={required}
+				readonly
+				data-date-picker
+				data-date-variant="plain"
+				data-date-min="today"
+				data-date-links-to={linksTo}
+				class={`${inputClass} pr-10`}
+				placeholder={label}
+				autocomplete="off"
+				aria-label={label}
+			/>
+			<svg
+				class="pointer-events-none absolute top-1/2 right-3.5 size-4 -translate-y-1/2 text-ink-500"
+				viewBox="0 0 20 20"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.6"
+				aria-hidden="true"
+			>
+				<rect x="3" y="4.5" width="14" height="12" rx="2"></rect>
+				<path stroke-linecap="round" d="M3 8.5h14M7 3v3M13 3v3"></path>
+			</svg>
+		</div>
+	)
+}

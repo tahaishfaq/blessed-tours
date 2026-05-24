@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import DatePickerField from '../components/DatePickerField.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import PackageImageCarousel from '../components/PackageImageCarousel.astro';
 import { flightFares } from '../data/flight-fares';
@@ -11,48 +12,134 @@ const seoDescription =
 
 <Layout title={seoTitle} description={seoDescription}>
 	<main class="landing-page">
-		<SiteHeader />
+		<section
+			class="relative isolate min-h-[min(88svh,52rem)] w-full overflow-hidden bg-ink-950 sm:min-h-[40rem] lg:min-h-[min(92svh,56rem)]"
+			aria-labelledby="flights-hero-heading"
+		>
+			<SiteHeader overlay />
 
-		<section class="section-block px-4 pt-18 pb-10 sm:px-6 sm:pt-22 sm:pb-12 lg:px-8 lg:pt-26 lg:pb-14">
-			<div class="mx-auto max-w-7xl" data-motion-root data-motion-trigger="load">
-				<div class="relative overflow-hidden rounded-[2rem] border border-white/15 bg-ink-950/40 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md sm:p-6 lg:p-8">
-					<img
-						src="https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg?auto=compress&cs=tinysrgb&w=1800"
-						alt="Aircraft silhouette at sunset"
-						class="absolute inset-0 h-full w-full object-cover"
-						loading="eager"
-						decoding="async"
-					/>
-					<div class="absolute inset-0 bg-[linear-gradient(140deg,rgba(13,11,10,0.66)_0%,rgba(13,11,10,0.52)_52%,rgba(191,145,71,0.26)_100%)]"></div>
+			<img
+				src="https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg?auto=compress&cs=tinysrgb&w=2000"
+				alt=""
+				class="absolute inset-0 h-full w-full object-cover object-[50%_35%] sm:object-[50%_40%]"
+				loading="eager"
+				decoding="async"
+				fetchpriority="high"
+			/>
+			<div
+				class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-ink-950/95"
+				aria-hidden="true"
+			></div>
+			<div
+				class="absolute inset-0 bg-gradient-to-r from-black/55 via-transparent to-black/35 sm:from-black/65"
+				aria-hidden="true"
+			></div>
 
-					<div class="relative z-10 text-center">
-						<p class="inline-flex rounded-full border border-white/20 bg-white/[0.08] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-[0.13em] text-gold-300 backdrop-blur-sm" data-motion-item="up">Flights</p>
-						<h1 class="mx-auto mt-4 max-w-4xl font-display text-4xl leading-tight text-ink-50 sm:text-5xl lg:text-6xl" data-motion-item="up" data-motion-delay="75">Cheap Flights From UK to Saudi Arabia</h1>
-						<p class="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-ink-100 sm:text-xl" data-motion-item="up" data-motion-delay="150">Affordable airfares, trusted routes, and flexible dates for Umrah flights to Jeddah and Madinah.</p>
-					</div>
-
-					<form class="relative z-10 mx-auto mt-7 grid max-w-[1360px] grid-cols-1 gap-3 rounded-[1.4rem] border border-white/20 bg-black/30 p-3 backdrop-blur-xl sm:grid-cols-2 lg:grid-cols-5">
-						<select class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 outline-none transition-all focus:border-gold-500">
-							<option>Round-trip</option>
-							<option>One-way</option>
-						</select>
-						<input type="text" placeholder="From" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" />
-						<input type="text" placeholder="To" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" />
-						<input type="text" placeholder="Start Date" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" />
-						<input type="text" placeholder="End Date" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" />
-						<input type="text" placeholder="Travelers" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" />
-						<select class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 outline-none transition-all focus:border-gold-500">
-							<option>Cabin Class</option>
-							<option>Economy</option>
-							<option>Premium Economy</option>
-							<option>Business</option>
-						</select>
-						<input type="text" placeholder="Name*" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" required />
-						<input type="tel" placeholder="Phone*" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" required />
-						<input type="email" placeholder="Email" class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500" />
-						<button type="submit" class="lg:col-span-5 inline-flex h-12 items-center justify-center rounded-xl border border-gold-400/55 bg-gold-500 px-6 font-sans text-base font-semibold text-ink-900 transition-all duration-300 hover:bg-gold-400 active:translate-y-px">Submit Flight Enquiry</button>
-					</form>
+			<div
+				class="relative z-10 flex min-h-[min(88svh,52rem)] w-full flex-col justify-between px-4 pt-28 pb-8 sm:min-h-[40rem] sm:px-6 sm:pt-32 sm:pb-10 lg:min-h-[min(92svh,56rem)] lg:px-8 lg:pt-36 lg:pb-12"
+				data-motion-root
+				data-motion-trigger="load"
+			>
+				<div class="mx-auto w-full max-w-7xl text-center">
+					<p
+						class="inline-flex rounded-full border border-white/20 bg-white/[0.08] px-4 py-1.5 font-sans text-xs font-semibold uppercase tracking-[0.13em] text-gold-300 backdrop-blur-sm"
+						data-motion-item="up"
+					>
+						Flights
+					</p>
+					<h1
+						id="flights-hero-heading"
+						class="mx-auto mt-4 max-w-4xl font-display text-4xl leading-[1.05] tracking-tight text-ink-50 sm:text-5xl lg:text-6xl"
+						data-motion-item="up"
+						data-motion-delay="75"
+					>
+						Cheap Flights From UK to Saudi Arabia
+					</h1>
+					<p
+						class="mx-auto mt-4 max-w-3xl font-sans text-base leading-relaxed text-ink-100/95 sm:text-xl"
+						data-motion-item="up"
+						data-motion-delay="150"
+					>
+						Affordable airfares, trusted routes, and flexible dates for Umrah flights to Jeddah and
+						Madinah.
+					</p>
 				</div>
+
+				<form
+					class="mx-auto mt-8 grid w-full max-w-7xl grid-cols-1 gap-3 rounded-3xl border border-white/20 bg-black/35 p-3 shadow-[0_24px_70px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl sm:mt-10 sm:grid-cols-2 sm:p-4 lg:grid-cols-5 lg:p-5"
+					data-flights-enquiry-form
+					data-motion-item="up"
+					data-motion-delay="225"
+					novalidate
+				>
+					<select
+						name="trip_type"
+						data-trip-type
+						class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 outline-none transition-all focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+					>
+						<option value="round-trip">Round-trip</option>
+						<option value="one-way">One-way</option>
+					</select>
+					<input
+						type="text"
+						placeholder="From"
+						class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+					/>
+					<input
+						type="text"
+						placeholder="To"
+						class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+					/>
+					<DatePickerField
+						id="flights-start-date"
+						name="start_date"
+						label="Start date"
+						linksTo="end_date"
+						required
+					/>
+					<DatePickerField
+						id="flights-end-date"
+						name="end_date"
+						label="End date"
+						required
+					/>
+					<input
+						type="text"
+						placeholder="Travelers"
+						class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+					/>
+					<select
+						class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 outline-none transition-all focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+					>
+						<option>Cabin Class</option>
+						<option>Economy</option>
+						<option>Premium Economy</option>
+						<option>Business</option>
+					</select>
+					<input
+						type="text"
+						placeholder="Name*"
+						class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+						required
+					/>
+					<input
+						type="tel"
+						placeholder="Phone*"
+						class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+						required
+					/>
+					<input
+						type="email"
+						placeholder="Email"
+						class="h-12 rounded-xl border border-white/35 bg-white/92 px-4 font-sans text-base text-ink-900 placeholder:text-ink-500 outline-none transition-all focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+					/>
+					<button
+						type="submit"
+						class="inline-flex h-12 items-center justify-center rounded-xl border border-gold-400/55 bg-gold-500 px-6 font-sans text-base font-semibold text-ink-900 transition-all duration-300 hover:bg-gold-400 active:translate-y-px sm:col-span-2 lg:col-span-5"
+					>
+						Submit Flight Enquiry
+					</button>
+				</form>
 			</div>
 		</section>
 
@@ -108,3 +195,51 @@ const seoDescription =
 		</section>
 	</main>
 </Layout>
+
+<script>
+	function initFlightsTripType(form: HTMLFormElement) {
+		if (form.dataset.tripTypeReady === 'true') return;
+		form.dataset.tripTypeReady = 'true';
+
+		const tripSelect = form.querySelector<HTMLSelectElement>('[data-trip-type]');
+		const endInput = form.querySelector<HTMLInputElement>('input[name="end_date"]');
+		if (!tripSelect || !endInput) return;
+
+		const syncEndDate = () => {
+			const oneWay = tripSelect.value === 'one-way';
+			const fp = (
+				endInput as HTMLInputElement & {
+					_flatpickr?: {
+						clear: () => void;
+						set: (key: string, value: unknown) => void;
+						altInput?: HTMLInputElement;
+					};
+				}
+			)._flatpickr;
+
+			endInput.toggleAttribute('disabled', oneWay);
+			endInput.toggleAttribute('required', !oneWay);
+
+			if (fp) {
+				if (oneWay) {
+					fp.clear();
+					fp.set('clickOpens', false);
+					fp.altInput?.setAttribute('disabled', 'true');
+				} else {
+					fp.set('clickOpens', true);
+					fp.altInput?.removeAttribute('disabled');
+				}
+			}
+		};
+
+		tripSelect.addEventListener('change', syncEndDate);
+		requestAnimationFrame(syncEndDate);
+	}
+
+	function setupFlightsForms() {
+		document.querySelectorAll<HTMLFormElement>('[data-flights-enquiry-form]').forEach(initFlightsTripType);
+	}
+
+	setupFlightsForms();
+	document.addEventListener('astro:page-load', setupFlightsForms);
+</script>

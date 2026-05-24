@@ -1,4 +1,5 @@
 ---
+import DatePickerField from './DatePickerField.astro';
 import {
 	departureCities,
 	nightOptions,
@@ -7,13 +8,12 @@ import {
 
 interface Props {
 	idPrefix?: string;
-	dateInputType?: 'date' | 'text';
 	layout?: 'card' | 'bar';
 }
 
-const { idPrefix = 'hero-booking', dateInputType = 'date', layout = 'card' } = Astro.props;
-const usesTextDate = dateInputType === 'text';
+const { idPrefix = 'hero-booking', layout = 'card' } = Astro.props;
 const isBar = layout === 'bar';
+const departureId = `${idPrefix}-departure`;
 const cityId = `${idPrefix}-departure-city`;
 const travelersId = `${idPrefix}-travelers`;
 const nightsId = `${idPrefix}-nights`;
@@ -29,7 +29,6 @@ const selectClass = `${fieldClass} cursor-pointer appearance-none py-0 pr-9`;
 
 const inputClass = fieldClass;
 
-const dateClass = `${fieldClass} pt-4 pb-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60`;
 ---
 
 <form
@@ -64,27 +63,13 @@ const dateClass = `${fieldClass} pt-4 pb-0 [&::-webkit-calendar-picker-indicator
 		]}
 		data-motion-stagger
 	>
-		<!-- Departure date -->
-		<div class="relative h-11">
-			<label class="relative block h-full">
-				<span
-					class="pointer-events-none absolute top-1.5 left-3 z-10 font-sans text-[0.6875rem] font-semibold leading-none text-ink-500"
-				>
-					Departure date
-				</span>
-				<input
-					type={dateInputType}
-					name="departure"
-					required
-					class={dateClass}
-					placeholder={usesTextDate ? 'DD/MM/YYYY' : undefined}
-					inputmode={usesTextDate ? 'numeric' : undefined}
-					pattern={usesTextDate ? '\\d{2}/\\d{2}/\\d{4}' : undefined}
-					maxlength={usesTextDate ? '10' : undefined}
-					autocomplete="off"
-				/>
-			</label>
-		</div>
+		<DatePickerField
+			id={departureId}
+			name="departure"
+			label="Departure date"
+			variant="hero"
+			required
+		/>
 
 		<!-- Departure city -->
 		<div class="relative h-11">
@@ -220,23 +205,9 @@ const dateClass = `${fieldClass} pt-4 pb-0 [&::-webkit-calendar-picker-indicator
 		if (form.dataset.bookingReady === 'true') return;
 		form.dataset.bookingReady = 'true';
 
-		const departure = form.querySelector<HTMLInputElement>('input[name="departure"]');
 		const submitBtn = form.querySelector<HTMLButtonElement>('[data-submit]');
 		const submitLabel = form.querySelector<HTMLElement>('[data-submit-label]');
 		const successMsg = form.querySelector<HTMLElement>('[data-success]');
-
-		if (departure?.type === 'date') {
-			const today = new Date().toISOString().split('T')[0];
-			departure.min = today;
-		}
-
-		if (departure?.type === 'text') {
-			departure.addEventListener('input', () => {
-				const digits = departure.value.replace(/\D/g, '').slice(0, 8);
-				const parts = [digits.slice(0, 2), digits.slice(2, 4), digits.slice(4, 8)].filter(Boolean);
-				departure.value = parts.join('/');
-			});
-		}
 
 		form.addEventListener('submit', async (e) => {
 			e.preventDefault();

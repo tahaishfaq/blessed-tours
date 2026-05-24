@@ -1,6 +1,8 @@
 @import 'tailwindcss';
+@import 'flatpickr/dist/flatpickr.min.css';
 @import './motion.css';
 @import './page-surface.css';
+@import './flatpickr-theme.css';
 
 @theme {
 	--font-sans: 'Source Sans Pro', ui-sans-serif, system-ui, sans-serif;

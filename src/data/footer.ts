@@ -22,14 +22,17 @@ export const footerLegalLinks: NavLink[] = [
 	{ label: 'Payment Security', href: '/payment-security' },
 ];
 
+export const companyAddress = '84 Kingsley Road, Hounslow, London, TW3 1QA' as const;
+
 export const footerContact = {
 	email: {
 		label: 'info@blessedtours.co.uk',
 		href: 'mailto:info@blessedtours.co.uk',
 	},
 	address: {
-		label: '28 Keswick Gardens, Ilford, IG4 5NB, United Kingdom',
-		href: 'https://maps.google.com/?q=28+Keswick+Gardens,+Ilford,+IG4+5NB,+United+Kingdom',
+		lines: ['84 Kingsley Road', 'Hounslow, London', 'TW3 1QA'] as const,
+		label: companyAddress,
+		href: 'https://maps.google.com/?q=84+Kingsley+Road,+Hounslow,+London,+TW3+1QA',
 	},
 } as const;
 
