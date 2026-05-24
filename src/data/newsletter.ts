@@ -19,7 +19,7 @@ export const newsletterImages = {
 		alt: 'Courtyard near Masjid al-Haram',
 	},
 	bottom: {
-		src: 'https://images.pexels.com/photos/1269029/pexels-photo-1269029.jpeg?auto=compress&cs=tinysrgb&w=600',
-		alt: 'Masjid an-Nabawi in Madinah',
+		src: 'https://images.pexels.com/photos/34455218/pexels-photo-34455218.jpeg?auto=compress&cs=tinysrgb&w=600',
+		alt: 'Pilgrims at the golden door of the Kaaba in Makkah',
 	},
 } as const;

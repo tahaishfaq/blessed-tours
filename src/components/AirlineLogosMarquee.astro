@@ -15,6 +15,10 @@ const airlineLogos = [
 	{ name: 'Turkish Airlines', file: 'thy-turk-hava-yollari-seeklogo.png' },
 	{ name: 'Lufthansa', file: 'lufthansa-seeklogo.png' },
 	{ name: 'Qatar Airways', file: 'qatar-airways-seeklogo.png' },
+	{ name: 'Royal Jordanian', file: 'royal-jordanian-airlines-seeklogo.png' },
+	{ name: 'KLM Royal Dutch Airlines', file: 'klm-royal-dutch-airlines-seeklogo.png' },
+	{ name: 'Air Peace', file: 'air-peace-seeklogo.png' },
+	{ name: 'Batik Air', file: 'batik-air-seeklogo.png' },
 ];
 ---
 
@@ -38,13 +42,13 @@ const airlineLogos = [
 				<div class="airline-marquee__track flex w-max will-change-transform group-hover:[animation-play-state:paused]">
 					{
 						[0, 1].map((groupIndex) => (
-							<div class="flex shrink-0 items-center gap-4 px-3 sm:gap-5 sm:px-4 lg:gap-6" aria-hidden={groupIndex === 1}>
+							<div class="flex shrink-0 items-center gap-5 px-3 sm:gap-6 sm:px-4 lg:gap-7" aria-hidden={groupIndex === 1}>
 								{airlineLogos.map((logo) => (
-									<div class="group/logo grid h-20 w-36 shrink-0 place-items-center px-5 py-4 transition-transform duration-300 hover:scale-[1.03] sm:h-24 sm:w-44 lg:h-28 lg:w-52">
+									<div class="group/logo grid h-24 w-40 shrink-0 place-items-center px-4 py-3 transition-transform duration-300 hover:scale-[1.03] sm:h-28 sm:w-48 sm:px-5 sm:py-4 lg:h-32 lg:w-56">
 										<img
 											src={`/images/Airline%20Logos/${logo.file}`}
 											alt={`${logo.name} logo`}
-											class="max-h-12 w-auto max-w-full object-contain opacity-100 transition-transform duration-300 group-hover/logo:scale-[1.04] sm:max-h-14 lg:max-h-16"
+											class="max-h-14 w-auto max-w-full object-contain opacity-100 transition-transform duration-300 group-hover/logo:scale-[1.04] sm:max-h-16 lg:max-h-[4.5rem]"
 											loading="lazy"
 											decoding="async"
 										/>
@@ -61,7 +65,7 @@ const airlineLogos = [
 
 <style>
 	.airline-marquee__track {
-		animation: airline-marquee-scroll 58s linear infinite;
+		animation: airline-marquee-scroll 72s linear infinite;
 		transform: translate3d(0, 0, 0);
 	}
 
